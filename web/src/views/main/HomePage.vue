@@ -20,4 +20,7 @@ import SideNavigation from '@/components/sidebar/SideNavigation.vue'
   display: flex;
   height: calc(100vh - 48px);
 }
+.content {
+  width: 100%;
+}
 </style>
