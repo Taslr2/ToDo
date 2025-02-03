@@ -1,7 +1,13 @@
 <script setup></script>
 
 <template>
-  <div class="total">1</div>
+  <div class="total">
+    <ul class="nav">
+      <li><router-link to="/">我的一天</router-link></li>
+      <li><router-link to="/inplan">计划内</router-link></li>
+      <li><router-link to="/alltasks">任务</router-link></li>
+    </ul>
+  </div>
 </template>
 
 <style scoped>
@@ -21,7 +27,6 @@
   right: 0;
   width: 3px;
   height: 100%;
-  background: linear-gradient(to right, #eee, #faf9f8); /* 从左到右的渐变 */
+  background: linear-gradient(to right, #eee, #faf9f8);
 }
 </style>
-<!-- #e9e8e7 ,-->

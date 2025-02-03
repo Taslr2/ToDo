@@ -10,7 +10,7 @@ import SideNavigation from '@/components/sidebar/SideNavigation.vue'
       <SideNavigation />
     </div>
     <div class="content">
-      <div>111</div>
+      <RouterView />
     </div>
   </div>
 </template>
