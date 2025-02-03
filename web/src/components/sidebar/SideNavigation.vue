@@ -16,9 +16,21 @@ const toggleMenu = () => {
       />
     </div>
     <ul class="nav">
-      <li><router-link to="/">我的一天</router-link></li>
-      <li><router-link to="/inplan">计划内</router-link></li>
-      <li><router-link to="/alltasks">任务</router-link></li>
+      <li>
+        <router-link to="/">
+          <img class="sun" src="@/assets/icons/sun.svg" width="20" height="20" />我的一天
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/inplan">
+          <img class="calendar" src="@/assets/icons/calendar.svg" width="20" height="20" />计划内
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/alltasks">
+          <img class="house" src="@/assets/icons/house.svg" width="20" height="20" />任务
+        </router-link>
+      </li>
     </ul>
   </div>
 </template>
@@ -53,6 +65,10 @@ const toggleMenu = () => {
   align-items: center;
 }
 .menu-icon {
+  cursor: pointer;
+}
+
+.nav li {
   cursor: pointer;
 }
 </style>
