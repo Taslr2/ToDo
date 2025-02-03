@@ -1,18 +1,43 @@
-<script setup></script>
+<script setup>
+const toggleMenu = () => {
+  console.log('缩略功能未完成')
+}
+</script>
 
 <template>
   <div class="total">
+    <div class="toggle" @click="toggleMenu">
+      <img
+        class="menu-icon"
+        src="@/assets/icons/menu-icon.svg"
+        alt="Menu Icon"
+        width="20"
+        height="20"
+      />
+    </div>
     <ul class="nav">
-      <li><router-link to="/">我的一天</router-link></li>
-      <li><router-link to="/inplan">计划内</router-link></li>
-      <li><router-link to="/alltasks">任务</router-link></li>
+      <li>
+        <router-link to="/">
+          <img class="sun" src="@/assets/icons/sun.svg" width="20" height="20" />我的一天
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/inplan">
+          <img class="calendar" src="@/assets/icons/calendar.svg" width="20" height="20" />计划内
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/alltasks">
+          <img class="house" src="@/assets/icons/house.svg" width="20" height="20" />任务
+        </router-link>
+      </li>
     </ul>
   </div>
 </template>
 
 <style scoped>
 .total {
-  width: 292px;
+  width: 290px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -28,5 +53,22 @@
   width: 3px;
   height: 100%;
   background: linear-gradient(to right, #eee, #faf9f8);
+}
+
+.toggle {
+  display: flex;
+  width: 100%;
+  height: 48px;
+  box-sizing: border-box;
+  margin: 16px 0px 0px;
+  padding: 0px 24px;
+  align-items: center;
+}
+.menu-icon {
+  cursor: pointer;
+}
+
+.nav li {
+  cursor: pointer;
 }
 </style>
