@@ -14,7 +14,7 @@
     </div>
     <div class="StatisticalAnalysis-chart">
       <div class="piechart">
-        <!-- <PieChart : -->
+        <PieChart />
       </div>
       <div class="linechart"></div>
     </div>
