@@ -1,0 +1,112 @@
+<template>
+  <div class="StatisticalAnalysis-header">
+    <div class="header-title">
+      <img src="../icons/green-dot.png" alt="dot" class="dot">
+      <h3 class="title-text">任务数据统计</h3>
+    </div>
+    <div class="header-blocks">
+      <div class="block-item">
+        <p class="block-item-title">{{ allCount }}</p>
+        <p class="block-item-text">任务总数</p>
+        <p class="block-item-find-more">Look for more</p>
+        <img src="../icons/more.png" alt="more" class="more-icon">
+      </div>
+      <div class="block-item">
+        <p class="block-item-title">{{ completedCount }}</p>
+        <p class="block-item-text">已完成</p>
+        <p class="block-item-find-more">Look for more</p>
+        <img src="../icons/more.png" alt="more" class="more-icon">
+      </div>
+      <div class="block-item">
+        <p class="block-item-title">{{ unfinishedCount }}</p>
+        <p class="block-item-text">待完成</p>
+        <p class="block-item-find-more">Look for more</p>
+        <img src="../icons/more.png" alt="more" class="more-icon">
+      </div>
+      <div class="block-item">
+        <p class="block-item-title">{{ deleteCount }}</p>
+        <p class="block-item-text">已放弃</p>
+        <p class="block-item-find-more">Look for more</p>
+        <img src="../icons/more.png" alt="more" class="more-icon">
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+</script>
+
+<style scoped>
+.header-title {
+    padding: 20px;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.dot {
+  width: 30px;
+  height: 30px;
+}
+
+.title-text {
+  font-size: 24px;
+  font-family: "华文隶书";
+}
+
+.header-blocks {
+  width: 100%;
+  height: 185px;
+  display: flex;
+}
+
+.block-item {
+  width: calc(25% - 20px);
+  margin: 10px;
+  border-radius: 15px;
+  padding: 30px;
+}
+
+.header-blocks> :nth-child(1) {
+  background: linear-gradient(135deg, #7881f7, #75caf9);
+}
+
+.header-blocks> :nth-child(2) {
+  background: linear-gradient(135deg, #ec958f, #e17785);
+}
+
+.header-blocks> :nth-child(3) {
+  background: linear-gradient(135deg, #64b3dd, #82eda3);
+}
+
+.header-blocks> :nth-child(4) {
+  background: linear-gradient(135deg, #867ef5, #e388e8);
+}
+
+
+.block-item-title {
+  font-size: 36px;
+  font-family: "Arial Black";
+  color: #f1f1f1;
+}
+
+.block-item-text {
+  font-size: 18px;
+  font-family: "华文隶书";
+  color: #f1f1f1;
+  margin-top: 10px;
+}
+
+.block-item-find-more {
+  text-align: right;
+  font-size: 12px;
+  margin-top: 10px;
+  color: #f1f1f1;
+}
+
+.more-icon {
+  width: 45px;
+  height: 45px;
+  margin-left: calc(100% - 50px);
+}
+</style>
