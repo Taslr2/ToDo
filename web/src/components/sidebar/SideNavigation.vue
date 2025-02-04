@@ -1,12 +1,20 @@
 <script setup>
-const toggleMenu = () => {
-  console.log('缩略功能未完成')
+import { ref } from 'vue'
+import { defineEmits } from 'vue'
+
+const emit = defineEmits(['updateVisibility'])
+
+const isContentVisible = ref(true)
+
+const toggleContent = () => {
+  isContentVisible.value = !isContentVisible.value
+  emit('updateVisibility', isContentVisible.value)
 }
 </script>
 
 <template>
-  <div class="total">
-    <div class="toggle" @click="toggleMenu">
+  <div>
+    <div class="toggle" @click="toggleContent">
       <img
         class="menu-icon"
         src="@/assets/icons/menu-icon.svg"
@@ -15,35 +23,55 @@ const toggleMenu = () => {
         height="20"
       />
     </div>
-    <ul class="nav">
-      <li>
-        <router-link to="/">
-          <img class="sun" src="@/assets/icons/calendar.svg" width="20" height="20" />日历
-        </router-link>
-      </li>
-      <li>
-        <router-link to="/fourquadrant">
-          <img class="calendar" src="@/assets/icons/sun.svg" width="20" height="20" />四象限
-        </router-link>
-      </li>
-      <li>
-        <router-link to="/taskdetails">
-          <img class="house" src="@/assets/icons/house.svg" width="20" height="20" />任务详情
-        </router-link>
-      </li>
-      <li>
-        <router-link to="/statisticalanalysis">
-          <img class="house" src="@/assets/icons/bell.svg" width="20" height="20" />统计分析
-        </router-link>
-      </li>
-    </ul>
+    <div class="sidebar">
+      <div class="total">
+        <ul class="nav">
+          <li>
+            <router-link to="/">
+              <img class="sun" src="@/assets/icons/calendar.svg" width="20" height="20" />日历
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/fourquadrant">
+              <img class="calendar" src="@/assets/icons/sun.svg" width="20" height="20" />四象限
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/taskdetails">
+              <img class="house" src="@/assets/icons/house.svg" width="20" height="20" />任务详情
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/statisticalanalysis">
+              <img class="house" src="@/assets/icons/bell.svg" width="20" height="20" />统计分析
+            </router-link>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.total {
-  width: 290px;
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
   height: 100%;
+  background-color: white;
+}
+
+.sidebar {
+  height: 100vh-48px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.total {
+  flex: 1;
+  width: 290px;
   display: flex;
   flex-direction: column;
   background-color: #fff;
@@ -68,7 +96,9 @@ const toggleMenu = () => {
   margin: 16px 0px 0px;
   padding: 0px 24px;
   align-items: center;
+  background-color: #fff;
 }
+
 .menu-icon {
   cursor: pointer;
 }
