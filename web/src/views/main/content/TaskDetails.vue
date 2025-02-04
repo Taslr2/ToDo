@@ -1,6 +1,6 @@
 <script setup></script>
 <template>
-  <div class="test">任务</div>
+  <div class="test">任务详情</div>
 </template>
 <style scope>
 .test {

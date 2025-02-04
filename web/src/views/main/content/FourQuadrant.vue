@@ -1,13 +1,11 @@
 <script setup></script>
-
 <template>
-  <div class="test">我的一天</div>
+  <div class="test">四象限</div>
 </template>
-
-<style scoped>
+<style scope>
 .test {
   width: 100%;
   height: 100%;
-  background-color: blue;
+  background-color: green;
 }
 </style>
