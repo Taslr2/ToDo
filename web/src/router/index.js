@@ -10,17 +10,23 @@ const router = createRouter({
       children: [
         {
           path: '',
-          component: () => import('@/views/main/content/MyDay.vue'),
+          name: 'CalendarView',
+          component: () => import('@/views/main/content/CalendarView.vue'),
         },
         {
-          path: 'inplan',
-          name: 'InPlan',
-          component: () => import('@/views/main/content/InPlan.vue'),
+          path: 'fourquadrant',
+          name: 'FourQuadrant',
+          component: () => import('@/views/main/content/FourQuadrant.vue'),
         },
         {
-          path: 'alltasks',
-          name: 'AllTasks',
-          component: () => import('@/views/main/content/AllTasks.vue'),
+          path: 'taskdetails',
+          name: 'TaskDetails',
+          component: () => import('@/views/main/content/TaskDetails.vue'),
+        },
+        {
+          path: 'statisticalanalysis',
+          name: 'StatisticalAnalysis',
+          component: () => import('@/views/main/content/StatisticalAnalysis.vue'),
         },
       ],
     },
