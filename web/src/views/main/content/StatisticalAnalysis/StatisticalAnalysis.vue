@@ -24,7 +24,7 @@
 <script setup>
 import { ref, inject } from 'vue'
 import StatisticalAnalysisHeader from './StatisticalAnalysis-header/StatisticalAnalysis-header.vue'
-import { PieChart } from '@/views/main/content/StatisticalAnalysis/PieChart.vue'
+// import { PieChart } from '@/views/main/content/StatisticalAnalysis/PieChart.vue'
 
 const tasks = inject('tasks')
 
@@ -77,3 +77,4 @@ console.log('已放弃的任务数量:', deleteCount)
   background-color: yellow;
 }
 </style>
+

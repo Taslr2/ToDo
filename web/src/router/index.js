@@ -27,9 +27,7 @@ const router = createRouter({
           path: 'statisticalanalysis',
           name: 'StatisticalAnalysis',
           component: () =>
-            import(
-              '@/views/main/content/StatisticalAnalysis/StatisticalAnalysis-header/StatisticalAnalysis-header.vue'
-            ),
+            import('@/views/main/content/StatisticalAnalysis/StatisticalAnalysis.vue'),
         },
       ],
     },
