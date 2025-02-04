@@ -34,6 +34,17 @@
 </template>
 
 <script setup>
+import { ref, inject } from 'vue'
+
+const allTasks = inject('allTasks')
+const completedTasks = inject('completedTasks')
+const unfinishedTasks = inject('unfinishedTasks')
+const deleteTasks = inject('deleteTasks')
+
+const allCount = ref(allTasks.value.length)
+const completedCount = ref(completedTasks.value.length)
+const unfinishedCount = ref(unfinishedTasks.value.length)
+const deleteCount = ref(deleteTasks.value.length)
 </script>
 
 <style scoped>
