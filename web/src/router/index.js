@@ -28,7 +28,7 @@ const router = createRouter({
           name: 'StatisticalAnalysis',
           component: () =>
             import(
-              '@/views/main/content/StatisticalAnalysis/StatisticalAnalysis-header/StatisticalAnalysis-header.vue'
+              '@/views/main/content/StatisticalAnalysis/StatisticalAnalysis.vue'
             ),
         },
       ],

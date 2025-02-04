@@ -14,7 +14,7 @@
     </div>
     <div class="StatisticalAnalysis-chart">
       <div class="piechart">
-        <!-- <PieChart : -->
+        <PieChart />
       </div>
       <div class="linechart"></div>
     </div>
@@ -24,7 +24,7 @@
 <script setup>
 import { ref, inject } from 'vue'
 import StatisticalAnalysisHeader from './StatisticalAnalysis-header/StatisticalAnalysis-header.vue'
-import { PieChart } from '@/views/main/content/StatisticalAnalysis/PieChart.vue'
+// import { PieChart } from '@/views/main/content/StatisticalAnalysis/PieChart.vue'
 
 const tasks = inject('tasks')
 
