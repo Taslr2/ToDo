@@ -1,8 +1,7 @@
 <script setup>
-
 import HeadNavigation from '@/components/HeadNavigation.vue';
 import SideNavigation from '@/components/sidebar/SideNavigation.vue';
-import { ref } from 'vue';
+import { ref,provide } from 'vue';
 
 const isSidebarVisible = ref(true);
 
