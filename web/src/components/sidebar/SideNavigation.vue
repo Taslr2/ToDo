@@ -18,17 +18,22 @@ const toggleMenu = () => {
     <ul class="nav">
       <li>
         <router-link to="/">
-          <img class="sun" src="@/assets/icons/sun.svg" width="20" height="20" />我的一天
+          <img class="sun" src="@/assets/icons/calendar.svg" width="20" height="20" />日历
         </router-link>
       </li>
       <li>
-        <router-link to="/inplan">
-          <img class="calendar" src="@/assets/icons/calendar.svg" width="20" height="20" />计划内
+        <router-link to="/fourquadrant">
+          <img class="calendar" src="@/assets/icons/sun.svg" width="20" height="20" />四象限
         </router-link>
       </li>
       <li>
-        <router-link to="/alltasks">
-          <img class="house" src="@/assets/icons/house.svg" width="20" height="20" />任务
+        <router-link to="/taskdetails">
+          <img class="house" src="@/assets/icons/house.svg" width="20" height="20" />任务详情
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/statisticalanalysis">
+          <img class="house" src="@/assets/icons/bell.svg" width="20" height="20" />统计分析
         </router-link>
       </li>
     </ul>
