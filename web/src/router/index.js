@@ -23,11 +23,11 @@ const router = createRouter({
           name: 'TaskDetails',
           component: () => import('@/views/main/content/TaskDetails.vue'),
         },
-        {
-          path: 'statisticalanalysis',
-          name: 'StatisticalAnalysis',
-          component: () => import('@/views/main/content/StatisticalAnalysis/StatisticalAnalysis.vue'),
-        },
+        // {
+        //   path: 'statisticalanalysis',
+        //   name: 'StatisticalAnalysis',
+        //   component: () => import('@/views/main/content/StatisticalAnalysis/StatisticalAnalysis.vue'),
+        // },
       ],
     },
   ],
