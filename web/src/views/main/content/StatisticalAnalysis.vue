@@ -2,7 +2,7 @@
 <template>
   <div class="test">统计分析</div>
 </template>
-<style scope>
+<style scoped>
 .test {
   width: 100%;
   height: 100%;
