@@ -1,11 +1,11 @@
 <script setup></script>
 <template>
-  <div class="test">计划内</div>
+  <div class="test">任务详情</div>
 </template>
 <style scope>
 .test {
   width: 100%;
   height: 100%;
-  background-color: green;
+  background-color: pink;
 }
 </style>

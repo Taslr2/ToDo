@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <div class="test">我的一天</div>
+  <div class="test">日历</div>
 </template>
 
 <style scoped>
