@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import { defineEmits } from 'vue'
 
-// 静态导入图像
 import calendarIcon from '@/assets/icons/calendar.svg'
 import sunIcon from '@/assets/icons/sun.svg'
 import houseIcon from '@/assets/icons/house.svg'
@@ -31,36 +30,35 @@ const menuItems = [
 </script>
 
 <template>
-  <div>
-    <div class="toggle" @click="toggleContent">
-      <img
-        class="menu-icon"
-        src="@/assets/icons/menu-icon.svg"
-        alt="Menu Icon"
-        width="20"
-        height="20"
-      />
-    </div>
-    <div class="sidebar">
-      <div class="total">
-        <ul class="nav">
-          <router-link v-for="(item, index) in menuItems" :key="index" :to="item.route">
-            <li
-              :class="selectedIndex === index ? 'selected' : 'unselected'"
-              @click="whetherselected(index)"
-            >
-              <img :src="item.iconSrc" width="20" height="20" />
-              <span class="text">{{ item.text }}</span>
-            </li>
-          </router-link>
-        </ul>
-      </div>
+  <div class="toggle">
+    <img
+      class="menu-icon"
+      src="@/assets/icons/menu-icon.svg"
+      alt="Menu Icon"
+      width="20"
+      height="20"
+      @click="toggleContent"
+    />
+  </div>
+  <div class="sidebar" v-show="isContentVisible">
+    <div class="total">
+      <ul class="nav">
+        <router-link v-for="(item, index) in menuItems" :key="index" :to="item.route">
+          <li
+            :class="selectedIndex === index ? 'selected' : 'unselected'"
+            @click="whetherselected(index)"
+          >
+            <img :src="item.iconSrc" width="20" height="20" />
+            <span class="text">{{ item.text }}</span>
+          </li>
+        </router-link>
+      </ul>
     </div>
   </div>
 </template>
 
 <style scoped>
-body,
+.body,
 html {
   margin: 0;
   padding: 0;
@@ -70,10 +68,10 @@ html {
 }
 
 .sidebar {
-  height: 100vh-48px;
   background-color: #fff;
   display: flex;
   flex-direction: column;
+  transition: width 0.5s;
 }
 
 .total {
