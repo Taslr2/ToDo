@@ -9,6 +9,11 @@ const handleUpdateVisibility = (visibility) => {
   isSidebarVisible.value = visibility
 }
 
+const convertSidebarVisible = (visibility) => {
+  isSidebarVisible.value = visibility
+  console.log(isSidebarVisible.value)
+}
+
 const tasks = ref([
   {
     title: '完成项目报告',
@@ -107,13 +112,18 @@ provide('tasks', tasks)
 
 <template>
   <div>
-    <HeadNavigation />
+    <div class="head">
+      <HeadNavigation />
+    </div>
     <div class="main-container">
-      <div :class="['sidebar', { 'hidden-sidebar': !isSidebarVisible }]">
+      <div class="sidebar" v-if="isSidebarVisible">
         <SideNavigation @updateVisibility="handleUpdateVisibility" />
       </div>
       <div class="content">
-        <RouterView />
+        <RouterView
+          :is-sidebar-visible="isSidebarVisible"
+          @makeSidebarVisible="convertSidebarVisible"
+        />
       </div>
     </div>
   </div>
