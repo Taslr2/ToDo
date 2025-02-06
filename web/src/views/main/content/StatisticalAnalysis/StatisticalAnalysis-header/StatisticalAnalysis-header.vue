@@ -65,7 +65,7 @@ const toggleSidebar = () => {
 
 <style scoped>
 .header-title {
-  padding: 20px;
+  padding: 20px 10px;
   padding-bottom: 10px;
   display: flex;
   align-items: center;

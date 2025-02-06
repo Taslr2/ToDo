@@ -1,9 +1,12 @@
 <script setup>
 import HeadNavigation from '@/components/HeadNavigation.vue'
 import SideNavigation from '@/components/sidebar/SideNavigation.vue'
-import { ref, provide } from 'vue'
+import { ref, provide, onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 
 const isSidebarVisible = ref(true)
+const router = useRouter()
+const route = useRoute()
 
 const handleUpdateVisibility = (visibility) => {
   isSidebarVisible.value = visibility
@@ -11,7 +14,6 @@ const handleUpdateVisibility = (visibility) => {
 
 const convertSidebarVisible = (visibility) => {
   isSidebarVisible.value = visibility
-  console.log(isSidebarVisible.value)
 }
 
 const tasks = ref([
@@ -108,6 +110,12 @@ const tasks = ref([
 ])
 
 provide('tasks', tasks)
+
+onMounted(() => {
+  if (route.path !== '/') {
+    router.push('/')
+  }
+})
 </script>
 
 <template>
@@ -120,7 +128,6 @@ provide('tasks', tasks)
         @updateVisibility="handleUpdateVisibility"
         :isSidebarVisible="isSidebarVisible"
       />
-
       <div class="content">
         <RouterView
           :is-sidebar-visible="isSidebarVisible"
@@ -135,6 +142,7 @@ provide('tasks', tasks)
 .main-container {
   display: flex;
   height: calc(100vh - 48px);
+  overflow: hidden;
 }
 
 .sidebar {
@@ -144,5 +152,6 @@ provide('tasks', tasks)
 
 .content {
   width: 100%;
+  transition: width 0.5s ease;
 }
 </style>
