@@ -48,7 +48,7 @@ const SidebarVisible = (visibility) => {
 .StatisticalAnalysis {
   width: 100%;
   height: 100%;
-  background-color: #f4f7fb;
+  background-color: #faf9f8;
 }
 
 .StatisticalAnalysis-header {

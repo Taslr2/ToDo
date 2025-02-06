@@ -116,9 +116,11 @@ provide('tasks', tasks)
       <HeadNavigation />
     </div>
     <div class="main-container">
-      <div class="sidebar" v-if="isSidebarVisible">
-        <SideNavigation @updateVisibility="handleUpdateVisibility" />
-      </div>
+      <SideNavigation
+        @updateVisibility="handleUpdateVisibility"
+        :isSidebarVisible="isSidebarVisible"
+      />
+
       <div class="content">
         <RouterView
           :is-sidebar-visible="isSidebarVisible"
@@ -130,15 +132,6 @@ provide('tasks', tasks)
 </template>
 
 <style scoped>
-body,
-html {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-}
-
 .main-container {
   display: flex;
   height: calc(100vh - 48px);
@@ -147,12 +140,6 @@ html {
 .sidebar {
   width: 290px;
   background-color: #fff;
-  transition: width 0.3s;
-}
-
-.hidden-sidebar {
-  width: 0;
-  overflow: hidden;
 }
 
 .content {
