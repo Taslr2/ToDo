@@ -1,25 +1,22 @@
 <script setup>
 import { ref, defineEmits, defineProps, watch } from 'vue'
 
-
 import calendarIcon from '@/assets/icons/calendar.svg'
 import sunIcon from '@/assets/icons/sun.svg'
 import houseIcon from '@/assets/icons/house.svg'
 import bellIcon from '@/assets/icons/bell.svg'
 
-const emit = defineEmits('updateVisibility')
+const emit = defineEmits(['updateVisibility'])
 const props = defineProps(['isSidebarVisible'])
 
 const isContentVisible = ref(props.isSidebarVisible)
-
+const selectedIndex = ref(0)
 watch(
   () => props.isSidebarVisible,
   (newVal) => {
     isContentVisible.value = newVal
   },
 )
-
-const selectedIndex = ref(0)
 
 const toggleContent = () => {
   isContentVisible.value = !isContentVisible.value
