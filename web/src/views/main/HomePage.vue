@@ -120,7 +120,6 @@ provide('tasks', tasks)
         @updateVisibility="handleUpdateVisibility"
         :isSidebarVisible="isSidebarVisible"
       />
-
       <div class="content">
         <RouterView
           :is-sidebar-visible="isSidebarVisible"
@@ -135,6 +134,7 @@ provide('tasks', tasks)
 .main-container {
   display: flex;
   height: calc(100vh - 48px);
+  overflow: hidden;
 }
 
 .sidebar {
