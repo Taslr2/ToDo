@@ -1,6 +1,5 @@
 <script setup>
-import { ref } from 'vue'
-import { defineEmits } from 'vue'
+import { ref, defineEmits, defineProps } from 'vue'
 
 import calendarIcon from '@/assets/icons/calendar.svg'
 import sunIcon from '@/assets/icons/sun.svg'
@@ -8,6 +7,7 @@ import houseIcon from '@/assets/icons/house.svg'
 import bellIcon from '@/assets/icons/bell.svg'
 
 const emit = defineEmits(['updateVisibility'])
+const props = defineProps(['isSidebarVisible'])
 
 const isContentVisible = ref(true)
 const selectedIndex = ref(0)
@@ -30,46 +30,39 @@ const menuItems = [
 </script>
 
 <template>
-  <div class="totalall">
-    <div class="toggle">
-      <img
-        class="menu-icon"
-        src="@/assets/icons/menu-icon.svg"
-        alt="Menu Icon"
-        width="20"
-        height="20"
-        @click="toggleContent"
-      />
-    </div>
-    <div class="sidebar">
-      <div class="total">
-        <ul class="nav">
-          <router-link v-for="(item, index) in menuItems" :key="index" :to="item.route">
-            <li
-              :class="selectedIndex === index ? 'selected' : 'unselected'"
-              @click="whetherselected(index)"
-            >
-              <img :src="item.iconSrc" width="20" height="20" />
-              <span class="text">{{ item.text }}</span>
-            </li>
-          </router-link>
-        </ul>
-        <div class="ul-last"></div>
+  <transition name="leftside">
+    <div class="totalall" v-show="props.isSidebarVisible">
+      <div class="toggle">
+        <img
+          class="menu-icon"
+          src="@/assets/icons/menu-icon.svg"
+          alt="Menu Icon"
+          width="20"
+          height="20"
+          @click="toggleContent"
+        />
+      </div>
+      <div class="sidebar">
+        <div class="total">
+          <ul class="nav">
+            <router-link v-for="(item, index) in menuItems" :key="index" :to="item.route">
+              <li
+                :class="selectedIndex === index ? 'selected' : 'unselected'"
+                @click="whetherselected(index)"
+              >
+                <img :src="item.iconSrc" width="20" height="20" />
+                <span class="text">{{ item.text }}</span>
+              </li>
+            </router-link>
+          </ul>
+          <div class="ul-last"></div>
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <style scoped>
-.body,
-html {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-}
-
 .sidebar {
   background-color: #fff;
   display: flex;
@@ -153,5 +146,21 @@ html {
   background-color: #eff6fc;
   color: #000;
   font-weight: 900;
+}
+
+.leftside-enter,
+.leftside-leave-to {
+  width: 0;
+  overflow: hidden;
+}
+
+.leftside-enter-active,
+.leftside-leave-active {
+  transition: width 0.5s ease;
+}
+
+.leftside-enter-to,
+.leftside-leave {
+  width: 290px;
 }
 </style>
