@@ -1,15 +1,24 @@
 <script setup>
-import { ref, defineEmits, defineProps } from 'vue'
+import { ref, defineEmits, defineProps, watch } from 'vue'
+
 
 import calendarIcon from '@/assets/icons/calendar.svg'
 import sunIcon from '@/assets/icons/sun.svg'
 import houseIcon from '@/assets/icons/house.svg'
 import bellIcon from '@/assets/icons/bell.svg'
 
-const emit = defineEmits(['updateVisibility'])
+const emit = defineEmits('updateVisibility')
 const props = defineProps(['isSidebarVisible'])
 
-const isContentVisible = ref(true)
+const isContentVisible = ref(props.isSidebarVisible)
+
+watch(
+  () => props.isSidebarVisible,
+  (newVal) => {
+    isContentVisible.value = newVal
+  },
+)
+
 const selectedIndex = ref(0)
 
 const toggleContent = () => {
@@ -30,8 +39,12 @@ const menuItems = [
 </script>
 
 <template>
-  <transition name="leftside">
-    <div class="totalall" v-show="props.isSidebarVisible">
+  <transition
+    name="leftside"
+    leave-active-class="animate__animated animate__slideOutLeft custom-duration"
+    enter-active-class="animate__animated animate__slideInLeft custom-duration"
+  >
+    <div class="all" v-show="isContentVisible">
       <div class="toggle">
         <img
           class="menu-icon"
@@ -63,13 +76,17 @@ const menuItems = [
 </template>
 
 <style scoped>
+.custom-duration {
+  animation-duration: 1s !important;
+}
+
 .sidebar {
   background-color: #fff;
   display: flex;
   flex-direction: column;
 }
 
-.totalall {
+.all {
   flex: 1;
   width: 290px;
   display: flex;
@@ -77,9 +94,10 @@ const menuItems = [
   background-color: #fff;
   position: relative;
   height: calc(100vh - 48px);
+  animation-duration: 1s;
 }
 
-.totalall::after {
+.all::after {
   content: '';
   position: absolute;
   top: 0;
@@ -110,6 +128,7 @@ const menuItems = [
   height: 44px;
   padding: 12px 24px;
   box-sizing: border-box;
+  transition: transform 0.5s ease;
 }
 
 .nav li img {
@@ -147,8 +166,7 @@ const menuItems = [
   color: #000;
   font-weight: 900;
 }
-
-.leftside-enter,
+/* .leftside-enter,
 .leftside-leave-to {
   width: 0;
   overflow: hidden;
@@ -162,5 +180,5 @@ const menuItems = [
 .leftside-enter-to,
 .leftside-leave {
   width: 290px;
-}
+} */
 </style>
