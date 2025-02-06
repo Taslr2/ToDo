@@ -75,6 +75,6 @@ const SidebarVisible = (visibility) => {
   height: 100%;
   margin: 10px;
   float: left;
-  background-color: lightblue;
+  /* background-color: lightblue; */
 }
 </style>
