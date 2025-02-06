@@ -41,7 +41,7 @@ const menuItems = [
         @click="toggleContent"
       />
     </div>
-    <div class="sidebar" v-show="isContentVisible">
+    <div class="sidebar">
       <div class="total">
         <ul class="nav">
           <router-link v-for="(item, index) in menuItems" :key="index" :to="item.route">
@@ -74,7 +74,6 @@ html {
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  transition: width 0.5s;
 }
 
 .totalall {
