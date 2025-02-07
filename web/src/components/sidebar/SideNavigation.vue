@@ -126,6 +126,7 @@ const menuItems = [
   padding: 12px 24px;
   box-sizing: border-box;
   transition: transform 0.5s ease;
+  position: relative;
 }
 
 .nav li img {
@@ -162,6 +163,26 @@ const menuItems = [
   background-color: #eff6fc;
   color: #000;
   font-weight: 900;
+}
+
+.selected::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background-color: #2564cf;
+  animation: zoomIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 /* .leftside-enter,
 .leftside-leave-to {
