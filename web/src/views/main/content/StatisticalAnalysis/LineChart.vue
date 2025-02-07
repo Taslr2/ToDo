@@ -1,5 +1,5 @@
 <template>
-  <div id="lineChart" ref="lineChart" style="width: 100%; height: 50%; position: relative; top: 100px;"></div>
+  <div id="lineChart" ref="lineChart" style="width: 100%; height: 70%; position: relative; top: 100px;"></div>
 </template>
 
 
@@ -60,7 +60,7 @@ onMounted(() => {
       trigger: 'axis',
     },
     legend: {
-      data: ['工作', '学习', '生活', '其他', '总任务'],
+      data: ['工作', '学习', '生活', '其他', '总数'],
     },
     xAxis: {
       type: 'category',
@@ -71,8 +71,8 @@ onMounted(() => {
       splitNumber: 8, // 调整 Y 轴刻度数量
     },
     grid: {
-      top: '20%',  // 调整图表上边距
-      bottom: '20%', // 调整图表下边距
+      top: '10%',  // 调整图表上边距
+      bottom: '10%', // 调整图表下边距
       left: '15%', // 调整图表左边距
       right: '15%', // 调整图表右边距
     },
@@ -82,30 +82,60 @@ onMounted(() => {
         type: 'line',
         data: taskCountByTime.value.workCounts, // 使用处理后的任务数量数据
         smooth: true,
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: 'rgba(0, 0, 128, 0.5)' }, // 起始颜色，半透明的蓝色
+            { offset: 1, color: 'rgba(0, 0, 128, 0)' }, // 结束颜色，完全透明的蓝色
+          ]),
+        },
       },
       {
         name: '学习',
         type: 'line',
         data: taskCountByTime.value.studyCounts, // 使用处理后的任务数量数据
         smooth: true,
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: 'rgba(0, 128, 0, 0.5)' }, // 起始颜色，半透明的绿色
+            { offset: 1, color: 'rgba(0, 128, 0, 0)' }, // 结束颜色，完全透明的绿色
+          ]),
+        },
       },
       {
         name: '生活',
         type: 'line',
         data: taskCountByTime.value.lifeCounts, // 使用处理后的任务数量数据
         smooth: true,
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: 'rgba(255, 165, 0, 0.5)' }, // 起始颜色，半透明的橙色
+            { offset: 1, color: 'rgba(255, 165, 0, 0)' }, // 结束颜色，完全透明的橙色
+          ]),
+        },
       },
       {
         name: '其他',
         type: 'line',
         data: taskCountByTime.value.otherCounts, // 使用处理后的任务数量数据
         smooth: true,
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: 'rgba(128, 0, 128, 0.5)' }, // 起始颜色，半透明的紫色
+            { offset: 1, color: 'rgba(128, 0, 128, 0)' }, // 结束颜色，完全透明的紫色
+          ]),
+        },
       },
       {
-        name: '总任务',
+        name: '总数',
         type: 'line',
         data: taskCountByTime.value.totalCounts, // 使用处理后的任务数量数据
         smooth: true,
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: 'rgba(159, 191, 219, 0.5)' }, // 起始颜色，半透明的黄色
+            { offset: 1, color: 'rgba(159, 191, 219, 0)' }, // 结束颜色，完全透明的黄色
+          ]),
+        },
       },
     ],
   }
