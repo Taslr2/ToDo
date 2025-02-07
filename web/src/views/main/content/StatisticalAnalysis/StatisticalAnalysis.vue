@@ -13,6 +13,9 @@
       <div class="linechart">
         <LineChart />
       </div>
+      <!-- <div class="download">
+        <a href="#">下载分析数据</a>
+      </div> -->
     </div>
   </div>
 </template>
@@ -77,4 +80,62 @@ const SidebarVisible = (visibility) => {
   float: left;
   /* background-color: lightblue; */
 }
+
+/* .download {
+  position: relative;
+  width: calc(60% - 20px);
+  height: 40%;
+  float: left;
+}
+
+.download a {
+  position: absolute;
+  top: 30%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  color: #fff;
+  font-size: 16px;
+  text-decoration: none;
+  font-family: sans-serif;
+  box-sizing: border-box;
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background-size: 400%;
+  border-radius: 30px;
+  z-index: 1;
+}
+
+.download a:hover {
+  animation: animate 8s linear infinite;
+}
+
+.download a::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  z-index: -1;
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background-size: 400%;
+  border-radius: 40px;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.download a:hover::before {
+  filter: blur(20px);
+  opacity: 1;
+  animation: animate 8s linear infinite;
+}
+
+@keyframes animate {
+  from {
+    background-position: 0%;
+  }
+  to {
+    background-position: 400%;
+  }
+} */
 </style>
