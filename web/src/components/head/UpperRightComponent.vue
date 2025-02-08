@@ -7,7 +7,7 @@
     <div class="personalCenter"><img src="@/assets/icons/personal-center.svg" alt="" /></div>
   </div>
 </template>
-<style>
+<style scoped>
 .whole {
   width: 192px;
   height: 48px;
