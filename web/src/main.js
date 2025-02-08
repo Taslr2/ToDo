@@ -6,7 +6,7 @@ import router from './router'
 import '@/assets/css/reset.css'
 import '@/assets/css/global.css'
 import  'animate.css'
-
+import '@/assets/iconfont/iconfont.css'
 
 const app = createApp(App)
 

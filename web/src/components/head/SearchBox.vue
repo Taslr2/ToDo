@@ -2,14 +2,6 @@
 import { ref } from 'vue'
 
 const searchQuery = ref('')
-const SearchMark = {
-  template: '<img src="@/assets/svg/search-mark.svg" alt="Search Icon" class="icon" />'
-}
-
-const CancelSearch = {
-  template: '<img src="@/assets/svg/cancel-search.svg" alt="Cancel Icon" class="icon" />'
-}
-
 const handleSearch = () => {
   console.log('Search query:', searchQuery.value)
 }
@@ -25,10 +17,10 @@ const handleSearch = () => {
       placeholder="搜索"
     >
       <template #prefix>
-        <SearchMark />
+        <i class="iconfont icon-sousuo"></i>
       </template>
       <template #suffix>
-        <CancelSearch />
+        <i class="iconfont icon-fork" @click="searchQuery = ''"></i>
       </template>
     </el-input>
   </div>
@@ -41,8 +33,11 @@ const handleSearch = () => {
 }
 .init {
   width: 100%;
-  padding: 8px 12px;
+  padding: 0 12px;
   border-radius: 4px;
   font-size: 14px;
 }
+
 </style>
+
+
