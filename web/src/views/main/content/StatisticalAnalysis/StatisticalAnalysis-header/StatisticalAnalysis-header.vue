@@ -41,7 +41,7 @@
 <script setup>
 import { ref, inject, defineProps, defineEmits } from 'vue'
 import greendot from '../icons/green-dot.png'
-import navigation from '@/assets/icons/menu-icon.svg'
+import navigation from '@/assets/svg/menu-icon.svg'
 
 const allTasks = inject('allTasks')
 const completedTasks = inject('completedTasks')

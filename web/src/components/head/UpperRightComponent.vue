@@ -1,13 +1,13 @@
 <script setup></script>
 <template>
   <div class="whole">
-    <div class="gear"><img src="@/assets/icons/gear.svg" alt="" /></div>
-    <div class="questionMark"><img src="@/assets/icons/question-mark.svg" alt="" /></div>
-    <div class="paperPlane"><img src="@/assets/icons/paper-plane.svg" alt="" /></div>
-    <div class="personalCenter"><img src="@/assets/icons/personal-center.svg" alt="" /></div>
+    <div class="gear"><img src="@/assets/svg/gear.svg" alt="" /></div>
+    <div class="questionMark"><img src="@/assets/svg/question-mark.svg" alt="" /></div>
+    <div class="paperPlane"><img src="@/assets/svg/paper-plane.svg" alt="" /></div>
+    <div class="personalCenter"><img src="@/assets/svg/personal-center.svg" alt="" /></div>
   </div>
 </template>
-<style>
+<style scoped>
 .whole {
   width: 192px;
   height: 48px;
