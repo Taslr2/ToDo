@@ -1,5 +1,5 @@
 <script setup>
-import HeadNavigation from '@/components/HeadNavigation.vue'
+import HeadNavigation from '@/components/head/HeadNavigation.vue'
 import SideNavigation from '@/components/sidebar/SideNavigation.vue'
 import { ref, provide, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
