@@ -1,10 +1,10 @@
 <script setup>
 import { ref, defineEmits, defineProps, watch } from 'vue'
 
-import calendarIcon from '@/assets/icons/calendar.svg'
-import sunIcon from '@/assets/icons/sun.svg'
-import houseIcon from '@/assets/icons/house.svg'
-import bellIcon from '@/assets/icons/bell.svg'
+import calendarIcon from '@/assets/svg/calendar.svg'
+import sunIcon from '@/assets/svg/sun.svg'
+import houseIcon from '@/assets/svg/house.svg'
+import bellIcon from '@/assets/svg/bell.svg'
 
 const emit = defineEmits(['updateVisibility'])
 const props = defineProps(['isSidebarVisible'])
@@ -45,7 +45,7 @@ const menuItems = [
       <div class="toggle">
         <img
           class="menu-icon"
-          src="@/assets/icons/menu-icon.svg"
+          src="@/assets/svg/menu-icon.svg"
           alt="Menu Icon"
           width="20"
           height="20"

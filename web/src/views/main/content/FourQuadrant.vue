@@ -1,7 +1,7 @@
 <script setup>
 import { ref, defineProps, defineEmits } from 'vue'
-import sun from '@/assets/icons/sun.svg'
-import navigation from '@/assets/icons/menu-icon.svg'
+import sun from '@/assets/svg/sun.svg'
+import navigation from '@/assets/svg/menu-icon.svg'
 
 const props = defineProps(['isSidebarVisible'])
 const emit = defineEmits(['makeSidebarVisible'])
