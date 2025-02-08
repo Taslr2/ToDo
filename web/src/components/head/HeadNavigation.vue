@@ -1,4 +1,5 @@
 <script setup>
+import UpperRightComponent from '@/components/head/UpperRightComponent.vue'
 const refreshPage = () => {
   window.location.reload()
 }
@@ -6,8 +7,9 @@ const refreshPage = () => {
 
 <template>
   <div class="total">
-    <div class="icon">1</div>
+    <div class="icon"><img src="@/assets/icons/sign.svg" alt="" /></div>
     <div class="title" @click="refreshPage">To Do</div>
+    <UpperRightComponent class="upper-right" />
   </div>
 </template>
 
@@ -18,6 +20,7 @@ const refreshPage = () => {
   height: 48px;
   width: 100%;
   background-color: rgb(37, 100, 207);
+  position: relative;
 }
 .icon {
   width: 48px;
@@ -42,5 +45,10 @@ const refreshPage = () => {
 .title:hover {
   cursor: pointer;
   text-decoration: underline;
+}
+.upper-right {
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 </style>

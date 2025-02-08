@@ -1,0 +1,45 @@
+<script setup></script>
+<template>
+  <div class="whole">
+    <div class="gear"><img src="@/assets/icons/gear.svg" alt="" /></div>
+    <div class="questionMark"><img src="@/assets/icons/question-mark.svg" alt="" /></div>
+    <div class="paperPlane"><img src="@/assets/icons/paper-plane.svg" alt="" /></div>
+    <div class="personalCenter"><img src="@/assets/icons/personal-center.svg" alt="" /></div>
+  </div>
+</template>
+<style>
+.whole {
+  width: 192px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+}
+.gear {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.questionMark {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.paperPlane {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.personalCenter {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
