@@ -1,5 +1,7 @@
 <script setup>
 import UpperRightComponent from '@/components/head/UpperRightComponent.vue'
+import SearchBox from '@/components/head/SearchBox.vue'
+
 const refreshPage = () => {
   window.location.reload()
 }
@@ -9,7 +11,8 @@ const refreshPage = () => {
   <div class="total">
     <div class="icon"><img src="@/assets/icons/sign.svg" alt="" /></div>
     <div class="title" @click="refreshPage">To Do</div>
-    <UpperRightComponent class="upper-right" />
+    <div class="search"><SearchBox /></div>
+    <div class="right"><UpperRightComponent /></div>
   </div>
 </template>
 
@@ -46,9 +49,13 @@ const refreshPage = () => {
   cursor: pointer;
   text-decoration: underline;
 }
-.upper-right {
-  position: absolute;
-  right: 0;
-  top: 0;
+.search {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+.right {
+  width: 192px;
+  height: 48px;
 }
 </style>
