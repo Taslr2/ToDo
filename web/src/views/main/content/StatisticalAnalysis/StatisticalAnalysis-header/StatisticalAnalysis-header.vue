@@ -100,6 +100,11 @@ const toggleSidebar = () => {
   margin: 10px;
   border-radius: 15px;
   padding: 30px;
+  transition: all 0.2s ease-in-out;
+}
+
+.block-item:hover {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 .header-blocks > :nth-child(1) {
