@@ -2,7 +2,6 @@
   <div id="lineChart" ref="lineChart" style="width: 100%; height: 70%; position: relative; top: 100px;"></div>
 </template>
 
-
 <script setup>
 import { ref, onMounted, computed, inject } from 'vue'
 import * as echarts from 'echarts'
@@ -26,21 +25,22 @@ const taskCountByTime = computed(() => {
     dateCountMap[date][category] += 1
   })
 
-  const dates = Object.keys(dateCountMap).sort() // 按日期排序
-  const workCounts = dates.map((date) => dateCountMap[date]['工作'])
-  const studyCounts = dates.map((date) => dateCountMap[date]['学习'])
-  const lifeCounts = dates.map((date) => dateCountMap[date]['生活'])
-  const otherCounts = dates.map((date) => dateCountMap[date]['其他'])
-  const totalCounts = dates.map(
+  const dates = Object.keys(dateCountMap).map(date => new Date(date)).sort((a, b) => a - b) // 按日期排序
+  const latest20Dates = dates.slice(-20).map(date => date.toLocaleDateString()) // 获取最近20天的日期
+  const workCounts = latest20Dates.map((date) => dateCountMap[date]['工作'] || 0)
+  const studyCounts = latest20Dates.map((date) => dateCountMap[date]['学习'] || 0)
+  const lifeCounts = latest20Dates.map((date) => dateCountMap[date]['生活'] || 0)
+  const otherCounts = latest20Dates.map((date) => dateCountMap[date]['其他'] || 0)
+  const totalCounts = latest20Dates.map(
     (date) =>
-      dateCountMap[date]['工作'] +
-      dateCountMap[date]['学习'] +
-      dateCountMap[date]['生活'] +
-      dateCountMap[date]['其他']
+      (dateCountMap[date]['工作'] || 0) +
+      (dateCountMap[date]['学习'] || 0) +
+      (dateCountMap[date]['生活'] || 0) +
+      (dateCountMap[date]['其他'] || 0)
   )
 
   return {
-    times: dates,
+    times: latest20Dates,
     workCounts: workCounts,
     studyCounts: studyCounts,
     lifeCounts: lifeCounts,
