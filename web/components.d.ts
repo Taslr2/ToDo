@@ -7,9 +7,12 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ElInput: typeof import('element-plus/es')['ElInput']
     HeadNavigation: typeof import('./src/components/head/HeadNavigation.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SearchBox: typeof import('./src/components/head/SearchBox.vue')['default']
     SideNavigation: typeof import('./src/components/sidebar/SideNavigation.vue')['default']
+    UpperRightComponent: typeof import('./src/components/head/UpperRightComponent.vue')['default']
   }
 }
