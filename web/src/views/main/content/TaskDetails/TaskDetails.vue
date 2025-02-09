@@ -69,12 +69,16 @@ const toggleSidebar = () => {
 
 .task-info {
   width: 50%;
-  /* float: left; */
+  margin: 30px;
+  background-color: pink;
+  overflow-y: auto; /* 添加垂直滚动条 */
+  height: calc(100% - 20px); /* 确保高度适应父容器，减去上下边距 */
 }
+
 
 .timeLine {
   width: 50%;
-  position: relative;
-  left: 25%;
+  /* position: relative;
+  left: 25%; */
 }
 </style>
