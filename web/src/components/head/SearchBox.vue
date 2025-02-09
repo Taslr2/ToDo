@@ -2,14 +2,34 @@
 import { ref } from 'vue'
 
 const searchQuery = ref('')
+const isEditing = ref(false)
+
 const handleSearch = () => {
   console.log('Search query:', searchQuery.value)
+}
+
+const startEditing = () => {
+  isEditing.value = true
+}
+
+const stopEditing = () => {
+  isEditing.value = false
+  searchQuery.value = ''
+}
+
+const searchContent = () => {
+  if (searchQuery.value === '') {
+    isEditing.value = true
+  } else {
+    console.log('Search query:', searchQuery.value) // 搜索功能
+  }
 }
 </script>
 
 <template>
   <div class="search-box">
     <el-input
+      v-if="isEditing"
       class="init"
       type="string"
       v-model="searchQuery"
@@ -17,27 +37,63 @@ const handleSearch = () => {
       placeholder="搜索"
     >
       <template #prefix>
-        <i class="iconfont icon-sousuo"></i>
+        <span class="input-prefix" @click="searchContent">
+          <i class="iconfont icon-sousuo"></i>
+        </span>
       </template>
       <template #suffix>
-        <i class="iconfont icon-fork" @click="searchQuery = ''"></i>
+        <span class="input-suffix" @click="stopEditing">
+          <i class="iconfont icon-fork"></i>
+        </span>
       </template>
     </el-input>
+    <div v-else class="init-button" @click="startEditing">
+      <i class="iconfont icon-sousuo" style="margin-left: 10px"></i>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .search-box {
-  width: 100%;
-  max-width: 400px;
+  width: 375px;
 }
 .init {
   width: 100%;
-  padding: 0 12px;
-  border-radius: 4px;
   font-size: 14px;
 }
-
+::v-deep .el-input__wrapper {
+  background-color: #fff;
+  border-radius: 5px;
+  height: 33.33px;
+  padding: 0;
+}
+::v-deep .el-input__inner {
+  height: 100%;
+}
+.init-button {
+  width: 100%;
+  height: 33.33px;
+  font-size: 14px;
+  border-radius: 5px;
+  background-color: #fff;
+  border: 1px solid #dcdfe6;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.init-button:hover {
+  background-color: #f5f7fa;
+}
+.input-prefix,
+.input-suffix {
+  width: 40px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.input-prefix i {
+  transform: translate(1px, 1px);
+}
 </style>
-
-
