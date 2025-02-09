@@ -3,46 +3,49 @@
     <div class="crop">
       <ul class="card-list" style="--count: 6">
         <li>
-          <div class="card">
-            <a href="">
+          <div class="card task-card">
+            <!-- <a href="#">
               <span>2020-2024</span>
               <span>Model for generating highly dimensional, mostly numeric, tabular data</span>
-            </a>
+            </a> -->
+            <TaskCard :index="2"/>
           </div>
         </li>
         <li>
           <div class="card">
-            <a href="">
+            <a href="#">
               <img src="./03.gif" alt="" />
             </a>
           </div>
         </li>
         <li>
-          <div class="card">
-            <a href="">
+          <div class="card task-card">
+            <!-- <a href="#">
               <span>2020-2024</span>
               <span>Model for generating highly dimensional, mostly numeric, tabular data</span>
-            </a>
+            </a> -->
+            <TaskCard :index="1"/>
           </div>
         </li>
         <li>
           <div class="card">
-            <a href="">
+            <a href="#">
               <img src="./03.gif" alt="" />
             </a>
           </div>
         </li>
         <li>
-          <div class="card">
-            <a href="">
+          <div class="card task-card">
+            <!-- <a href="#">
               <span>2020-2024</span>
               <span>Model for generating highly dimensional, mostly numeric, tabular data</span>
-            </a>
+            </a> -->
+            <TaskCard :index="0"/>
           </div>
         </li>
         <li>
           <div class="card">
-            <a href="">
+            <a href="#">
               <img src="./03.gif" alt="" />
             </a>
           </div>
@@ -57,15 +60,17 @@
 </template>
 
 <script setup>
+import TaskCard from '../TaskCard.vue'
 </script>
 
 <style scoped>
 /* 设置容器样式 */
 .void {
-  width: 100%;
-  max-width: 1024px;
+  width: 700px;
   margin: auto;
-  position: relative;
+  position: absolute;
+  left: 50%;
+  top: 10%;
   aspect-ratio: 1 / 1;
   --rotate-speed: 40;
   --count: 8;
@@ -99,19 +104,34 @@ li {
 
 /* 设置卡片样式 */
 .card {
-  width: 200px;
-  height: 100px;
+  width: 32%;
+  height: auto; /* 修改为自动高度，根据内容调整 */
+  max-height: 16vh; /* 修改为视口高度的16%，使最大高度更具响应性 */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 16px 24px;
+  padding: 8px;
   gap: 8px;
   background: #ffffff;
   box-shadow: 0px 4px 12px rgba(70, 0, 255, 0.1), 0px 16px 32px rgba(165, 135, 255, 0.1);
-  border-radius: 12px;
-  font: 400 14px '';
+  border-radius: 8px;
+  font-family: Arial, sans-serif; /* 明确字体系列 */
+  font-size: 14px; /* 字体大小 */
+  font-weight: 400; /* 字体粗细 */
   color: #535062;
   animation: rotateCCW calc(var(--rotate-speed) * 1s) var(--easing) infinite;
+}
+
+.task-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; /* 修改为bottom: 0; 使伪元素与卡片高度一致 */
+  width: 5px; /* 边框宽度 */
+  background: linear-gradient(to bottom, #9885c5, #7f639d); /* 渐变颜色 */
+  border-top-left-radius: 12px; /* 添加圆角样式以匹配卡片的圆角 */
+  border-bottom-left-radius: 12px; /* 添加圆角样式以匹配卡片的圆角 */
 }
 
 /* 设置图片样式 */
@@ -196,7 +216,7 @@ li:nth-child(6) .card {
 /* 设置中心圆样式 */
 .center-circle {
   position: absolute;
-  width: 20%;
+  width: 147px;
   aspect-ratio: 1 / 1;
   left: 50%;
   top: 50%;
@@ -211,7 +231,7 @@ li:nth-child(6) .card {
 /* 设置第二个圆样式 */
 .second-circle {
   position: absolute;
-  width: 40%;
+  width: 296px;
   aspect-ratio: 1 / 1;
   left: 50%;
   top: 50%;
@@ -220,13 +240,13 @@ li:nth-child(6) .card {
   opacity: 0.5;
   box-shadow: 0px 18px 36px -18px rgba(12, 5, 46, 0.3), 0px 30px 60px -12px rgba(12, 5, 46, 0.25);
   border-radius: 50%;
-  background-image: url(./03.gif);
+  background-image: url(./02.gif);
 }
 
 /* 设置最后一个圆样式 */
 .last-circle {
   position: absolute;
-  width: 66%;
+  width: 550px;
   aspect-ratio: 1 / 1;
   left: 50%;
   top: 50%;
@@ -235,7 +255,7 @@ li:nth-child(6) .card {
   opacity: 0.25;
   box-shadow: 0px 18px 36px -18px rgba(12, 5, 46, 0.3), 0px 30px 60px -12px rgba(12, 5, 46, 0.25);
   border-radius: 50%;
-  background-image: url(./03.gif);
+  background-image: url(./04.gif);
 }
 
 /* 设置裁剪样式 */
