@@ -2,6 +2,7 @@
 import { ref, defineProps, defineEmits } from 'vue'
 import house from '@/assets/svg/house.svg'
 import navigation from '@/assets/svg/menu-icon.svg'
+import TimeLine from '@/views/main/content/TaskDetails/TimeLine/TimeLine.vue'
 
 const props = defineProps(['isSidebarVisible'])
 const emit = defineEmits(['makeSidebarVisible'])
@@ -16,14 +17,24 @@ const toggleSidebar = () => {
 </script>
 
 <template>
-  <div class="header-title">
-    <img
-      :class="['house', { navigation: !props.isSidebarVisible }]"
-      :src="props.isSidebarVisible ? house : navigation"
-      alt="house"
-      @click="toggleSidebar"
-    />
-    <h3 class="title-text">任务详情</h3>
+  <div class="task-details">
+    <div class="header-title">
+      <img
+        :class="['house', { navigation: !props.isSidebarVisible }]"
+        :src="props.isSidebarVisible ? house : navigation"
+        alt="house"
+        @click="toggleSidebar"
+      />
+      <h3 class="title-text">任务详情</h3>
+    </div>
+    <div class="content">
+      <div class="task-info">
+        任务详情
+      </div>
+      <div class="timeLine">
+        <TimeLine />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -48,5 +59,22 @@ const toggleSidebar = () => {
 .title-text {
   font-size: 24px;
   font-family: '华文隶书';
+}
+
+.content {
+  float: left;
+  width: 100%;
+  height: calc(100% - 60px);
+}
+
+.task-info {
+  width: 50%;
+  /* float: left; */
+}
+
+.timeLine {
+  width: 50%;
+  position: relative;
+  left: 25%;
 }
 </style>

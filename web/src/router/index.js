@@ -21,7 +21,7 @@ const router = createRouter({
         {
           path: 'taskdetails',
           name: 'TaskDetails',
-          component: () => import('@/views/main/content/TaskDetails.vue'),
+          component: () => import('@/views/main/content/TaskDetails/TaskDetails.vue'),
         },
         {
           path: 'statisticalanalysis',
