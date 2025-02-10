@@ -15,6 +15,12 @@ const toggleSidebar = () => {
     emit('makeSidebarVisible', isLeftSidebarVisible.value)
   }
 }
+
+const isBlurred = ref(false); // 控制模糊状态
+
+const handleOpenModal = (blur) => {
+  isBlurred.value = blur;
+};
 </script>
 
 <template>
@@ -30,10 +36,10 @@ const toggleSidebar = () => {
     </div>
     <div class="content">
       <div class="task-info">
-        <TaskItem />
+        <TaskItem @isBlur="handleOpenModal"/>
       </div>
       <div class="timeLine">
-        <TimeLine />
+        <TimeLine :is-blurred="isBlurred" />
       </div>
     </div>
   </div>
