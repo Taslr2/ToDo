@@ -3,18 +3,20 @@ import { ref } from 'vue'
 
 const searchQuery = ref('')
 const isEditing = ref(false)
-
-const handleSearch = () => {
-  console.log('Search query:', searchQuery.value)
-}
+const isSearchVisable = ref(false)
+const isCancelVisable = ref(false)
+const isSearchAllowed = ref(true)
+const isCancelAllowed = ref(true)
 
 const startEditing = () => {
   isEditing.value = true
+  isSearchVisable.value = false
 }
 
 const stopEditing = () => {
   isEditing.value = false
   searchQuery.value = ''
+  isCancelVisable.value = false
 }
 
 const searchContent = () => {
@@ -24,9 +26,30 @@ const searchContent = () => {
     console.log('Search query:', searchQuery.value) // 搜索功能
   }
 }
+
 const makeSearchVisable = () => {
-  let tooltip = document.getElementById('tooltip15')
-  tooltip.removeAttribute('hidden')
+  if (isSearchAllowed.value == true) {
+    setTimeout(() => {
+      isSearchVisable.value = true
+    }, 200)
+    isSearchAllowed.value = false
+  }
+}
+const makeSearchInvisable = () => {
+  isSearchVisable.value = false
+  isSearchAllowed.value = true
+}
+const makeCancelVisable = () => {
+  if (isCancelAllowed.value == true) {
+    setTimeout(() => {
+      isCancelVisable.value = true
+    }, 200)
+    isCancelAllowed.value = false
+  }
+}
+const makeCancelInvisable = () => {
+  isCancelVisable.value = false
+  isCancelAllowed.value = true
 }
 </script>
 
@@ -37,25 +60,41 @@ const makeSearchVisable = () => {
       class="init"
       type="string"
       v-model="searchQuery"
-      @keyup.enter="handleSearch"
+      @keyup.enter="searchContent"
       placeholder="搜索"
     >
       <template #prefix>
-        <span class="input-prefix" @click="searchContent">
+        <span
+          class="input-prefix"
+          @click="searchContent"
+          @mouseover="makeSearchVisable"
+          @mouseleave="makeSearchInvisable"
+        >
           <i class="iconfont icon-sousuo"></i>
         </span>
       </template>
       <template #suffix>
-        <span class="input-suffix" @click="stopEditing" @mouseover="makeSearchVisable">
+        <span
+          class="input-suffix"
+          @click="stopEditing"
+          @mouseover="makeCancelVisable"
+          @mouseleave="makeCancelInvisable"
+        >
           <i class="iconfont icon-fork"></i>
         </span>
       </template>
     </el-input>
-    <div v-else class="init-button" @click="startEditing">
+    <div
+      v-else
+      class="init-button"
+      @click="startEditing"
+      @mouseover="makeSearchVisable"
+      @mouseleave="makeSearchInvisable"
+    >
       <i class="iconfont icon-sousuo" style="margin-left: 10px"></i>
     </div>
-    <div id="tooltip15">搜索</div>
-    <div id="tooltip16">退出搜索</div>
+    <div id="tooltip15" v-show="isSearchVisable">搜索</div>
+    <div id="tooltip16" v-show="isCancelVisable">退出搜索</div>
   </div>
 </template>
 
@@ -118,7 +157,9 @@ const makeSearchVisable = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 3px;
+  border-radius: 2px;
+  animation: fadeIn 0.5s;
+  color: #333;
 }
 #tooltip15::after {
   content: '';
@@ -146,6 +187,9 @@ const makeSearchVisable = () => {
   align-items: center;
   justify-content: center;
   border-radius: 3px;
+  animation: fadeIn 0.5s;
+  color: #333;
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.15);
 }
 #tooltip16::before {
   content: '';
