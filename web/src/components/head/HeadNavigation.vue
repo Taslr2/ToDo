@@ -1,15 +1,22 @@
 <script setup>
 import UpperRightComponent from '@/components/head/UpperRightComponent.vue'
 import SearchBox from '@/components/head/SearchBox.vue'
+import { ref } from 'vue'
 
+const activeBox = ref('')
 const refreshPage = () => {
   window.location.reload()
+}
+const handleMouseDown = (box) => {
+  activeBox.value = box
 }
 </script>
 
 <template>
   <div class="total">
-    <div class="icon"><img src="@/assets/svg/sign.svg" alt="" /></div>
+    <div :class="['icon', { active: activeBox === 'icon' }]" @mousedown="handleMouseDown('icon')">
+      <img src="@/assets/svg/sign.svg" alt="" @click="refreshPage" />
+    </div>
     <div class="title" @click="refreshPage">To Do</div>
     <div class="search"><SearchBox /></div>
     <div class="right"><UpperRightComponent /></div>
@@ -32,6 +39,10 @@ const refreshPage = () => {
   align-items: center;
   justify-content: center;
   color: white;
+}
+.icon:hover {
+  background-color: #005a9e;
+  cursor: pointer;
 }
 .title {
   font-size: 16px;
@@ -57,5 +68,10 @@ const refreshPage = () => {
 .right {
   width: 192px;
   height: 48px;
+}
+.icon.active {
+  background-color: #173f85;
+  border: 0.5px solid white;
+  box-sizing: border-box;
 }
 </style>
