@@ -7,10 +7,14 @@ const isSearchVisable = ref(false)
 const isCancelVisable = ref(false)
 const isSearchAllowed = ref(true)
 const isCancelAllowed = ref(true)
+const inputRef = ref(null)
 
 const startEditing = () => {
   isEditing.value = true
   isSearchVisable.value = false
+  setTimeout(() => {
+    inputRef.value.focus()
+  }, 0)
 }
 
 const stopEditing = () => {
@@ -62,6 +66,7 @@ const makeCancelInvisable = () => {
       v-model="searchQuery"
       @keyup.enter="searchContent"
       placeholder="搜索"
+      ref="inputRef"
     >
       <template #prefix>
         <span
