@@ -24,6 +24,10 @@ const searchContent = () => {
     console.log('Search query:', searchQuery.value) // 搜索功能
   }
 }
+const makeSearchVisable = () => {
+  let tooltip = document.getElementById('tooltip15')
+  tooltip.removeAttribute('hidden')
+}
 </script>
 
 <template>
@@ -42,7 +46,7 @@ const searchContent = () => {
         </span>
       </template>
       <template #suffix>
-        <span class="input-suffix" @click="stopEditing">
+        <span class="input-suffix" @click="stopEditing" @mouseover="makeSearchVisable">
           <i class="iconfont icon-fork"></i>
         </span>
       </template>
@@ -50,12 +54,15 @@ const searchContent = () => {
     <div v-else class="init-button" @click="startEditing">
       <i class="iconfont icon-sousuo" style="margin-left: 10px"></i>
     </div>
+    <div id="tooltip15">搜索</div>
+    <div id="tooltip16">退出搜索</div>
   </div>
 </template>
 
 <style scoped>
 .search-box {
   width: 375px;
+  position: relative;
 }
 .init {
   width: 100%;
@@ -82,7 +89,7 @@ const searchContent = () => {
   cursor: pointer;
 }
 .init-button:hover {
-  background-color: #f5f7fa;
+  background-color: #f5f5f5;
 }
 .input-prefix,
 .input-suffix {
@@ -95,5 +102,59 @@ const searchContent = () => {
 }
 .input-prefix i {
   transform: translate(1px, 1px);
+}
+#tooltip15 {
+  position: absolute;
+  left: -50px;
+  top: 2.5px;
+  width: 40px;
+  height: 30px;
+  margin: -1px;
+  padding: 0px;
+  border: 0px;
+  background-color: #fff;
+  font-size: 12px;
+  font-family: Microsoft YaHei;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+}
+#tooltip15::after {
+  content: '';
+  position: absolute;
+  right: -25px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 15px;
+  border-style: solid;
+  border-color: transparent transparent transparent #fff;
+}
+#tooltip16 {
+  position: absolute;
+  right: -13px;
+  bottom: -40px;
+  width: 70px;
+  height: 30px;
+  margin: -1px;
+  padding: 0px;
+  border: 0px;
+  background-color: #fff;
+  font-size: 12px;
+  font-family: Microsoft YaHei;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+}
+#tooltip16::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 10px 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent #fff transparent;
 }
 </style>
