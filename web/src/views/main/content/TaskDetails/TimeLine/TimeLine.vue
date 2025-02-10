@@ -60,7 +60,7 @@
 </template>
 
 <script setup>
-import TaskCard from '../TaskCard.vue'
+import TaskCard from './TaskCard.vue'
 </script>
 
 <style scoped>
