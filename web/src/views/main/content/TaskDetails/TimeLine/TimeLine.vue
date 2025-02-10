@@ -1,5 +1,5 @@
 <template>
-  <div class="void" id="void">
+  <div class="void" id="void" :class="{ blurred: isBlurred }">
     <div class="crop">
       <ul class="card-list" style="--count: 6">
         <li>
@@ -60,7 +60,15 @@
 </template>
 
 <script setup>
-import TaskCard from '../TaskCard.vue'
+import TaskCard from './TaskCard.vue'
+
+import { defineProps } from 'vue';
+
+const props = defineProps({
+  isBlurred: Boolean, // 接收父组件传递的模糊状态
+});
+
+console.log(props.isBlurred)
 </script>
 
 <style scoped>
@@ -118,8 +126,11 @@ li {
   font-family: Arial, sans-serif; /* 明确字体系列 */
   font-size: 14px; /* 字体大小 */
   font-weight: 400; /* 字体粗细 */
-  color: #535062;
   animation: rotateCCW calc(var(--rotate-speed) * 1s) var(--easing) infinite;
+}
+
+.task-card {
+  color: #8977af;
 }
 
 .task-card::before {
@@ -303,5 +314,14 @@ li:nth-child(6) .card {
     #3c1ae5 50%,
     rgba(60, 26, 229, 0) 100%
   );
+}
+
+.void {
+  transition: filter 0.5s ease;
+}
+
+.void.blurred {
+  filter: blur(5px); /* 添加模糊效果 */
+  opacity: 0.5; /* 添加半透明效果 */
 }
 </style>

@@ -30,7 +30,7 @@ const formatDateString = (dateString) => {
 <template>
   <div v-if="selectedTask">
     <div class="task-card">
-      <h3>任务: {{ selectedTask.title }}</h3>
+      <h3>{{ selectedTask.title }}</h3>
       <p>类别: {{ selectedTask.category }}</p>
       <p>ddl: {{ formatDateString(selectedTask.expectedCompletionDate) }}</p>
     </div>
@@ -44,6 +44,17 @@ const formatDateString = (dateString) => {
 .task-card {
   font-family: "微软雅黑", "楷体";
   line-height: 1.3;
-  padding: 7px;
+  padding: 4px 9px;
+}
+
+.task-card h3 {
+  color: #6d5691;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.task-card p {
+  color: #a898d1;
+  font-size: 12px;
 }
 </style>

@@ -1,7 +1,8 @@
 <script setup>
-import { ref, defineProps, defineEmits } from 'vue'
+import { ref, defineProps, defineEmits, inject } from 'vue'
 import house from '@/assets/svg/house.svg'
 import navigation from '@/assets/svg/menu-icon.svg'
+import TaskItem from '@/views/main/content/TaskDetails/TaskItem.vue'
 import TimeLine from '@/views/main/content/TaskDetails/TimeLine/TimeLine.vue'
 
 const props = defineProps(['isSidebarVisible'])
@@ -14,6 +15,12 @@ const toggleSidebar = () => {
     emit('makeSidebarVisible', isLeftSidebarVisible.value)
   }
 }
+
+const isBlurred = ref(false); // 控制模糊状态
+
+const handleOpenModal = (blur) => {
+  isBlurred.value = blur;
+};
 </script>
 
 <template>
@@ -29,16 +36,19 @@ const toggleSidebar = () => {
     </div>
     <div class="content">
       <div class="task-info">
-        任务详情
+        <TaskItem @isBlur="handleOpenModal"/>
       </div>
       <div class="timeLine">
-        <TimeLine />
+        <TimeLine :is-blurred="isBlurred" />
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.task-details {
+  height: 100%;
+}
 .header-title {
   width: 100%;
   height: 60px;
@@ -64,17 +74,23 @@ const toggleSidebar = () => {
 .content {
   float: left;
   width: 100%;
-  height: calc(100% - 60px);
+  /* height: calc(100% - 60px); */
+  height: calc(100% - 120px);
 }
 
 .task-info {
   width: 50%;
-  margin: 30px;
-  background-color: pink;
-  overflow-y: auto; /* 添加垂直滚动条 */
-  height: calc(100% - 20px); /* 确保高度适应父容器，减去上下边距 */
+  height: calc(100% - 50px);
+  margin: 0 30px;
+  /* background-color: pink; */
+  overflow-y: auto; /* 添加滚动 */
 }
 
+/* 隐藏滚动条样式 */
+.task-info::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
 
 .timeLine {
   width: 50%;
