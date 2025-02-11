@@ -10,30 +10,30 @@
       <h3 class="title-text">任务数据统计</h3>
     </div>
     <div class="header-blocks">
-      <div class="block-item">
+      <router-link :to="{ name: 'TaskDetails', query: { filter: 'all' } }" class="block-item">
         <p class="block-item-title">{{ allCount }}</p>
         <p class="block-item-text">任务总数</p>
         <p class="block-item-find-more">Look for more</p>
         <img src="../icons/more.png" alt="more" class="more-icon" />
-      </div>
-      <div class="block-item">
+      </router-link>
+      <router-link :to="{ name: 'TaskDetails', query: { filter: 'completed' } }" class="block-item">
         <p class="block-item-title">{{ completedCount }}</p>
         <p class="block-item-text">已完成</p>
         <p class="block-item-find-more">Look for more</p>
         <img src="../icons/more.png" alt="more" class="more-icon" />
-      </div>
-      <div class="block-item">
+      </router-link>
+      <router-link :to="{ name: 'TaskDetails', query: { filter: 'active' } }" class="block-item">
         <p class="block-item-title">{{ unfinishedCount }}</p>
         <p class="block-item-text">待完成</p>
         <p class="block-item-find-more">Look for more</p>
         <img src="../icons/more.png" alt="more" class="more-icon" />
-      </div>
-      <div class="block-item">
+      </router-link>
+      <router-link :to="{ name: 'TaskDetails', query: { filter: 'deleted' } }" class="block-item">
         <p class="block-item-title">{{ deleteCount }}</p>
         <p class="block-item-text">已放弃</p>
         <p class="block-item-find-more">Look for more</p>
         <img src="../icons/more.png" alt="more" class="more-icon" />
-      </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -104,18 +104,38 @@ const toggleSidebar = () => {
 
 .header-blocks > :nth-child(1) {
   background: linear-gradient(135deg, #7881f7, #75caf9);
+  transition: all 0.2s ease-in-out;
+}
+
+.header-blocks > :nth-child(1):hover {
+  box-shadow: #8aa6f3 0px 0px 10px 3px;
 }
 
 .header-blocks > :nth-child(2) {
   background: linear-gradient(135deg, #ec958f, #e17785);
+  transition: all 0.2s ease-in-out;
+}
+
+.header-blocks > :nth-child(2):hover {
+  box-shadow: #d3898b 0px 0px 10px 3px;
 }
 
 .header-blocks > :nth-child(3) {
   background: linear-gradient(135deg, #64b3dd, #82eda3);
+  transition: all 0.2s ease-in-out;
+}
+
+.header-blocks > :nth-child(3):hover {
+  box-shadow: #92cfc1 0px 0px 10px 3px;
 }
 
 .header-blocks > :nth-child(4) {
   background: linear-gradient(135deg, #867ef5, #e388e8);
+  transition: all 0.2s ease-in-out;
+}
+
+.header-blocks > :nth-child(4):hover {
+  box-shadow: #ad85e8 0px 0px 10px 3px;
 }
 
 .block-item-title {

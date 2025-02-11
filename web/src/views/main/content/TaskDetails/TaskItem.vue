@@ -6,10 +6,10 @@
           <input type="radio" v-model="filter" value="all" /> 全部
         </label>
         <label>
-          <input type="radio" v-model="filter" value="active" /> 未完成
+          <input type="radio" v-model="filter" value="completed" /> 已完成
         </label>
         <label>
-          <input type="radio" v-model="filter" value="completed" /> 已完成
+          <input type="radio" v-model="filter" value="active" /> 未完成
         </label>
         <label>
           <input type="radio" v-model="filter" value="deleted" /> 已删除
@@ -49,6 +49,10 @@
 
 <script setup>
 import { ref, inject, computed, onMounted, onUnmounted } from 'vue';
+import { useRoute } from 'vue-router';
+
+// 导入 defineEmits
+const emit = defineEmits(['isBlur']);
 
 const tasks = inject('tasks');
 const filter = ref('all');
@@ -69,17 +73,19 @@ const filteredTasks = computed(() => {
   });
 });
 
-const emit = defineEmits(['isBlur']);
+// 监听路由参数
+const route = useRoute();
+filter.value = route.query.filter || 'all';
 
 const showDetailsModal = (index) => {
   currentTask.value = filteredTasks.value[index];
   showModal.value = true;
-  emit('isBlur', true);  // 触发事件，并传递参数
+  emit('isBlur', true); // 触发事件
 };
 
 const closeModal = () => {
   showModal.value = false;
-  emit('isBlur', false); // 关闭时触发事件，并传递参数
+  emit('isBlur', false); // 关闭时触发事件
 };
 
 // 监听键盘事件
@@ -97,6 +103,7 @@ onUnmounted(() => {
   window.removeEventListener('keydown', handleKeyDown);
 });
 </script>
+
 
 <style scoped>
 .todo-app, .task-information {
@@ -122,7 +129,6 @@ onUnmounted(() => {
   background-color: #ffffff;
   color: #333;
   font-family: 'Arial', sans-serif;
-  /* font-size: 16px; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -155,7 +161,6 @@ onUnmounted(() => {
 }
 
 .completed {
-  /* background: linear-gradient(135deg, #ec958f, #e17785); */
   background: #d58dff;
 }
 
@@ -164,7 +169,6 @@ onUnmounted(() => {
 }
 
 .deleted {
-  /* background: linear-gradient(135deg, #867ef5, #e388e8); */
   background: #9896f1;
 }
 
@@ -173,7 +177,6 @@ onUnmounted(() => {
 }
 
 .active {
-  /* background: linear-gradient(135deg, #64b3dd, #82eda3); */
   background: #edb1f1;
 }
 
@@ -204,44 +207,43 @@ onUnmounted(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* 添加半透明背景 */
-  backdrop-filter: blur(5px); /* 添加模糊效果 */
-  z-index: 1000; /* 确保 modal 显示在其他组件之上 */
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
 }
 
 .modal-content {
-  background: linear-gradient(135deg, #ffffff, #f5f5f5); /* 渐变背景 */
+  background: linear-gradient(135deg, #ffffff, #f5f5f5);
   padding: 20px;
-  border-radius: 15px; /* 增大圆角 */
+  border-radius: 15px;
   position: relative;
   width: 80%;
   max-width: 450px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* 增加阴影 */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
-  z-index: 1001; /* 确保 modal 内容显示在其他组件之上 */
+  z-index: 1001;
 }
 
 .modal-info {
-  /* background-color: #f5f5f5; */
-  padding: 10px 20px; /* 内边距 */
-  border-radius: 15px; /* 圆角 */
-  color: #c7c7c7; /* 字体颜色 */
-  margin-top: 0px; /* 上边距 */
-  z-index: 1002; /* 确保 modal 信息显示在其他组件之上 */
+  padding: 10px 20px;
+  border-radius: 15px;
+  color: #c7c7c7;
+  margin-top: 0px;
+  z-index: 1002;
 }
 
 .modal-content h2 {
-  font-size: 24px; /* 增加标题字体大小 */
-  color: #333; /* 改变标题字体颜色 */
-  margin-bottom: 20px; /* 增加标题和段落之间的间距 */
-  font-weight: bold; /* 加粗标题 */
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
 }
 
 .modal-content p {
-  font-size: 16px; /* 调整段落字体大小 */
-  color: #666; /* 改变段落字体颜色 */
-  line-height: 1.1; /* 增加行高，提高可读性 */
-  margin-bottom: 10px; /* 增加段落之间的间距 */
+  font-size: 16px;
+  color: #666;
+  line-height: 1.1;
+  margin-bottom: 10px;
 }
 
 .close-button {
@@ -252,10 +254,10 @@ onUnmounted(() => {
   cursor: pointer;
   color: #888;
   transition: color 0.3s;
-  z-index: 1003; /* 确保关闭按钮显示在其他组件之上 */
+  z-index: 1003;
 }
 
 .close-button:hover {
-  color: #ff4d4f; /* 鼠标悬停时的颜色变化 */
+  color: #ff4d4f;
 }
 </style>
