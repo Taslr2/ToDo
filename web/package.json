@@ -12,10 +12,14 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@iconify/vue": "^4.3.0",
+    "@internationalized/date": "^3.7.0",
+    "@radix-ui/colors": "^3.0.0",
     "animate.css": "^4.1.1",
     "echarts": "^5.6.0",
     "element-plus": "^2.9.3",
     "pinia": "^2.3.0",
+    "radix-vue": "^1.9.13",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },
