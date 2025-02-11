@@ -1,14 +1,44 @@
 <script setup>
 import UpperRightComponent from '@/components/head/UpperRightComponent.vue'
 import SearchBox from '@/components/head/SearchBox.vue'
-import { ref } from 'vue'
+import { ref, defineEmits } from 'vue'
 
+const [isRightVisible, isSettingVisible, isHelpVisible, isNewVisible, isPersonalVisible] = [
+  ref(false),
+  ref(false),
+  ref(false),
+  ref(false),
+  ref(false),
+]
 const activeBox = ref('')
 const refreshPage = () => {
   window.location.reload()
 }
 const handleMouseDown = (box) => {
   activeBox.value = box
+}
+
+const emit = defineEmits(['showSetting', 'showHelp', 'showNew', 'showPersonal'])
+const makeSettingVisible = (right, setting) => {
+  isRightVisible.value = right
+  isSettingVisible.value = setting
+  emit('showSetting', isRightVisible.value, isSettingVisible.value)
+  console.log('成功传递给HeadNavigation')
+}
+const makeHelpVisible = (right, help) => {
+  isRightVisible.value = right
+  isHelpVisible.value = help
+  emit('showHelp', isRightVisible.value, isHelpVisible.value)
+}
+const makeNewVisible = (right, new_) => {
+  isRightVisible.value = right
+  isNewVisible.value = new_
+  emit('showNew', isRightVisible.value, isNewVisible.value)
+}
+const makePersonalVisible = (right, personal) => {
+  isRightVisible.value = right
+  isPersonalVisible.value = personal
+  emit('showPersonal', isRightVisible.value, isPersonalVisible.value)
 }
 </script>
 
@@ -19,7 +49,14 @@ const handleMouseDown = (box) => {
     </div>
     <div class="title" @click="refreshPage">To Do</div>
     <div class="search"><SearchBox /></div>
-    <div class="right"><UpperRightComponent /></div>
+    <div class="right">
+      <UpperRightComponent
+        @showSetting="makeSettingVisible"
+        @showHelp="makeHelpVisible"
+        @showNew="makeNewVisible"
+        @showPersonal="makePersonalVisible"
+      />
+    </div>
   </div>
 </template>
 
