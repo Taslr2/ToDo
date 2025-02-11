@@ -11,7 +11,7 @@ const router = createRouter({
         {
           path: '',
           name: 'CalendarView',
-          component: () => import('@/views/main/content/CalendarView.vue'),
+          component: () => import('@/views/main/content/CalendarView/CalendarView.vue'),
         },
         {
           path: 'fourquadrant',

@@ -2,6 +2,7 @@
 import { ref, defineProps, defineEmits } from 'vue'
 import calendar from '@/assets/svg/calendar.svg'
 import navigation from '@/assets/svg/menu-icon.svg'
+import Calendar from './Calendar.vue'
 
 const props = defineProps(['isSidebarVisible'])
 const emit = defineEmits(['makeSidebarVisible'])
@@ -16,14 +17,19 @@ const toggleSidebar = () => {
 </script>
 
 <template>
-  <div class="header-title">
-    <img
-      :class="['calendar', { navigation: !props.isSidebarVisible }]"
-      :src="props.isSidebarVisible ? calendar : navigation"
-      alt="calendar"
-      @click="toggleSidebar"
-    />
-    <h3 class="title-text">日历</h3>
+  <div class="calendar-view">
+    <div class="header-title">
+      <img
+        :class="['calendar', { navigation: !props.isSidebarVisible }]"
+        :src="props.isSidebarVisible ? calendar : navigation"
+        alt="calendar"
+        @click="toggleSidebar"
+      />
+      <h3 class="title-text">日历</h3>
+    </div>
+    <div class="calendar-content">
+      <Calendar />
+    </div>
   </div>
 </template>
 
@@ -48,5 +54,11 @@ const toggleSidebar = () => {
 .title-text {
   font-size: 24px;
   font-family: '华文隶书';
+}
+
+.calendar-content {
+  width: 100%;
+  height: calc(100% - 60px);
+  padding: 20px;
 }
 </style>
