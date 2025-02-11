@@ -14,6 +14,25 @@ const toggleSidebar = () => {
     emit('makeSidebarVisible', isLeftSidebarVisible.value)
   }
 }
+
+import { tasks as taskList } from '@/api/tasks.js' 
+const filteredTasks = ref([])  // 将 filteredTasks 定义为响应式引用
+
+const handleDateSelected = (date) => {
+  const year = date.year
+  const month = date.month
+  const day = date.day
+
+  filteredTasks.value = taskList.filter(task => {
+    const taskDate = new Date(task.expectedCompletionDate)
+    const taskYear = taskDate.getFullYear()
+    const taskMonth = taskDate.getMonth() + 1
+    const taskDay = taskDate.getDate()
+    return taskYear === year && taskMonth === month && taskDay === day
+  })
+
+  console.log(filteredTasks.value)
+}
 </script>
 
 <template>
@@ -28,10 +47,14 @@ const toggleSidebar = () => {
       <h3 class="title-text">日历</h3>
     </div>
     <div class="calendar-content">
-      <Calendar />
+      <Calendar @dateSelected="handleDateSelected" />
+      <div v-for="task in filteredTasks" :key="task.id">
+        {{ task.title }} - {{ task.category }} - {{ task.expectedCompletionDate }}
+      </div>
     </div>
   </div>
 </template>
+
 
 <style scoped>
 .header-title {

@@ -21,6 +21,13 @@ const isDateUnavailable: CalendarRootProps['isDateUnavailable'] = (date) => {
   //   return date.day === 17 || date.day === 18
   return null
 }
+
+const emit = defineEmits(['dateSelected'])
+
+const handleDateClick = (day) => {
+  // console.log(day)
+  emit('dateSelected', day)
+}
 </script>
 
 <template>
@@ -69,6 +76,7 @@ const isDateUnavailable: CalendarRootProps['isDateUnavailable'] = (date) => {
                   :day="weekDate"
                   :month="month.value"
                   class="CalendarCellTrigger"
+                  @click="handleDateClick(weekDate)"
                 />
               </CalendarCell>
             </CalendarGridRow>
