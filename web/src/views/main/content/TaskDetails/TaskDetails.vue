@@ -72,7 +72,7 @@ const handleOpenModal = (blur) => {
 }
 
 .content {
-  float: left;
+  float: flex;
   width: 100%;
   /* height: calc(100% - 60px); */
   height: calc(100% - 120px);
@@ -81,9 +81,11 @@ const handleOpenModal = (blur) => {
 .task-info {
   width: 50%;
   height: calc(100% - 50px);
-  margin: 0 30px;
+  margin: 0 10px;
+  position: relative;
   /* background-color: pink; */
   overflow-y: auto; /* 添加滚动 */
+  z-index: 100;
 }
 
 /* 隐藏滚动条样式 */
@@ -94,7 +96,6 @@ const handleOpenModal = (blur) => {
 
 .timeLine {
   width: 50%;
-  /* position: relative;
-  left: 25%; */
+  z-index: 10;
 }
 </style>
