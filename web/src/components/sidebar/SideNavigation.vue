@@ -1,5 +1,6 @@
 <script setup>
 import { ref, defineEmits, defineProps, watch } from 'vue'
+import { useRoute } from 'vue-router'
 
 import calendarIcon from '@/assets/svg/calendar.svg'
 import sunIcon from '@/assets/svg/sun.svg'
@@ -11,6 +12,8 @@ const props = defineProps(['isSidebarVisible'])
 
 const isContentVisible = ref(props.isSidebarVisible)
 const selectedIndex = ref(0)
+const route = useRoute()
+
 watch(
   () => props.isSidebarVisible,
   (newVal) => {
@@ -33,6 +36,25 @@ const menuItems = [
   { text: '任务详情', iconClass: 'house', iconSrc: houseIcon, route: '/taskdetails' },
   { text: '统计分析', iconClass: 'house', iconSrc: bellIcon, route: '/statisticalanalysis' },
 ]
+
+watch(
+  () => route.path,
+  (newPath) => {
+    const index = menuItems.findIndex((item) => item.route === newPath)
+    if (index !== -1) {
+      selectedIndex.value = index
+    }
+  },
+)
+
+const initSelectedIndex = () => {
+  const index = menuItems.findIndex((item) => item.route === route.path)
+  if (index !== -1) {
+    selectedIndex.value = index
+  }
+}
+
+initSelectedIndex()
 </script>
 
 <template>
