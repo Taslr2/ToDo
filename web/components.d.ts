@@ -9,9 +9,13 @@ declare module 'vue' {
   export interface GlobalComponents {
     ElInput: typeof import('element-plus/es')['ElInput']
     HeadNavigation: typeof import('./src/components/head/HeadNavigation.vue')['default']
+    HelpWindow: typeof import('./src/components/RightPopUpWindows/HelpWindow.vue')['default']
+    NewFutures: typeof import('./src/components/RightPopUpWindows/NewFutures.vue')['default']
+    PersonalInformation: typeof import('./src/components/RightPopUpWindows/PersonalInformation.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchBox: typeof import('./src/components/head/SearchBox.vue')['default']
+    SettingWindow: typeof import('./src/components/RightPopUpWindows/SettingWindow.vue')['default']
     SideNavigation: typeof import('./src/components/sidebar/SideNavigation.vue')['default']
     UpperRightComponent: typeof import('./src/components/head/UpperRightComponent.vue')['default']
   }
