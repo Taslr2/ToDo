@@ -5,8 +5,7 @@ const searchQuery = ref('')
 const isEditing = ref(false)
 const isSearchVisable = ref(false)
 const isCancelVisable = ref(false)
-const isSearchAllowed = ref(true)
-const isCancelAllowed = ref(true)
+
 const inputRef = ref(null)
 
 const startEditing = () => {
@@ -32,28 +31,21 @@ const searchContent = () => {
 }
 
 const makeSearchVisable = () => {
-  if (isSearchAllowed.value == true) {
-    setTimeout(() => {
-      isSearchVisable.value = true
-    }, 200)
-    isSearchAllowed.value = false
-  }
+  isSearchVisable.value = true
 }
+
+const buttonMakeSearchVisable = () => {
+  isSearchVisable.value = true
+}
+
 const makeSearchInvisable = () => {
   isSearchVisable.value = false
-  isSearchAllowed.value = true
 }
 const makeCancelVisable = () => {
-  if (isCancelAllowed.value == true) {
-    setTimeout(() => {
-      isCancelVisable.value = true
-    }, 200)
-    isCancelAllowed.value = false
-  }
+  isCancelVisable.value = true
 }
 const makeCancelInvisable = () => {
   isCancelVisable.value = false
-  isCancelAllowed.value = true
 }
 </script>
 
@@ -93,7 +85,7 @@ const makeCancelInvisable = () => {
       v-else
       class="init-button"
       @click="startEditing"
-      @mouseover="makeSearchVisable"
+      @mouseover="buttonMakeSearchVisable"
       @mouseleave="makeSearchInvisable"
     >
       <i class="iconfont icon-sousuo" style="margin-left: 10px"></i>
@@ -111,6 +103,7 @@ const makeCancelInvisable = () => {
 .init {
   width: 100%;
   font-size: 14px;
+  z-index: 2;
 }
 ::v-deep .el-input__wrapper {
   background-color: #fff;
@@ -163,8 +156,10 @@ const makeCancelInvisable = () => {
   align-items: center;
   justify-content: center;
   border-radius: 2px;
-  animation: fadeIn 0.5s;
+  animation: fadeIn 0.5s ease 0.3s;
   color: #333;
+  opacity: 0;
+  animation-fill-mode: forwards;
 }
 #tooltip15::after {
   content: '';
@@ -175,6 +170,7 @@ const makeCancelInvisable = () => {
   border-width: 15px;
   border-style: solid;
   border-color: transparent transparent transparent #fff;
+  z-index: 1;
 }
 #tooltip16 {
   position: absolute;
@@ -192,8 +188,10 @@ const makeCancelInvisable = () => {
   align-items: center;
   justify-content: center;
   border-radius: 3px;
-  animation: fadeIn 0.5s;
+  animation: fadeIn 0.5s ease 0.3s;
   color: #333;
+  opacity: 0;
+  animation-fill-mode: forwards;
   box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.15);
 }
 #tooltip16::before {
