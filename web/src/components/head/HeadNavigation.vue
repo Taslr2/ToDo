@@ -1,7 +1,7 @@
 <script setup>
 import UpperRightComponent from '@/components/head/UpperRightComponent.vue'
 import SearchBox from '@/components/head/SearchBox.vue'
-import { ref, defineEmits } from 'vue'
+import { ref, defineEmits, defineProps } from 'vue'
 
 const [isRightVisible, isSettingVisible, isHelpVisible, isNewVisible, isPersonalVisible] = [
   ref(''),
@@ -19,11 +19,18 @@ const handleMouseDown = (box) => {
 }
 
 const emit = defineEmits(['showSetting', 'showHelp', 'showNew', 'showPersonal'])
+const props = defineProps({
+  isUpperRightVisible: {
+    type: Boolean,
+    required: true,
+  },
+})
+
+
 const makeSettingVisible = (right, setting) => {
   isRightVisible.value = right
   isSettingVisible.value = setting
   emit('showSetting', isRightVisible.value, isSettingVisible.value)
-  console.log('成功传递给HeadNavigation')
 }
 const makeHelpVisible = (right, help) => {
   isRightVisible.value = right
@@ -55,6 +62,7 @@ const makePersonalVisible = (right, personal) => {
         @showHelp="makeHelpVisible"
         @showNew="makeNewVisible"
         @showPersonal="makePersonalVisible"
+        :isUpperRightVisible="props.isUpperRightVisible"
       />
     </div>
   </div>

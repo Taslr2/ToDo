@@ -14,7 +14,7 @@ const closeIsNew = () => {
     <div class="total" v-show="isNewVisible">
       <div class="title">
         <h3>新增功能</h3>
-        <button @click="closeIsNew"><img :src="rightCancel"  /></button>
+        <el-button @click="closeIsNew" class="cancel" color="#faf9f8"><img :src="rightCancel"  /></el-button>
       </div>
     </div>
   </transition>
@@ -27,10 +27,24 @@ const closeIsNew = () => {
 }
 .title {
   width: 100%;
-  height: 58px;
+  height: 65px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #e5e5e5;
+  padding: 0 10px;
+}
+.title h3 {
+  font-size: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #252423;
+  margin: 0 0 0 6px;
+  font-weight: 700;
+}
+.cance
+.cancel:hover {
+  background-color: #cccbca;
+}
+.cancel:active {
+  border: 2px solid #101010;
 }
 </style>
