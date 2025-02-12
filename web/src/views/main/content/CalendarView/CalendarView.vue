@@ -1,3 +1,25 @@
+<template>
+  <div class="calendar-view">
+    <div class="header-title">
+      <img
+        :class="['calendar', { navigation: !props.isSidebarVisible }]"
+        :src="props.isSidebarVisible ? calendar : navigation"
+        alt="calendar"
+        @click="toggleSidebar"
+      />
+      <h3 class="title-text">日历</h3>
+    </div>
+    <div class="calendar-content">
+      <div class="calendar-container">
+        <Calendar @dateSelected="handleDateSelected" />
+      </div>
+      <div class="task-list-container">
+        <TaskListView :year="year" :month="month" :day="day" />
+      </div>
+    </div>
+  </div>
+</template>
+
 <script setup>
 import { ref, defineProps, defineEmits } from 'vue'
 import calendar from '@/assets/svg/calendar.svg'
@@ -16,48 +38,18 @@ const toggleSidebar = () => {
   }
 }
 
-import { tasks as taskList } from '@/api/tasks.js' 
-const filteredTasks = ref([])  // 将 filteredTasks 定义为响应式引用
+const year = ref(0)
+const month = ref(0)
+const day = ref(0)
 
 const handleDateSelected = (date) => {
-  const year = date.year
-  const month = date.month
-  const day = date.day
-
-  filteredTasks.value = taskList.filter(task => {
-    const taskDate = new Date(task.expectedCompletionDate)
-    const taskYear = taskDate.getFullYear()
-    const taskMonth = taskDate.getMonth() + 1
-    const taskDay = taskDate.getDate()
-    return taskYear === year && taskMonth === month && taskDay === day
-  })
-
-  console.log(filteredTasks.value)
+  year.value = date.year
+  month.value = date.month
+  day.value = date.day
+  // console.log("发送: ", year.value, month.value, day.value)
 }
+
 </script>
-
-<template>
-  <div class="calendar-view">
-    <div class="header-title">
-      <img
-        :class="['calendar', { navigation: !props.isSidebarVisible }]"
-        :src="props.isSidebarVisible ? calendar : navigation"
-        alt="calendar"
-        @click="toggleSidebar"
-      />
-      <h3 class="title-text">日历</h3>
-    </div>
-    <div class="calendar-content">
-      <div class="calendar-container">
-        <Calendar @dateSelected="handleDateSelected" />
-      </div>
-      <div class="task-list-container">
-        <TaskListView :filteredTasks="filteredTasks" />
-      </div>
-    </div>
-  </div>
-</template>
-
 
 <style scoped>
 .header-title {
@@ -99,6 +91,8 @@ const handleDateSelected = (date) => {
   position: absolute;
   top: 50%;
   transform: translateY(-55%);
+  border: #fff solid 2px;
+  z-index: 10;
 }
 
 .task-list-container {
@@ -112,5 +106,6 @@ const handleDateSelected = (date) => {
   position: absolute;
   top: 50%;
   transform: translateY(-55%);
+  border: #fff solid 2px;
 }
 </style>
