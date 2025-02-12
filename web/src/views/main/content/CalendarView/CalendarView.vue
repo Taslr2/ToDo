@@ -3,6 +3,7 @@ import { ref, defineProps, defineEmits } from 'vue'
 import calendar from '@/assets/svg/calendar.svg'
 import navigation from '@/assets/svg/menu-icon.svg'
 import Calendar from './Calendar.vue'
+import TaskListView from './TaskListView.vue'
 
 const props = defineProps(['isSidebarVisible'])
 const emit = defineEmits(['makeSidebarVisible'])
@@ -47,9 +48,11 @@ const handleDateSelected = (date) => {
       <h3 class="title-text">日历</h3>
     </div>
     <div class="calendar-content">
-      <Calendar @dateSelected="handleDateSelected" />
-      <div v-for="task in filteredTasks" :key="task.id">
-        {{ task.title }} - {{ task.category }} - {{ task.expectedCompletionDate }}
+      <div class="calendar-container">
+        <Calendar @dateSelected="handleDateSelected" />
+      </div>
+      <div class="task-list-container">
+        <TaskListView :filteredTasks="filteredTasks" />
       </div>
     </div>
   </div>
@@ -81,7 +84,33 @@ const handleDateSelected = (date) => {
 
 .calendar-content {
   width: 100%;
-  height: calc(100% - 60px);
+  height: calc(100% - 120px);
   padding: 20px;
+  position: absolute;
+  /* display: block;
+  align-content: center; */
+}
+
+.calendar-container {
+  width: 25%;
+  /* height: 100%; */
+  float: left;
+  margin: 10px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-55%);
+}
+
+.task-list-container {
+  width: 30%;
+  height: 402px;
+  margin: 10px;
+  border-radius: 12px;
+  background: linear-gradient(0deg, #9786b8, #b4c7de);
+  position: relative;
+  left: calc(25% + 10px);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-55%);
 }
 </style>
