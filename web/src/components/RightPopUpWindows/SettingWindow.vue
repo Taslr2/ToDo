@@ -7,7 +7,6 @@ const isSettingVisible = props.isSettingVisible
 
 const closeIsSetting = () => {
   emit('closeIsSetting', false)
-  console.log('closeIsSetting')
 }
 </script>
 <template>
@@ -15,7 +14,9 @@ const closeIsSetting = () => {
     <div class="total" v-show="isSettingVisible">
       <div class="title">
         <h3>设置</h3>
-        <button @click="closeIsSetting"><img :src="rightCancel" /></button>
+        <el-button @click="closeIsSetting" class="cancel" color="#faf9f8"
+          ><img :src="rightCancel" />
+        </el-button>
       </div>
     </div>
   </transition>
@@ -28,10 +29,23 @@ const closeIsSetting = () => {
 }
 .title {
   width: 100%;
-  height: 58px;
+  height: 65px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #e5e5e5;
+  padding: 0 10px;
+}
+.title h3 {
+  font-size: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #252423;
+  margin: 0 0 0 6px;
+  font-weight: 700;
+}
+.cancel:hover {
+  background-color: #cccbca;
+}
+.cancel:active {
+  border: 2px solid #101010;
 }
 </style>
