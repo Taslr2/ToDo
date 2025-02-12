@@ -7,6 +7,7 @@ const isSettingVisible = props.isSettingVisible
 
 const closeIsSetting = () => {
   emit('closeIsSetting', false)
+  console.log('closeIsSetting')
 }
 </script>
 <template>
@@ -14,7 +15,7 @@ const closeIsSetting = () => {
     <div class="total" v-show="isSettingVisible">
       <div class="title">
         <h3>设置</h3>
-        <button><img :src="rightCancel" @click="closeIsSetting" /></button>
+        <button @click="closeIsSetting"><img :src="rightCancel" /></button>
       </div>
     </div>
   </transition>

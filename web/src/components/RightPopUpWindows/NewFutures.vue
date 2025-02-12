@@ -14,7 +14,7 @@ const closeIsNew = () => {
     <div class="total" v-show="isNewVisible">
       <div class="title">
         <h3>新增功能</h3>
-        <button><img :src="rightCancel" @click="closeIsNew" /></button>
+        <button @click="closeIsNew"><img :src="rightCancel"  /></button>
       </div>
     </div>
   </transition>

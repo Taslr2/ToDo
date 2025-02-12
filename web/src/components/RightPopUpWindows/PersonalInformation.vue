@@ -14,7 +14,7 @@ const closeIsPersonal = () => {
     <div class="total" v-show="isPersonalVisible">
       <div class="title">
         <h3>个人主页</h3>
-        <button><img :src="rightCancel" @click="closeIsPersonal" /></button>
+        <button @click="closeIsPersonal"><img :src="rightCancel" /></button>
       </div>
     </div>
   </transition>
