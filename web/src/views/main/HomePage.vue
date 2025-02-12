@@ -60,7 +60,6 @@ const makeRightInvisible = (invisbility) => {
   isRightVisible.value = invisbility
 }
 const tasks = ref(taskList)
-
 provide('tasks', tasks)
 
 onMounted(() => {
@@ -78,6 +77,7 @@ onMounted(() => {
         @showHelp="makeHelpVisible"
         @showNew="makeNewVisible"
         @showPersonal="makePersonalVisible"
+        :isUpperRightVisible="isRightVisible"
       />
     </div>
     <div class="main-container">
@@ -93,10 +93,23 @@ onMounted(() => {
       </div>
       <transition name="slide">
         <div class="right" v-show="isRightVisible">
-          <SettingWindow v-show="isSettingVisible" @closeIsSetting="makeRightInvisible" />
-          <HelpWindow v-show="isHelpVisible" @closeIsHelp="makeRightInvisible" />
-          <NewFutures v-show="isNewVisible" @closeIsNew="makeRightInvisible" />
-          <PersonalInformation v-show="isPersonalVisible" @closeIsPersonal="makeRightInvisible" />
+          <transition-group name="characterslide">
+            <SettingWindow
+              v-show="isSettingVisible"
+              @closeIsSetting="makeRightInvisible"
+              key="setting"
+            />
+
+            <HelpWindow v-show="isHelpVisible" @closeIsHelp="makeRightInvisible" key="help" />
+
+            <NewFutures v-show="isNewVisible" @closeIsNew="makeRightInvisible" key="new" />
+
+            <PersonalInformation
+              v-show="isPersonalVisible"
+              @closeIsPersonal="makeRightInvisible"
+              key="personal"
+            />
+          </transition-group>
         </div>
       </transition>
     </div>
@@ -138,12 +151,15 @@ onMounted(() => {
 }
 
 .slide-enter-active,
-.slide-leave-active {
-  transition: transform 0.5s ease;
+.slide-leave-active,
+.characterslide-enter-active {
+  transition: transform 0.4s ease;
 }
 
 .slide-enter-from,
-.slide-leave-to {
+.slide-leave-to,
+.characterslide-enter-from,
+.characterslide-leave-to {
   transform: translateX(100%);
 }
 </style>
