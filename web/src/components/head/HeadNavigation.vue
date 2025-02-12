@@ -4,11 +4,11 @@ import SearchBox from '@/components/head/SearchBox.vue'
 import { ref, defineEmits } from 'vue'
 
 const [isRightVisible, isSettingVisible, isHelpVisible, isNewVisible, isPersonalVisible] = [
-  ref(false),
-  ref(false),
-  ref(false),
-  ref(false),
-  ref(false),
+  ref(''),
+  ref(''),
+  ref(''),
+  ref(''),
+  ref(''),
 ]
 const activeBox = ref('')
 const refreshPage = () => {

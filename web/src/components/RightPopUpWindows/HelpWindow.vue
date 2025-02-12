@@ -14,7 +14,7 @@ const closeIsHelp = () => {
     <div class="total" v-show="isHelpVisible">
       <div class="title">
         <h3>帮助</h3>
-        <button><img :src="rightCancel" @click="closeIsHelp" /></button>
+        <button @click="closeIsHelp"><img :src="rightCancel"  /></button>
       </div>
     </div>
   </transition>
