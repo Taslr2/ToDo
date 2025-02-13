@@ -56,7 +56,8 @@ const menuItems = [
   width: 350px;
   height: 100%;
   background-color: #faf9f8;
-  overflow: scroll;
+  overflow-y: auto;    
+  overflow-x: hidden;
 }
 .title {
   width: 100%;
