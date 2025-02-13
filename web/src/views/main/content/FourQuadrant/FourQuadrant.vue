@@ -64,9 +64,14 @@ const toggleSidebar = () => {
 }
 
 .quadrant-container {
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 90%;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -53%);
 }
+
 
 .quedrantBox {
   width: calc(50% - 20px);
