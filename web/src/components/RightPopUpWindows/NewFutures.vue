@@ -1,5 +1,13 @@
 <script setup>
+import { defineProps, defineEmits } from 'vue'
+import rightCancel from '@/assets/svg/rightcancel.svg'
+const props = defineProps(['isNewVisible'])
+const emit = defineEmits(['closeIsNew'])
+const isNewVisible = props.isPersonalVisible
 const closeIsNew = () => {
+  emit('closeIsNew', false)
+}
+const listButton = () => {
   console.log('hello')
 }
 const menuItems = [
@@ -66,7 +74,7 @@ const menuItems = [
   margin: 0 0 0 6px;
   font-weight: 700;
 }
-.cance .cancel:hover {
+.cancel:hover {
   background-color: #cccbca;
 }
 .cancel:active {
