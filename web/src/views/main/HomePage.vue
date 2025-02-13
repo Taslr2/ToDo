@@ -22,6 +22,7 @@ const route = useRoute()
 
 const handleUpdateVisibility = (visibility) => {
   isSidebarVisible.value = visibility
+  console.log('成功接收到更新侧边栏可见性的消息')
 }
 
 const convertSidebarVisible = (visibility) => {
@@ -80,11 +81,19 @@ onMounted(() => {
         :isUpperRightVisible="isRightVisible"
       />
     </div>
+
     <div class="main-container">
-      <SideNavigation
-        @updateVisibility="handleUpdateVisibility"
-        :isSidebarVisible="isSidebarVisible"
-      />
+      <transition
+        name="leftside"
+        leave-active-class="animate__animated animate__slideOutLeft custom-duration"
+        enter-active-class="animate__animated animate__slideInLeft custom-duration"
+      >
+        <SideNavigation
+          @updateVisibility="handleUpdateVisibility"
+          :isSidebarVisible="isSidebarVisible"
+          v-show="isSidebarVisible"
+        />
+      </transition>
       <div class="content">
         <RouterView
           :is-sidebar-visible="isSidebarVisible"
@@ -124,11 +133,6 @@ onMounted(() => {
   position: relative;
 }
 
-.sidebar {
-  width: 290px;
-  background-color: #fff;
-}
-
 .content {
   width: 100%;
   transition: width 0.5s ease;
@@ -161,5 +165,8 @@ onMounted(() => {
 .characterslide-enter-from,
 .characterslide-leave-to {
   transform: translateX(100%);
+}
+.custom-duration {
+  animation-duration: 0.5s;
 }
 </style>

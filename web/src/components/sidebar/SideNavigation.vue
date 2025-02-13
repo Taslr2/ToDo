@@ -58,47 +58,37 @@ initSelectedIndex()
 </script>
 
 <template>
-  <transition
-    name="leftside"
-    leave-active-class="animate__animated animate__slideOutLeft custom-duration"
-    enter-active-class="animate__animated animate__slideInLeft custom-duration"
-  >
-    <div class="all" v-show="isContentVisible">
-      <div class="toggle">
-        <img
-          class="menu-icon"
-          src="@/assets/svg/menu-icon.svg"
-          alt="Menu Icon"
-          width="20"
-          height="20"
-          @click="toggleContent"
-        />
-      </div>
-      <div class="sidebar">
-        <div class="total">
-          <ul class="nav">
-            <router-link v-for="(item, index) in menuItems" :key="index" :to="item.route">
-              <li
-                :class="selectedIndex === index ? 'selected' : 'unselected'"
-                @click="whetherselected(index)"
-              >
-                <img :src="item.iconSrc" width="20" height="20" />
-                <span class="text">{{ item.text }}</span>
-              </li>
-            </router-link>
-          </ul>
-          <div class="ul-last"></div>
-        </div>
+  <div class="all">
+    <div class="toggle">
+      <img
+        class="menu-icon"
+        src="@/assets/svg/menu-icon.svg"
+        alt="Menu Icon"
+        width="20"
+        height="20"
+        @click="toggleContent"
+      />
+    </div>
+    <div class="sidebar">
+      <div class="total">
+        <ul class="nav">
+          <router-link v-for="(item, index) in menuItems" :key="index" :to="item.route">
+            <li
+              :class="selectedIndex === index ? 'selected' : 'unselected'"
+              @click="whetherselected(index)"
+            >
+              <img :src="item.iconSrc" width="20" height="20" />
+              <span class="text">{{ item.text }}</span>
+            </li>
+          </router-link>
+        </ul>
+        <div class="ul-last"></div>
       </div>
     </div>
-  </transition>
+  </div>
 </template>
 
 <style scoped>
-.custom-duration {
-  animation-duration: 1s !important;
-}
-
 .sidebar {
   background-color: #fff;
   display: flex;
@@ -106,14 +96,12 @@ initSelectedIndex()
 }
 
 .all {
-  flex: 1;
   width: 290px;
   display: flex;
   flex-direction: column;
   background-color: #fff;
   position: relative;
   height: calc(100vh - 48px);
-  animation-duration: 1s;
 }
 
 .all::after {
@@ -197,28 +185,4 @@ initSelectedIndex()
   background-color: #2564cf;
   animation: zoomIn 0.5s;
 }
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-/* .leftside-enter,
-.leftside-leave-to {
-  width: 0;
-  overflow: hidden;
-}
-
-.leftside-enter-active,
-.leftside-leave-active {
-  transition: width 0.5s ease;
-}
-
-.leftside-enter-to,
-.leftside-leave {
-  width: 290px;
-} */
 </style>
