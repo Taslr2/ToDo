@@ -39,11 +39,11 @@ const handleDateClick = (day) => {
       fixed-weeks
     >
       <CalendarHeader class="CalendarHeader">
-        <CalendarPrev class="CalendarNavButton">
+        <CalendarPrev class="CalendarNavButton leftButton">
           <Icon icon="radix-icons:chevron-left" class="Icon" />
         </CalendarPrev>
         <CalendarHeading class="CalendarHeading" />
-        <CalendarNext class="CalendarNavButton">
+        <CalendarNext class="CalendarNavButton rightButton">
           <Icon icon="radix-icons:chevron-right" class="Icon" />
         </CalendarNext>
       </CalendarHeader>
