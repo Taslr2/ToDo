@@ -16,7 +16,7 @@ const router = createRouter({
         {
           path: 'fourquadrant',
           name: 'FourQuadrant',
-          component: () => import('@/views/main/content/FourQuadrant.vue'),
+          component: () => import('@/views/main/content/FourQuadrant/FourQuadrant.vue'),
         },
         {
           path: 'taskdetails',
