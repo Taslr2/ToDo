@@ -38,7 +38,7 @@ const handleDateClick = (day) => {
       class="Calendar"
       fixed-weeks
     >
-      <CalendarHeader class="CalendarHeader">
+      <!-- <CalendarHeader class="CalendarHeader">
         <CalendarPrev class="CalendarNavButton">
           <Icon icon="radix-icons:chevron-left" class="Icon" />
         </CalendarPrev>
@@ -46,10 +46,10 @@ const handleDateClick = (day) => {
         <CalendarNext class="CalendarNavButton">
           <Icon icon="radix-icons:chevron-right" class="Icon" />
         </CalendarNext>
-      </CalendarHeader>
+      </CalendarHeader> -->
 
-      <div class="Canlendar-Connector-left"></div>
-      <div class="Canlendar-Connector-right"></div>
+      <!-- <div class="Canlendar-Connector-left"></div>
+      <div class="Canlendar-Connector-right"></div> -->
 
       <div class="CalendarWrapper">
         <CalendarGrid v-for="month in grid" :key="month.value.toString()" class="CalendarGrid">

@@ -13,9 +13,9 @@
       <div class="calendar-container">
         <Calendar @dateSelected="handleDateSelected" />
       </div>
-      <div class="task-list-container">
+      <!-- <div class="task-list-container">
         <TaskListView :year="year" :month="month" :day="day" />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -79,19 +79,17 @@ const handleDateSelected = (date) => {
   height: calc(100% - 120px);
   padding: 20px;
   position: absolute;
-  /* display: block;
-  align-content: center; */
+  display: block;
+  align-content: center;
 }
 
 .calendar-container {
-  width: 25%;
-  /* height: 100%; */
+  width: 60%;
+  height: 560px;
   float: left;
-  margin: 10px;
   position: absolute;
   top: 50%;
-  transform: translateY(-55%);
-  border: #fff solid 2px;
+  transform: translateY(-50%);
   z-index: 10;
 }
 
@@ -102,7 +100,7 @@ const handleDateSelected = (date) => {
   border-radius: 12px;
   background: linear-gradient(0deg, #9786b8, #b4c7de);
   position: relative;
-  left: calc(25% + 10px);
+  left: calc(60% + 10px);
   position: absolute;
   top: 50%;
   transform: translateY(-55%);
