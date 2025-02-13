@@ -48,7 +48,6 @@ const handleDateSelected = (date) => {
   day.value = date.day
   // console.log("发送: ", year.value, month.value, day.value)
 }
-
 </script>
 
 <style scoped>
