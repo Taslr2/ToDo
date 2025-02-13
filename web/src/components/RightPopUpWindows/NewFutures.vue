@@ -19,11 +19,12 @@ const menuItems = [
   },
   {
     imgSrc: '',
-    mainText: '现在可以按类别对任务进行分组。在“排序”按钮旁边可以找到新的“分组依据”选项!',
+    mainText: '现在可以按类别对任务进行分组。在"排序"按钮旁边可以找到新的"分组依据"选项!',
     buttonText: '明白了',
   },
 ]
 </script>
+
 <template>
   <transition>
     <div class="total" v-show="isNewVisible">
@@ -51,14 +52,36 @@ const menuItems = [
     </div>
   </transition>
 </template>
+
 <style scoped>
 .total {
   width: 350px;
   height: 100%;
   background-color: #faf9f8;
-  overflow-y: auto;    
+  overflow-y: auto;
   overflow-x: hidden;
+
+  scrollbar-width: thin;
+  scrollbar-color: #8f8f8f transparent;
 }
+
+.total::-webkit-scrollbar {
+  width: 6px;
+}
+
+.total::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.total::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1;
+  border-radius: 3px;
+}
+
+.total::-webkit-scrollbar-thumb:hover {
+  background-color: #a8a8a8;
+}
+
 .title {
   width: 100%;
   height: 65px;
@@ -68,6 +91,7 @@ const menuItems = [
   padding: 0 10px;
   margin-bottom: 20px;
 }
+
 .title h3 {
   font-size: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -75,29 +99,36 @@ const menuItems = [
   margin: 0 0 0 6px;
   font-weight: 700;
 }
+
 .cancel:hover {
   background-color: #cccbca;
 }
+
 .cancel:active {
   border: 2px solid #101010;
 }
+
 .content {
   width: 100%;
   height: 100%;
 }
+
 .wholeList {
   width: 318px;
   margin: 0 5px 0 auto;
 }
+
 .innerList {
   margin-bottom: 30px;
 }
+
 .Img {
   width: 320px;
   height: 180px;
   border-radius: 2px 2px 0 0;
   background-color: #daecff;
 }
+
 .innerContent {
   width: 318px;
   height: 142.67px;
