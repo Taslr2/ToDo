@@ -90,16 +90,16 @@ const handleDateSelected = (date) => {
   position: absolute;
   top: 50%;
   transform: translateY(-55%);
-  border: #fff solid 2px;
+  /* border: #fff solid 2px; */
   z-index: 10;
 }
 
 .task-list-container {
   width: 30%;
-  height: 402px;
+  height: 532px;
   margin: 10px;
   border-radius: 12px;
-  background: linear-gradient(0deg, #9786b8, #b4c7de);
+  background: linear-gradient(0deg, #9b96eb, #e1b3ed);
   position: relative;
   left: calc(25% + 10px);
   position: absolute;

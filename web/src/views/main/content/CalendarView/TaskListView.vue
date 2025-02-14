@@ -132,11 +132,13 @@ const addCalendarEvent = () => {
 }
 
 .add-task-form input {
-  width: calc(80% - 10px);
+  width: 80%;
   height: 40px;
   margin: 10px;
+  margin-left: 0;
+  border-bottom-left-radius: 12px;
   margin-right: 0px;
-  background: #aeb2d0;
+  background: #bbb5de;
   border: none;
   flex: 2;
   outline: none;
@@ -148,7 +150,7 @@ const addCalendarEvent = () => {
   width: 20%;
   height: 40px;
   text-align: center;
-  background: #5d97ad;
+  background: #c27dfa;
   border: none;
   /* padding: 1.2em; */
   outline: none;
@@ -156,7 +158,7 @@ const addCalendarEvent = () => {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-bottom-left-radius: 0;
-  border-bottom-right-radius: 5px;
+  border-bottom-right-radius: 12px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
