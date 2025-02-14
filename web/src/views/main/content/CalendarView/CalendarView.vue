@@ -125,7 +125,7 @@ const handleTaskSelected = (task) => {
 
 .modify-task-container {
   width: 25%;
-  height: 452px;
+  height: 460px;
   border-radius: 12px;
   position: absolute;
   left: calc(55% + 10px);
