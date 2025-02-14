@@ -1,6 +1,34 @@
 <script setup>
-import { defineProps, defineEmits } from 'vue'
+import { ref, defineProps, defineEmits } from 'vue'
 import rightCancel from '@/assets/svg/rightcancel.svg'
+
+const [
+  value1,
+  value2,
+  value3,
+  value4,
+  value5,
+  value6,
+  value7,
+  value8,
+  value9,
+  value10,
+  value11,
+  value12,
+] = [
+  ref(true),
+  ref(true),
+  ref(false),
+  ref(true),
+  ref(true),
+  ref(true),
+  ref(false),
+  ref(false),
+  ref(true),
+  ref(true),
+  ref(false),
+  ref(false),
+]
 const props = defineProps(['isSettingVisible'])
 const emit = defineEmits(['closeIsSetting'])
 const isSettingVisible = props.isSettingVisible
@@ -18,6 +46,130 @@ const closeIsSetting = () => {
           ><img :src="rightCancel" />
         </el-button>
       </div>
+      <div class="content">
+        <div class="subtitle">常规</div>
+        <div class="choice">
+          在删除前确认
+          <div class="button">
+            <el-switch
+              v-model="value1"
+              style="--el-switch-on-color: #2564cf; --el-switch-off-color: #ccc"
+            />
+            <div class="buttontext">{{ value1 ? '开启' : '关闭' }}</div>
+          </div>
+        </div>
+        <div class="choice">
+          在顶部添加新任务
+          <div class="button">
+            <el-switch
+              v-model="value2"
+              style="--el-switch-on-color: #2564cf; --el-switch-off-color: #ccc"
+            />
+            <div class="buttontext">{{ value2 ? '开启' : '关闭' }}</div>
+          </div>
+        </div>
+        <div class="choice">
+          将带有星标的任务移至顶部
+          <div class="button">
+            <el-switch
+              v-model="value3"
+              style="--el-switch-on-color: #2564cf; --el-switch-off-color: #ccc"
+            />
+            <div class="buttontext">{{ value3 ? '开启' : '关闭' }}</div>
+          </div>
+        </div>
+        <div class="choice">
+          播放完成提示音
+          <div class="button">
+            <el-switch
+              v-model="value4"
+              style="--el-switch-on-color: #2564cf; --el-switch-off-color: #ccc"
+            />
+            <div class="buttontext">{{ value4 ? '开启' : '关闭' }}</div>
+          </div>
+        </div>
+        <div class="choice">
+          显示右键单击菜单
+          <div class="button">
+            <el-switch
+              v-model="value5"
+              style="--el-switch-on-color: #2564cf; --el-switch-off-color: #ccc"
+            />
+            <div class="buttontext">{{ value5 ? '开启' : '关闭' }}</div>
+          </div>
+        </div>
+        <div class="choice">
+          打开提醒通知
+          <div class="button">
+            <el-switch
+              v-model="value6"
+              style="--el-switch-on-color: #2564cf; --el-switch-off-color: #ccc"
+            />
+            <div class="buttontext">{{ value6 ? '开启' : '关闭' }}</div>
+          </div>
+        </div>
+        <div class="choice">
+          打开夜间模式
+          <div class="button">
+            <el-switch
+              v-model="value7"
+              style="--el-switch-on-color: #2564cf; --el-switch-off-color: #ccc"
+            />
+            <div class="buttontext">{{ value7 ? '开启' : '关闭' }}</div>
+          </div>
+        </div>
+        <div class="subtitle">智能列表</div>
+        <div class="choice">
+          重要
+          <div class="button">
+            <el-switch
+              v-model="value8"
+              style="--el-switch-on-color: #2564cf; --el-switch-off-color: #ccc"
+            />
+            <div class="buttontext">{{ value8 ? '开启' : '关闭' }}</div>
+          </div>
+        </div>
+        <div class="choice">
+          计划内
+          <div class="button">
+            <el-switch
+              v-model="value9"
+              style="--el-switch-on-color: #2564cf; --el-switch-off-color: #ccc"
+            />
+            <div class="buttontext">{{ value9 ? '开启' : '关闭' }}</div>
+          </div>
+        </div>
+        <div class="choice">
+          已完成
+          <div class="button">
+            <el-switch
+              v-model="value10"
+              style="--el-switch-on-color: #2564cf; --el-switch-off-color: #ccc"
+            />
+            <div class="buttontext">{{ value10 ? '开启' : '关闭' }}</div>
+          </div>
+        </div>
+        <div class="choice">
+          已分配给我
+          <div class="button">
+            <el-switch
+              v-model="value11"
+              style="--el-switch-on-color: #2564cf; --el-switch-off-color: #ccc"
+            />
+            <div class="buttontext">{{ value11 ? '开启' : '关闭' }}</div>
+          </div>
+        </div>
+        <div class="choice">
+          自动隐藏空的智能列表
+          <div class="button">
+            <el-switch
+              v-model="value12"
+              style="--el-switch-on-color: #2564cf; --el-switch-off-color: #ccc"
+            />
+            <div class="buttontext">{{ value12 ? '开启' : '关闭' }}</div>
+          </div>
+        </div>
+      </div>
     </div>
   </transition>
 </template>
@@ -26,6 +178,10 @@ const closeIsSetting = () => {
   width: 350px;
   height: 100%;
   background-color: #faf9f8;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #8f8f8f transparent;
 }
 .title {
   width: 100%;
@@ -48,4 +204,44 @@ const closeIsSetting = () => {
 .cancel:active {
   border: 2px solid #101010;
 }
+.content {
+  width: 350px;
+  height: 100%;
+  padding: 0 16px;
+}
+.subtitle {
+  width: 318px;
+  height: 42px;
+  font-size: 18px;
+  font-family: microsoft yahei;
+  color: #292827;
+  padding: 9px 0;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+.choice {
+  width: 318px;
+  height: 64.47px;
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: 700;
+  color: #292827;
+  letter-spacing: 0.03em;
+}
+.button {
+  display: flex;
+  align-items: center;
+}
+.buttontext {
+  margin: 0 8px;
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #292827;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
 </style>
+``` ▋
