@@ -31,7 +31,7 @@ const tasks = inject('tasks')
 const allTasks = ref(tasks.value)
 const completedTasks = ref(allTasks.value.filter((task) => task.isCompleted))
 const unfinishedTasks = ref(allTasks.value.filter((task) => !task.isCompleted && !task.isDeleted))
-const deleteTasks = ref(allTasks.value.filter((task) => task.isDeleted))
+const deleteTasks = ref(allTasks.value.filter((task) => !task.isCompleted && task.isDeleted))
 
 const props = defineProps(['isSidebarVisible'])
 const emit = defineEmits(['makeSidebarVisible'])
