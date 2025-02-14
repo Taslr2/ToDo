@@ -85,14 +85,13 @@ onMounted(() => {
     <div class="main-container">
       <transition
         name="leftside"
-        leave-active-class="animate__animated animate__slideOutLeft custom-duration"
-        enter-active-class="animate__animated animate__slideInLeft custom-duration"
       >
-        <SideNavigation
-          @updateVisibility="handleUpdateVisibility"
-          :isSidebarVisible="isSidebarVisible"
-          v-show="isSidebarVisible"
-        />
+        <div class="leftcontent" v-if="isSidebarVisible">
+          <SideNavigation
+            @updateVisibility="handleUpdateVisibility"
+            :isSidebarVisible="isSidebarVisible"
+          />
+        </div>
       </transition>
       <div class="content">
         <RouterView
@@ -133,9 +132,15 @@ onMounted(() => {
   position: relative;
 }
 
+.leftcontent {
+  width: 290px;
+  height: 100%;
+}
 .content {
   width: 100%;
-  transition: width 0.5s ease;
+}
+.content-padding {
+  z-index: 999;
 }
 
 .right {
@@ -165,8 +170,5 @@ onMounted(() => {
 .characterslide-enter-from,
 .characterslide-leave-to {
   transform: translateX(100%);
-}
-.custom-duration {
-  animation-duration: 0.5s;
 }
 </style>
