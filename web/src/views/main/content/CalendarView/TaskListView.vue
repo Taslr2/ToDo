@@ -2,7 +2,7 @@
   <div class="TaskListView">
     <div class="calendar-content">
       <transition-group name="bounce" tag="div">
-        <div v-for="(task, index) in filteredTasks" :key="index" class="task-card">
+        <div v-for="(task, index) in filteredTasks" :key="index" class="task-card" @click="emitTask(task)">
           <div class="task-title">{{ task.title }}</div>
           <div class="task-category">{{ task.category }}</div>
           <div class="task-date">{{ task.expectedCompletionDate }}</div>
@@ -11,27 +11,28 @@
     </div>
     <div class="add-task-form">
       <form @submit.prevent="addCalendarEvent">
-        <input v-model="calendarDescription" placeholder="Enter a task for this day" type="text" />
+        <input v-model="calendarDescription" placeholder="输入这一天的任务" type="text" />
         <select v-model="calendarType">
-          <option value="Work">Work</option>
-          <option value="Study">Study</option>
-          <option value="Social">Social</option>
-          <option value="Other">Other</option>
+          <option value="Work">工作</option>
+          <option value="Study">学习</option>
+          <option value="Social">生活</option>
+          <option value="Other">其他</option>
         </select>
       </form>
     </div>
   </div>
 </template>
-  
+
 <script setup>
-import { ref, defineProps, watch } from 'vue'
+import { ref, defineProps, watch, defineEmits } from 'vue'
 
 // 定义接收的 props
 const props = defineProps({
   year: Number,
   month: Number,
-  day: Number, 
+  day: Number,
 })
+
 console.log("接收：", props.year, props.month, props.day)
 
 // 初始化所有任务
@@ -48,7 +49,7 @@ watch([() => props.year, () => props.month, () => props.day], ([newYear, newMont
     const taskDay = taskDate.getDate()
     return taskYear === newYear && taskMonth === newMonth && taskDay === newDay
   })
-  console.log("过滤：", filteredTasks.value)
+  console.log("点击日期：", filteredTasks.value)
 })
 
 // 添加 tasks 的相关数据
@@ -82,10 +83,16 @@ const addCalendarEvent = () => {
     return taskYear === props.year && taskMonth === props.month && taskDay === props.day
   })
 }
+
+// 定义 emitTask 方法
+const emit = defineEmits(['task-clicked'])
+const emitTask = (task) => {
+  emit('task-clicked', task)
+  // console.log("emit: ", task)
+}
 </script>
-  
+
 <style scoped>
-/* 你的样式代码保持不变 */
 .TaskListView {
   width: 100%;
   height: 100%;
@@ -114,6 +121,7 @@ const addCalendarEvent = () => {
   padding: 10px;
   margin: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer; /* 添加鼠标指针效果 */
 }
 
 .task-title {
