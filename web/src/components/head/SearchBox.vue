@@ -5,7 +5,6 @@ const searchQuery = ref('')
 const isEditing = ref(false)
 const isSearchVisable = ref(false)
 const isCancelVisable = ref(false)
-
 const inputRef = ref(null)
 
 const startEditing = () => {
@@ -14,6 +13,7 @@ const startEditing = () => {
   setTimeout(() => {
     inputRef.value.focus()
   }, 0)
+  console.log(isEditing.value)
 }
 
 const stopEditing = () => {
@@ -47,6 +47,13 @@ const makeCancelVisable = () => {
 const makeCancelInvisable = () => {
   isCancelVisable.value = false
 }
+const closeEditing = () => {
+  isEditing.value = false
+  searchQuery.value = ''
+}
+defineExpose({
+  closeEditing,
+})
 </script>
 
 <template>
