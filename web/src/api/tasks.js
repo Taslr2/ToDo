@@ -7,6 +7,8 @@ export const tasks = [
     category: '其他',
     isDeleted: false,
     expectedCompletionDate: '2025-02-11T10:00:00Z',
+    isImportant: true,
+    isUrgent: false,
   },
   {
     title: '编写代码',
@@ -16,6 +18,8 @@ export const tasks = [
     category: '工作',
     isDeleted: false,
     expectedCompletionDate: '2025-02-11T15:00:00Z',
+    isImportant: true,
+    isUrgent: true,
   },
   {
     title: '学习新技能',
@@ -25,6 +29,8 @@ export const tasks = [
     category: '学习',
     isDeleted: false,
     expectedCompletionDate: '2025-02-12T12:00:00Z',
+    isImportant: false,
+    isUrgent: false,
   },
   {
     title: '购物清单',
@@ -34,6 +40,8 @@ export const tasks = [
     category: '生活',
     isDeleted: false,
     expectedCompletionDate: '2025-02-12T18:00:00Z',
+    isImportant: false,
+    isUrgent: true,
   },
   {
     title: '整理照片',
@@ -43,6 +51,8 @@ export const tasks = [
     category: '其他',
     isDeleted: false,
     expectedCompletionDate: '2025-02-13T11:00:00Z',
+    isImportant: true,
+    isUrgent: false,
   },
   {
     title: '编写测试用例',
@@ -52,6 +62,8 @@ export const tasks = [
     category: '工作',
     isDeleted: false,
     expectedCompletionDate: '2025-02-13T13:00:00Z',
+    isImportant: false,
+    isUrgent: true,
   },
   {
     title: '学习JavaScript',
@@ -61,6 +73,8 @@ export const tasks = [
     category: '学习',
     isDeleted: false,
     expectedCompletionDate: '2025-02-14T12:00:00Z',
+    isImportant: true,
+    isUrgent: false,
   },
   {
     title: '学习CSS',
@@ -70,6 +84,8 @@ export const tasks = [
     category: '学习',
     isDeleted: false,
     expectedCompletionDate: '2025-02-14T18:00:00Z',
+    isImportant: true,
+    isUrgent: true,
   },
   {
     title: '优化网站',
@@ -79,6 +95,8 @@ export const tasks = [
     category: '工作',
     isDeleted: true,
     expectedCompletionDate: '2025-02-15T10:00:00Z',
+    isImportant: false,
+    isUrgent: false,
   },
   {
     title: '计划下个月预算',
@@ -88,6 +106,8 @@ export const tasks = [
     category: '生活',
     isDeleted: true,
     expectedCompletionDate: '2025-02-15T12:00:00Z',
+    isImportant: false,
+    isUrgent: false,
   },
   {
     title: '回复客户邮件',
@@ -97,6 +117,8 @@ export const tasks = [
     category: '工作',
     isDeleted: false,
     expectedCompletionDate: '2025-02-15T14:30:00Z',
+    isImportant: true,
+    isUrgent: false,
   },
   {
     title: '学习React',
@@ -106,6 +128,8 @@ export const tasks = [
     category: '学习',
     isDeleted: true,
     expectedCompletionDate: '2025-02-15T15:00:00Z',
+    isImportant: false,
+    isUrgent: false,
   },
   {
     title: '健身训练',
@@ -115,6 +139,8 @@ export const tasks = [
     category: '生活',
     isDeleted: false,
     expectedCompletionDate: '2025-02-15T17:00:00Z',
+    isImportant: true,
+    isUrgent: false,
   },
   {
     title: '学习ES6',
@@ -124,5 +150,7 @@ export const tasks = [
     category: '学习',
     isDeleted: true,
     expectedCompletionDate: '2025-02-16T10:00:00Z',
+    isImportant: false,
+    isUrgent: false,
   },
 ];

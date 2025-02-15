@@ -17,23 +17,31 @@ const toggleSidebar = () => {
 // 放大quedrantBox
 const isClicked = ref([false, false, false, false])
 const toggleFullScreen = (index) => {
-  console.log("点击了四象限的", index)
+  console.log('点击了四象限的', index)
   isClicked.value[index] = !isClicked.value[index]
 }
 
-const handleKeyDown = (event) => {  // 按下Esc键退出全屏
+const handleKeyDown = (event) => {
+  // 按下Esc键退出全屏
   if (event.key === 'Escape') {
-    isClicked.value = [false, false, false, false];
+    isClicked.value = [false, false, false, false]
   }
 }
 
 onMounted(() => {
-  window.addEventListener('keydown', handleKeyDown);
-});
+  window.addEventListener('keydown', handleKeyDown)
+})
 
 onUnmounted(() => {
-  window.removeEventListener('keydown', handleKeyDown);
-});
+  window.removeEventListener('keydown', handleKeyDown)
+})
+
+// 添加任务
+import { tasks as Alltasks } from '@/api/tasks.js'
+const ImportantUrgentTasks = Alltasks.filter((task) => !task.isCompleted && !task.isDeleted && task.isImportant && task.isUrgent)
+const UrgentNotImportantTasks = Alltasks.filter((task) => !task.isCompleted && !task.isDeleted && task.isUrgent && !task.isImportant)
+const NotImportantNotUrgentTasks = Alltasks.filter((task) => !task.isCompleted && !task.isDeleted && !task.isUrgent && !task.isImportant)
+const NotUrgentImportantTasks = Alltasks.filter((task) => !task.isCompleted && !task.isDeleted && !task.isUrgent && task.isImportant)
 </script>
 
 <template>
@@ -53,28 +61,60 @@ onUnmounted(() => {
         :class="{ 'clicked-box': isClicked[0] }"
         @click="toggleFullScreen(0)"
       >
-        重要但不紧急
+        <div class="quedrantBox-title">重要但不紧急</div>
+        <div class="quedrantBox-content">
+          <div v-for="(task, index) in UrgentNotImportantTasks" :key="index" class="task-info">
+            <div class="task-title">{{ task.title }}</div>
+            <div class="task-info-detail" v-if="isClicked[0]">具体内容: {{ task.details }}</div>
+            <div class="task-info-detail" v-if="isClicked[0]">类别：{{ task.category }}</div>
+            <div class="task-info-detail" v-if="isClicked[0]">预计完成时间：{{ task.expectedCompletionDate }}</div>
+          </div>
+        </div>
       </div>
       <div
         class="quedrantBox"
         :class="{ 'clicked-box': isClicked[1] }"
         @click="toggleFullScreen(1)"
       >
-        重要且紧急
+        <div class="quedrantBox-title">重要且紧急</div>
+        <div class="quedrantBox-content">
+          <div v-for="(task, index) in ImportantUrgentTasks" :key="index" class="task-info">
+            <div class="task-title">{{ task.title }}</div>
+            <div class="task-info-detail" v-if="isClicked[1]">具体内容: {{ task.details }}</div>
+            <div class="task-info-detail" v-if="isClicked[1]">类别：{{ task.category }}</div>
+            <div class="task-info-detail" v-if="isClicked[1]">预计完成时间：{{ task.expectedCompletionDate }}</div>
+          </div>
+        </div>
       </div>
       <div
         class="quedrantBox"
         :class="{ 'clicked-box': isClicked[2] }"
         @click="toggleFullScreen(2)"
       >
-        不重要且不紧急
+        <div class="quedrantBox-title">不重要且不紧急</div>
+        <div class="quedrantBox-content">
+          <div v-for="(task, index) in NotImportantNotUrgentTasks" :key="index" class="task-info">
+            <div class="task-title">{{ task.title }}</div>
+            <div class="task-info-detail" v-if="isClicked[2]">具体内容: {{ task.details }}</div>
+            <div class="task-info-detail" v-if="isClicked[2]">类别：{{ task.category }}</div>
+            <div class="task-info-detail" v-if="isClicked[2]">预计完成时间：{{ task.expectedCompletionDate }}</div>
+          </div>
+        </div>
       </div>
       <div
         class="quedrantBox"
         :class="{ 'clicked-box': isClicked[3] }"
         @click="toggleFullScreen(3)"
       >
-        紧急但不重要
+        <div class="quedrantBox-title">紧急但不重要</div>
+        <div class="quedrantBox-content">
+          <div v-for="(task, index) in NotUrgentImportantTasks" :key="index" class="task-info">
+            <div class="task-title">{{ task.title }}</div>
+            <div class="task-info-detail" v-if="isClicked[3]">具体内容: {{ task.details }}</div>
+            <div class="task-info-detail" v-if="isClicked[3]">类别：{{ task.category }}</div>
+            <div class="task-info-detail" v-if="isClicked[3]">预计完成时间：{{ task.expectedCompletionDate }}</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="notes">
@@ -123,34 +163,35 @@ onUnmounted(() => {
 .quedrantBox {
   width: calc(50% - 20px);
   height: calc(50% - 60px);
+  padding: 22px;
   position: absolute;
   float: left;
   margin: 10px;
   transition: all 0.3s ease;
 }
 
-.quadrant-container> .quedrantBox:nth-child(1) {
+.quadrant-container > .quedrantBox:nth-child(1) {
   background-color: #d09bfb;
   left: 0px;
   top: 0px;
   z-index: 1;
 }
 
-.quadrant-container> .quedrantBox:nth-child(2) {
+.quadrant-container > .quedrantBox:nth-child(2) {
   background-color: #a43ef8;
   left: 50%;
   top: 0px;
   z-index: 1;
 }
 
-.quadrant-container> .quedrantBox:nth-child(3) {
+.quadrant-container > .quedrantBox:nth-child(3) {
   background-color: #e5d1f5;
   left: 0px;
   top: calc(50% - 40px);
   z-index: 1;
 }
 
-.quadrant-container> .quedrantBox:nth-child(4) {
+.quadrant-container > .quedrantBox:nth-child(4) {
   background-color: #b87aeb;
   left: 50%;
   top: calc(50% - 40px);
@@ -163,6 +204,45 @@ onUnmounted(() => {
   width: calc(100% - 20px);
   height: calc(100% - 100px);
   z-index: 10;
+}
+
+.quedrantBox-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 22px;
+}
+
+.quedrantBox-content {
+  width: 100%;
+  max-height: calc(100% - 40px);
+  display: flex;
+  flex-wrap: wrap;
+  transition: all 0.3s ease;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.task-info {
+  width: 100%;
+  max-width: 550px;
+  background-color: #fff;
+  flex: 0 0 auto;
+  margin-right: 22px;
+  margin-bottom: 22px;
+  padding: 15px 18px;
+  border-radius: 18px;
+}
+
+.task-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.task-info-detail {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #a4a4a4;
 }
 
 .notes {
