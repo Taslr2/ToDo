@@ -2,9 +2,9 @@
   <div class="StatisticalAnalysis-header">
     <div class="header-title">
       <img
-        :src="props.isSidebarVisible ? greendot : navigation"
+        :src="props.isSidebarVisible ? bell : navigation"
         alt="dot"
-        :class="props.isSidebarVisible ? 'dot' : 'navigation'"
+        :class="props.isSidebarVisible ? 'bell' : 'navigation'"
         @click="toggleSidebar"
       />
       <h3 class="title-text">任务数据统计</h3>
@@ -41,6 +41,7 @@
 <script setup>
 import { ref, inject, defineProps, defineEmits } from 'vue'
 import greendot from '../icons/green-dot.png'
+import bell from '@/assets/svg/bell.svg'
 import navigation from '@/assets/svg/menu-icon.svg'
 
 const allTasks = inject('allTasks')
@@ -71,9 +72,11 @@ const toggleSidebar = () => {
   align-items: center;
 }
 
-.dot {
-  width: 30px;
-  height: 30px;
+.bell {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  margin-bottom: 3px;
 }
 
 .navigation {

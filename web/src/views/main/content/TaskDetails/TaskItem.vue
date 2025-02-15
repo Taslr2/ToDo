@@ -37,10 +37,10 @@
         <span class="close-button" @click="closeModal">&times;</span>
         <h2>{{ currentTask.title }}</h2>
         <p>{{ currentTask.details }}</p>
-        <p>Category: {{ currentTask.category }}</p>
-        <p>Status: {{ currentTask.isCompleted ? 'Completed' : currentTask.isDeleted ? 'Deleted' : 'Active' }}</p>
-        <p>Expected Completion Date: {{ currentTask.expectedCompletionDate }}</p>
-        <p>Real Completion Date: {{ currentTask.completionDate }}</p>
+        <p>类别: {{ currentTask.category }}</p>
+        <p>状态: {{ currentTask.isCompleted ? '已完成' : currentTask.isDeleted ? '已删除' : '待完成' }}</p>
+        <p>预计完成时间: {{ currentTask.expectedCompletionDate }}</p>
+        <p>实际完成时间: {{ currentTask.completionDate }}</p>
       </div>
       <div class="modal-info">按下Esc键可关闭详情内容</div>
     </div>
