@@ -69,6 +69,24 @@
           type="date"
           class="input-field"
         />
+        <div class="checkbox-group">
+          <input
+            id="isUrgent"
+            v-model="currentSelectedTask.isUrgent"
+            type="checkbox"
+            class="checkbox"
+          />
+          <label for="isCompleted">是否紧急？</label>
+        </div>
+        <div class="checkbox-group">
+          <input
+            id="isImportant"
+            v-model="currentSelectedTask.isImportant"
+            type="checkbox"
+            class="checkbox"
+          />
+          <label for="isCompleted">是否重要？</label>
+        </div>
         <div class="buttons">
           <button class="save-btn" @click="saveTask">保存</button>
           <button class="cancel-btn" @click="cancelEditing">取消</button>

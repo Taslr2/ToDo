@@ -1,6 +1,6 @@
 <script setup>
-import { ref, defineEmits, defineProps, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, defineEmits, defineProps, watch, inject } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 import calendarIcon from '@/assets/svg/calendar.svg'
 import sunIcon from '@/assets/svg/sun.svg'
@@ -18,7 +18,7 @@ watch(
   () => props.isSidebarVisible,
   (newVal) => {
     isContentVisible.value = newVal
-  },
+  }
 )
 
 const toggleContent = () => {
@@ -44,7 +44,7 @@ watch(
     if (index !== -1) {
       selectedIndex.value = index
     }
-  },
+  }
 )
 
 const initSelectedIndex = () => {
@@ -55,6 +55,20 @@ const initSelectedIndex = () => {
 }
 
 initSelectedIndex()
+
+// 加载页面
+const showLoading = inject('showLoading');
+const hideLoading = inject('hideLoading');
+
+const router = useRouter();
+const navigateWithDelay = (route, index) => {
+  selectedIndex.value = index;
+  showLoading();
+  setTimeout(() => {
+    hideLoading();
+    router.push(route); // ✅ 正确使用 router.push()
+  }, 1000);
+};
 </script>
 
 <template>
@@ -72,15 +86,15 @@ initSelectedIndex()
     <div class="sidebar">
       <div class="total">
         <ul class="nav">
-          <router-link v-for="(item, index) in menuItems" :key="index" :to="item.route">
-            <li
-              :class="selectedIndex === index ? 'selected' : 'unselected'"
-              @click="whetherselected(index)"
-            >
-              <img :src="item.iconSrc" width="20" height="20" />
-              <span class="text">{{ item.text }}</span>
-            </li>
-          </router-link>
+          <li
+            v-for="(item, index) in menuItems"
+            :key="index"
+            :class="selectedIndex === index ? 'selected' : 'unselected'"
+            @click="navigateWithDelay(item.route, index)"
+          >
+            <img :src="item.iconSrc" width="20" height="20" />
+            <span class="text">{{ item.text }}</span>
+          </li>
         </ul>
         <div class="ul-last"></div>
       </div>

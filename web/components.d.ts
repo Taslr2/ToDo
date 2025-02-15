@@ -12,6 +12,7 @@ declare module 'vue' {
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     HeadNavigation: typeof import('./src/components/head/HeadNavigation.vue')['default']
     HelpWindow: typeof import('./src/components/RightPopUpWindows/HelpWindow.vue')['default']
+    Loading: typeof import('./src/components/loading/loading.vue')['default']
     NewFutures: typeof import('./src/components/RightPopUpWindows/NewFutures.vue')['default']
     PersonalInformation: typeof import('./src/components/RightPopUpWindows/PersonalInformation.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
