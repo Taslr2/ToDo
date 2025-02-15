@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     ElButton: typeof import('element-plus/es')['ElButton']
     ElInput: typeof import('element-plus/es')['ElInput']
+    ElSwitch: typeof import('element-plus/es')['ElSwitch']
     HeadNavigation: typeof import('./src/components/head/HeadNavigation.vue')['default']
     HelpWindow: typeof import('./src/components/RightPopUpWindows/HelpWindow.vue')['default']
     NewFutures: typeof import('./src/components/RightPopUpWindows/NewFutures.vue')['default']
