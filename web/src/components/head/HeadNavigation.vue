@@ -10,6 +10,7 @@ const [isRightVisible, isSettingVisible, isHelpVisible, isNewVisible, isPersonal
   ref(''),
   ref(''),
 ]
+
 const activeBox = ref('')
 const searchBoxRef = ref(null)
 
@@ -52,7 +53,9 @@ const handleClickOutside = (event) => {
   if (event.target.closest('.init-button')) {
     return
   }
-
+  if (searchBoxRef.value) {
+    searchBoxRef.value.closeEditing()
+  }
   if (searchBoxRef.value &&
       !searchBoxRef.value.$el.contains(event.target) &&
       !event.target.closest('.right')) {
@@ -66,6 +69,11 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', handleClickOutside)
+})
+
+// 暴露方法
+defineExpose({
+  handleClickOutside
 })
 </script>
 
