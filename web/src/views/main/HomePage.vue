@@ -5,11 +5,12 @@ import SettingWindow from '@/components/RightPopUpWindows/SettingWindow.vue'
 import HelpWindow from '@/components/RightPopUpWindows/HelpWindow.vue'
 import NewFutures from '@/components/RightPopUpWindows/NewFutures.vue'
 import PersonalInformation from '@/components/RightPopUpWindows/PersonalInformation.vue'
-import { ref, provide, onMounted } from 'vue'
+import { ref, provide, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { tasks as taskList } from '@/api/tasks.js' // 引入任务数组
 
 const isSidebarVisible = ref(true)
+const headNavigationRef = ref(null)
 const [isRightVisible, isSettingVisible, isHelpVisible, isNewVisible, isPersonalVisible] = [
   ref(false),
   ref(false),
@@ -63,10 +64,25 @@ const makeRightInvisible = (invisbility) => {
 const tasks = ref(taskList)
 provide('tasks', tasks)
 
+const handleClickOutside = (event) => {
+  if (event.target.closest('.head')) {
+    return
+  }
+
+  if (headNavigationRef.value) {
+    headNavigationRef.value.handleClickOutside()
+  }
+}
+
 onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
   if (route.path !== '/') {
     router.push('/')
   }
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleClickOutside)
 })
 </script>
 
@@ -74,6 +90,7 @@ onMounted(() => {
   <div>
     <div class="head">
       <HeadNavigation
+        ref="headNavigationRef"
         @showSetting="makeSettingVisible"
         @showHelp="makeHelpVisible"
         @showNew="makeNewVisible"
@@ -83,9 +100,7 @@ onMounted(() => {
     </div>
 
     <div class="main-container">
-      <transition
-        name="leftside"
-      >
+      <transition name="leftside">
         <div class="leftcontent" v-if="isSidebarVisible">
           <SideNavigation
             @updateVisibility="handleUpdateVisibility"

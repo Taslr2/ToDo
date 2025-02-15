@@ -1,7 +1,7 @@
 <script setup>
 import UpperRightComponent from '@/components/head/UpperRightComponent.vue'
 import SearchBox from '@/components/head/SearchBox.vue'
-import { ref, defineEmits, defineProps } from 'vue'
+import { ref, defineEmits, defineProps, onMounted, onBeforeUnmount } from 'vue'
 
 const [isRightVisible, isSettingVisible, isHelpVisible, isNewVisible, isPersonalVisible] = [
   ref(''),
@@ -10,7 +10,10 @@ const [isRightVisible, isSettingVisible, isHelpVisible, isNewVisible, isPersonal
   ref(''),
   ref(''),
 ]
+
 const activeBox = ref('')
+const searchBoxRef = ref(null)
+
 const refreshPage = () => {
   window.location.reload()
 }
@@ -25,7 +28,6 @@ const props = defineProps({
     required: true,
   },
 })
-
 
 const makeSettingVisible = (right, setting) => {
   isRightVisible.value = right
@@ -47,6 +49,32 @@ const makePersonalVisible = (right, personal) => {
   isPersonalVisible.value = personal
   emit('showPersonal', isRightVisible.value, isPersonalVisible.value)
 }
+const handleClickOutside = (event) => {
+  if (event.target.closest('.init-button')) {
+    return
+  }
+  if (searchBoxRef.value) {
+    searchBoxRef.value.closeEditing()
+  }
+  if (searchBoxRef.value &&
+      !searchBoxRef.value.$el.contains(event.target) &&
+      !event.target.closest('.right')) {
+    searchBoxRef.value.closeEditing()
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleClickOutside)
+})
+
+// 暴露方法
+defineExpose({
+  handleClickOutside
+})
 </script>
 
 <template>
@@ -55,7 +83,7 @@ const makePersonalVisible = (right, personal) => {
       <img src="@/assets/svg/sign.svg" alt="" @click="refreshPage" />
     </div>
     <div class="title" @click="refreshPage">To Do</div>
-    <div class="search"><SearchBox /></div>
+    <div class="search"><SearchBox ref="searchBoxRef" /></div>
     <div class="right">
       <UpperRightComponent
         @showSetting="makeSettingVisible"
