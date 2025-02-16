@@ -25,8 +25,19 @@ const taskCountByTime = computed(() => {
     dateCountMap[date][category] += 1
   })
 
-  const dates = Object.keys(dateCountMap).map(date => new Date(date)).sort((a, b) => a - b) // 按日期排序
-  const latest20Dates = dates.slice(-20).map(date => date.toLocaleDateString()) // 获取最近20天的日期
+  console.log(dateCountMap)
+
+  const dates = Object.keys(dateCountMap)
+  .map(date => {
+    const [day, month, year] = date.split('/');
+    return new Date(`${year}-${month}-${day}`);
+  })
+  .sort((a, b) => a - b);
+
+const latest20Dates = dates.slice(-20).map(date => date.toLocaleDateString());
+console.log(latest20Dates);
+  
+
   const workCounts = latest20Dates.map((date) => dateCountMap[date]['工作'] || 0)
   const studyCounts = latest20Dates.map((date) => dateCountMap[date]['学习'] || 0)
   const lifeCounts = latest20Dates.map((date) => dateCountMap[date]['生活'] || 0)
