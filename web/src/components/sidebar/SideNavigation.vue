@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineEmits, defineProps, watch, inject } from 'vue'
+import { ref, defineEmits, defineProps, watch, inject, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import calendarIcon from '@/assets/svg/calendar.svg'
@@ -13,12 +13,18 @@ const props = defineProps(['isSidebarVisible'])
 const isContentVisible = ref(props.isSidebarVisible)
 const selectedIndex = ref(0)
 const route = useRoute()
+const [isanalysisvisible, istaskvisible, iscalendarvisible, isfourquadrantvisible] = [
+  ref(true),
+  ref(true),
+  ref(true),
+  ref(true),
+]
 
 watch(
   () => props.isSidebarVisible,
   (newVal) => {
     isContentVisible.value = newVal
-  }
+  },
 )
 
 const toggleContent = () => {
@@ -26,17 +32,40 @@ const toggleContent = () => {
   emit('updateVisibility', isContentVisible.value)
 }
 
-const whetherselected = (index) => {
-  selectedIndex.value = index
-}
-
 const menuItems = [
-  { text: '日历', iconClass: 'sun', iconSrc: calendarIcon, route: '/' },
-  { text: '四象限', iconClass: 'calendar', iconSrc: sunIcon, route: '/fourquadrant' },
-  { text: '任务详情', iconClass: 'house', iconSrc: houseIcon, route: '/taskdetails' },
-  { text: '统计分析', iconClass: 'house', iconSrc: bellIcon, route: '/statisticalanalysis' },
+  {
+    text: '日历',
+    iconClass: 'sun',
+    iconSrc: calendarIcon,
+    route: '/',
+    isVisible: iscalendarvisible,
+  },
+  {
+    text: '四象限',
+    iconClass: 'calendar',
+    iconSrc: sunIcon,
+    route: '/fourquadrant',
+    isVisible: isfourquadrantvisible,
+  },
+  {
+    text: '任务详情',
+    iconClass: 'house',
+    iconSrc: houseIcon,
+    route: '/taskdetails',
+    isVisible: istaskvisible,
+  },
+  {
+    text: '统计分析',
+    iconClass: 'house',
+    iconSrc: bellIcon,
+    route: '/statisticalanalysis',
+    isVisible: isanalysisvisible,
+  },
 ]
 
+const filteredMenuItems = computed(() => {
+  return menuItems.filter((item) => item.isVisible.value)
+})
 watch(
   () => route.path,
   (newPath) => {
@@ -44,7 +73,7 @@ watch(
     if (index !== -1) {
       selectedIndex.value = index
     }
-  }
+  },
 )
 
 const initSelectedIndex = () => {
@@ -57,18 +86,18 @@ const initSelectedIndex = () => {
 initSelectedIndex()
 
 // 加载页面
-const showLoading = inject('showLoading');
-const hideLoading = inject('hideLoading');
+const showLoading = inject('showLoading')
+const hideLoading = inject('hideLoading')
 
-const router = useRouter();
+const router = useRouter()
 const navigateWithDelay = (route, index) => {
-  selectedIndex.value = index;
-  showLoading();
+  selectedIndex.value = index
+  showLoading()
   setTimeout(() => {
-    hideLoading();
-    router.push(route); // ✅ 正确使用 router.push()
-  }, 1000);
-};
+    hideLoading()
+    router.push(route) // ✅ 正确使用 router.push()
+  }, 1000)
+}
 </script>
 
 <template>
@@ -87,7 +116,7 @@ const navigateWithDelay = (route, index) => {
       <div class="total">
         <ul class="nav">
           <li
-            v-for="(item, index) in menuItems"
+            v-for="(item, index) in filteredMenuItems"
             :key="index"
             :class="selectedIndex === index ? 'selected' : 'unselected'"
             @click="navigateWithDelay(item.route, index)"
@@ -101,7 +130,6 @@ const navigateWithDelay = (route, index) => {
     </div>
   </div>
 </template>
-
 <style scoped>
 .sidebar {
   background-color: #fff;
