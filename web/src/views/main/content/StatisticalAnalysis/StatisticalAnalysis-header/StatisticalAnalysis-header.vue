@@ -10,37 +10,36 @@
       <h3 class="title-text">任务数据统计</h3>
     </div>
     <div class="header-blocks">
-      <router-link :to="{ name: 'TaskDetails', query: { filter: 'all' } }" class="block-item">
+      <div class="block-item" @click="navigateWithDelay('TaskDetails', 'all')">
         <p class="block-item-title">{{ allCount }}</p>
         <p class="block-item-text">任务总数</p>
         <p class="block-item-find-more">Look for more</p>
         <img src="../icons/more.png" alt="more" class="more-icon" />
-      </router-link>
-      <router-link :to="{ name: 'TaskDetails', query: { filter: 'completed' } }" class="block-item">
+      </div>
+      <div class="block-item" @click="navigateWithDelay('TaskDetails', 'completed')">
         <p class="block-item-title">{{ completedCount }}</p>
         <p class="block-item-text">已完成</p>
         <p class="block-item-find-more">Look for more</p>
         <img src="../icons/more.png" alt="more" class="more-icon" />
-      </router-link>
-      <router-link :to="{ name: 'TaskDetails', query: { filter: 'active' } }" class="block-item">
+      </div>
+      <div class="block-item" @click="navigateWithDelay('TaskDetails', 'active')">
         <p class="block-item-title">{{ unfinishedCount }}</p>
         <p class="block-item-text">待完成</p>
         <p class="block-item-find-more">Look for more</p>
         <img src="../icons/more.png" alt="more" class="more-icon" />
-      </router-link>
-      <router-link :to="{ name: 'TaskDetails', query: { filter: 'deleted' } }" class="block-item">
+      </div>
+      <div class="block-item" @click="navigateWithDelay('TaskDetails', 'deleted')">
         <p class="block-item-title">{{ deleteCount }}</p>
         <p class="block-item-text">已放弃</p>
         <p class="block-item-find-more">Look for more</p>
         <img src="../icons/more.png" alt="more" class="more-icon" />
-      </router-link>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, inject, defineProps, defineEmits } from 'vue'
-import greendot from '../icons/green-dot.png'
 import bell from '@/assets/svg/bell.svg'
 import navigation from '@/assets/svg/menu-icon.svg'
 
@@ -62,6 +61,21 @@ const toggleSidebar = () => {
     emit('makeSidebarVisible', props.isSidebarVisible)
   }
 }
+
+// 跳转加载
+import { useRouter } from 'vue-router'
+
+const router = useRouter();
+const showLoading = inject('showLoading');
+const hideLoading = inject('hideLoading');
+
+const navigateWithDelay = (routeName, filter) => {
+  showLoading();
+  setTimeout(() => {
+    hideLoading();
+    router.push({ name: routeName, query: { filter } });
+  }, 1000);
+};
 </script>
 
 <style scoped>
