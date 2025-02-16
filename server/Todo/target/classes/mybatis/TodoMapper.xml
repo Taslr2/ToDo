@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Todo_Test.mapper.TodoMapper">
+    <select id="selectAllTodos" resultType="todo">
+        select * from todo WHERE isDeleted = 0
+    </select>
+
+    <insert id="insertTodo" parameterType="todo" useGeneratedKeys="true" keyProperty="id">
+        insert into todo (title, details, isCompleted, completionDate, category, isDeleted, expectedCompletionDate,isImportant,isUrgent)
+        VALUES
+            (#{title},#{details},#{isCompleted},#{completionDate},#{category},#{isDeleted},#{expectedCompletionDate},#{isImportant},#{isUrgent})
+    </insert>
+
+    <select id="selectTodoById" resultType="todo">
+        select * from todo WHERE id = #{id} And isDeleted = 0
+    </select>
+
+    <select id="selectTodosByKey" resultType="todo">
+        SELECT * FROM todo WHERE title LIKE CONCAT('%',#{keyword},'%') And isDeleted = 0
+    </select>
+
+    <delete id="deleteTodoById">
+        DELETE FROM todo WHERE id = #{id};
+    </delete>
+
+    <update id="changeTodo">
+        UPDATE todo
+        SET details = #{details}, isCompleted = #{isCompleted},
+            completionDate = #{completionDate}, category = #{category},
+            isDeleted = #{isDeleted}, expectedCompletionDate = #{expectedCompletionDate},
+            title = #{title}
+        WHERE id=#{id}
+    </update>
+
+</mapper>
