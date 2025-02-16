@@ -23,7 +23,7 @@ const [
   ref(true),
   ref(true),
   ref(false),
-  ref(false),
+  ref(true),
   ref(true),
   ref(true),
   ref(false),
@@ -120,7 +120,7 @@ const closeIsSetting = () => {
         </div>
         <div class="subtitle">智能列表</div>
         <div class="choice">
-          重要
+          四象限
           <div class="button">
             <el-switch
               v-model="value8"
@@ -130,7 +130,7 @@ const closeIsSetting = () => {
           </div>
         </div>
         <div class="choice">
-          计划内
+          任务详情
           <div class="button">
             <el-switch
               v-model="value9"
@@ -140,7 +140,7 @@ const closeIsSetting = () => {
           </div>
         </div>
         <div class="choice">
-          已完成
+          统计分析
           <div class="button">
             <el-switch
               v-model="value10"

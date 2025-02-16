@@ -1,24 +1,20 @@
 <script setup>
 import { ref, defineEmits, defineProps, watch, inject } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useSideStore } from '@/stores/sidebar'
 
-import calendarIcon from '@/assets/svg/calendar.svg'
-import sunIcon from '@/assets/svg/sun.svg'
-import houseIcon from '@/assets/svg/house.svg'
-import bellIcon from '@/assets/svg/bell.svg'
-
+const sideStore = useSideStore()
 const emit = defineEmits(['updateVisibility'])
 const props = defineProps(['isSidebarVisible'])
 
 const isContentVisible = ref(props.isSidebarVisible)
-const selectedIndex = ref(0)
 const route = useRoute()
 
 watch(
   () => props.isSidebarVisible,
   (newVal) => {
     isContentVisible.value = newVal
-  }
+  },
 )
 
 const toggleContent = () => {
@@ -26,53 +22,40 @@ const toggleContent = () => {
   emit('updateVisibility', isContentVisible.value)
 }
 
-const whetherselected = (index) => {
-  selectedIndex.value = index
-}
-
-const menuItems = [
-  { text: '日历', iconClass: 'sun', iconSrc: calendarIcon, route: '/' },
-  { text: '四象限', iconClass: 'calendar', iconSrc: sunIcon, route: '/fourquadrant' },
-  { text: '任务详情', iconClass: 'house', iconSrc: houseIcon, route: '/taskdetails' },
-  { text: '统计分析', iconClass: 'house', iconSrc: bellIcon, route: '/statisticalanalysis' },
-]
-
 watch(
   () => route.path,
   (newPath) => {
-    const index = menuItems.findIndex((item) => item.route === newPath)
+    const index = sideStore.menuItems.findIndex((item) => item.route === newPath)
     if (index !== -1) {
-      selectedIndex.value = index
+      sideStore.selectedIndex = index // 移除 .value
     }
-  }
+  },
 )
 
-const initSelectedIndex = () => {
-  const index = menuItems.findIndex((item) => item.route === route.path)
-  if (index !== -1) {
-    selectedIndex.value = index
+// 传入当前路径初始化选中索引
+sideStore.initSelectedIndex(route.path)
+
+
+const showLoading = inject('showLoading')
+const hideLoading = inject('hideLoading')
+
+const router = useRouter()
+const navigateWithDelay = async (path, index) => { // 改为接收 path 参数
+  try {
+    sideStore.selectedIndex = index 
+    showLoading()
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    await router.push({ path }) // 使用对象方式传递路由路径
+    hideLoading()
+  } catch (error) {
+    console.error('Navigation error:', error)
+    hideLoading()
   }
 }
-
-initSelectedIndex()
-
-// 加载页面
-const showLoading = inject('showLoading');
-const hideLoading = inject('hideLoading');
-
-const router = useRouter();
-const navigateWithDelay = (route, index) => {
-  selectedIndex.value = index;
-  showLoading();
-  setTimeout(() => {
-    hideLoading();
-    router.push(route); // ✅ 正确使用 router.push()
-  }, 1000);
-};
 </script>
 
 <template>
-  <div class="all">
+  <div class="all" v-if="isContentVisible">
     <div class="toggle">
       <img
         class="menu-icon"
@@ -87,9 +70,9 @@ const navigateWithDelay = (route, index) => {
       <div class="total">
         <ul class="nav">
           <li
-            v-for="(item, index) in menuItems"
+            v-for="(item, index) in sideStore.menuItems"
             :key="index"
-            :class="selectedIndex === index ? 'selected' : 'unselected'"
+            :class="sideStore.selectedIndex === index ? 'selected' : 'unselected'"
             @click="navigateWithDelay(item.route, index)"
           >
             <img :src="item.iconSrc" width="20" height="20" />
