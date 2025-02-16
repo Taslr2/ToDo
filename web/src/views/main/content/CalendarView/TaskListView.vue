@@ -66,7 +66,9 @@ const addCalendarEvent = () => {
     isCompleted: false,
     completionDate: null,
     isDeleted: false,
-    details: ''
+    details: '',
+    isImportant: false,
+    isUrgent: false,
   }
   allTasks.value.push(newTask)
 
