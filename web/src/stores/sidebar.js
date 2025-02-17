@@ -6,11 +6,7 @@ import bellIcon from '@/assets/svg/bell.svg'
 
 export const useSideStore = defineStore('sidebar', {
   state: () => ({
-    selectedIndex: 0, 
-    isanalysisvisible: true,
-    istaskvisible: true,
-    iscalendarvisible: true,
-    isfourquadrantvisible: true,
+    selectedIndex: 0,
     menuItems: [
       {
         text: '日历',

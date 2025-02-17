@@ -35,16 +35,16 @@ watch(
 // 传入当前路径初始化选中索引
 sideStore.initSelectedIndex(route.path)
 
-
 const showLoading = inject('showLoading')
 const hideLoading = inject('hideLoading')
 
 const router = useRouter()
-const navigateWithDelay = async (path, index) => { // 改为接收 path 参数
+const navigateWithDelay = async (path, index) => {
+  // 改为接收 path 参数
   try {
-    sideStore.selectedIndex = index 
+    sideStore.selectedIndex = index
     showLoading()
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    await new Promise((resolve) => setTimeout(resolve, 1000))
     await router.push({ path }) // 使用对象方式传递路由路径
     hideLoading()
   } catch (error) {
@@ -71,6 +71,7 @@ const navigateWithDelay = async (path, index) => { // 改为接收 path 参数
         <ul class="nav">
           <li
             v-for="(item, index) in sideStore.menuItems"
+            v-show="item.isVisible"
             :key="index"
             :class="sideStore.selectedIndex === index ? 'selected' : 'unselected'"
             @click="navigateWithDelay(item.route, index)"
