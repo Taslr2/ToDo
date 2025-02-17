@@ -50,16 +50,19 @@ const makePersonalVisible = (right, personal) => {
   emit('showPersonal', isRightVisible.value, isPersonalVisible.value)
 }
 const handleClickOutside = (event) => {
-  if (event.target.closest('.init-button')) {
+  if (!event) return
+
+  const target = event?.target
+  if (!target) return
+
+  if (target.closest('.init-button')) {
     return
   }
+
   if (searchBoxRef.value) {
-    searchBoxRef.value.closeEditing()
-  }
-  if (searchBoxRef.value &&
-      !searchBoxRef.value.$el.contains(event.target) &&
-      !event.target.closest('.right')) {
-    searchBoxRef.value.closeEditing()
+    if (!searchBoxRef.value.$el.contains(target) && !target.closest('.right')) {
+      searchBoxRef.value.closeEditing()
+    }
   }
 }
 
@@ -73,7 +76,7 @@ onBeforeUnmount(() => {
 
 // 暴露方法
 defineExpose({
-  handleClickOutside
+  handleClickOutside,
 })
 </script>
 
