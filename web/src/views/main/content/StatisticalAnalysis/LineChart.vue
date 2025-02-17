@@ -1,5 +1,9 @@
 <template>
-  <div id="lineChart" ref="lineChart" style="width: 100%; height: 70%; position: relative; top: 100px;"></div>
+  <div
+    id="lineChart"
+    ref="lineChart"
+    style="width: 100%; height: 70%; position: relative; top: 100px"
+  ></div>
 </template>
 
 <script setup>
@@ -28,15 +32,11 @@ const taskCountByTime = computed(() => {
   console.log(dateCountMap)
 
   const dates = Object.keys(dateCountMap)
-  .map(date => {
-    const [day, month, year] = date.split('/');
-    return new Date(`${year}-${month}-${day}`);
-  })
-  .sort((a, b) => a - b);
+    .map((date) => new Date(date))
+    .sort((a, b) => a - b);
 
-const latest20Dates = dates.slice(-20).map(date => date.toLocaleDateString());
-console.log(latest20Dates);
-  
+  const latest20Dates = dates.slice(-20).map((date) => date.toLocaleDateString())
+  console.log(latest20Dates)
 
   const workCounts = latest20Dates.map((date) => dateCountMap[date]['工作'] || 0)
   const studyCounts = latest20Dates.map((date) => dateCountMap[date]['学习'] || 0)
@@ -82,7 +82,7 @@ onMounted(() => {
       splitNumber: 8, // 调整 Y 轴刻度数量
     },
     grid: {
-      top: '10%',  // 调整图表上边距
+      top: '10%', // 调整图表上边距
       bottom: '10%', // 调整图表下边距
       left: '15%', // 调整图表左边距
       right: '15%', // 调整图表右边距
