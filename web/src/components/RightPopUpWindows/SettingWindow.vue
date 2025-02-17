@@ -1,21 +1,11 @@
 <script setup>
 import { ref, defineProps, defineEmits } from 'vue'
 import rightCancel from '@/assets/svg/rightcancel.svg'
+import { useSideStore } from '@/stores/sidebar'
 
-const [
-  value1,
-  value2,
-  value3,
-  value4,
-  value5,
-  value6,
-  value7,
-  value8,
-  value9,
-  value10,
-  value11,
-  value12,
-] = [
+const sideStore = useSideStore()
+
+const [value1, value2, value3, value4, value5, value6, value7, value11, value12] = [
   ref(true),
   ref(true),
   ref(false),
@@ -23,9 +13,7 @@ const [
   ref(true),
   ref(true),
   ref(false),
-  ref(true),
-  ref(true),
-  ref(true),
+
   ref(false),
   ref(false),
 ]
@@ -123,30 +111,30 @@ const closeIsSetting = () => {
           四象限
           <div class="button">
             <el-switch
-              v-model="value8"
+              v-model="sideStore.menuItems[1].isVisible"
               style="--el-switch-on-color: #2564cf; --el-switch-off-color: #ccc"
             />
-            <div class="buttontext">{{ value8 ? '开启' : '关闭' }}</div>
+            <div class="buttontext">{{ sideStore.menuItems[1].isVisible ? '开启' : '关闭' }}</div>
           </div>
         </div>
         <div class="choice">
           任务详情
           <div class="button">
             <el-switch
-              v-model="value9"
+              v-model="sideStore.menuItems[2].isVisible"
               style="--el-switch-on-color: #2564cf; --el-switch-off-color: #ccc"
             />
-            <div class="buttontext">{{ value9 ? '开启' : '关闭' }}</div>
+            <div class="buttontext">{{ sideStore.menuItems[2].isVisible ? '开启' : '关闭' }}</div>
           </div>
         </div>
         <div class="choice">
           统计分析
           <div class="button">
             <el-switch
-              v-model="value10"
+              v-model="sideStore.menuItems[3].isVisible"
               style="--el-switch-on-color: #2564cf; --el-switch-off-color: #ccc"
             />
-            <div class="buttontext">{{ value10 ? '开启' : '关闭' }}</div>
+            <div class="buttontext">{{ sideStore.menuItems[3].isVisible ? '开启' : '关闭' }}</div>
           </div>
         </div>
         <div class="choice">
