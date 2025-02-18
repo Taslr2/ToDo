@@ -9,6 +9,7 @@ const closeIsHelp = () => {
   emit('closeIsHelp', false)
 }
 </script>
+
 <template>
   <transition>
     <div class="total" v-show="isHelpVisible">
@@ -18,15 +19,21 @@ const closeIsHelp = () => {
           ><img :src="rightCancel"
         /></el-button>
       </div>
+      <div class="settingSection">
+        <p><a href="#">了解详细信息</a></p>
+        <el-button type="primary" color="#626aef">同步</el-button>
+      </div>
     </div>
   </transition>
 </template>
+
 <style scoped>
 .total {
   width: 350px;
   height: 100%;
   background-color: #faf9f8;
 }
+
 .title {
   width: 100%;
   height: 65px;
@@ -35,6 +42,7 @@ const closeIsHelp = () => {
   align-items: center;
   padding: 0 10px;
 }
+
 .title h3 {
   font-size: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -42,10 +50,46 @@ const closeIsHelp = () => {
   margin: 0 0 0 6px;
   font-weight: 700;
 }
+
 .cancel:hover {
   background-color: #cccbca;
 }
+
 .cancel:active {
   border: 2px solid #101010;
+}
+
+.settingSection {
+  width: 328px;
+  height: 74.2px;
+  margin: 0 auto;
+  padding: 0 5px;
+}
+
+.settingSection p {
+  font-size: 14px;
+  color: #2564cf;
+  margin-bottom: 10px;
+}
+
+.settingSection a {
+  color: #2564d2;
+  text-decoration: none;
+}
+
+.settingSection a:visited {
+  color: #2564d2;
+}
+
+.settingSection a:hover {
+  text-decoration: underline;
+  color: #2564d2;
+}
+
+.settingSection .el-button {
+  margin-top: 8px;
+  font-size: 14px;
+  font-family: microsoftoeui, Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
 }
 </style>
