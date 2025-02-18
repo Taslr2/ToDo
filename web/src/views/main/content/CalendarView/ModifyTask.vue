@@ -22,6 +22,7 @@
           <p><strong>已删除：</strong>{{ currentSelectedTask.isDeleted ? '是' : '否' }}</p>
           <div class="action-buttons">
             <button class="delete-btn" @click="deleteTask">删除</button>
+            <button class="delete-btn" @click="giveUpTask">放弃</button>
             <button class="edit-btn" @click="startEditing">编辑</button>
           </div>
         </div>
@@ -76,7 +77,7 @@
             type="checkbox"
             class="checkbox"
           />
-          <label for="isCompleted">是否紧急？</label>
+          <label for="isUrgent">是否紧急？</label>
         </div>
         <div class="checkbox-group">
           <input
@@ -85,7 +86,7 @@
             type="checkbox"
             class="checkbox"
           />
-          <label for="isCompleted">是否重要？</label>
+          <label for="isImportant">是否重要？</label>
         </div>
         <div class="buttons">
           <button class="save-btn" @click="saveTask">保存</button>
@@ -99,6 +100,7 @@
   <script setup>
 import { defineProps, watch, ref, defineEmits } from 'vue'
 import moment from 'moment'
+import axios from 'axios'
 
 const props = defineProps({
   selectedTask: Object,
@@ -123,7 +125,19 @@ const startEditing = () => {
 const saveTask = () => {
   console.log('保存任务:', currentSelectedTask.value)
   isEditing.value = false
-  // 这里可以添加实际的保存逻辑，比如调用API更新任务信息
+  // // 利用后端接口更新任务
+  // axios
+  //   .put('http://localhost:8080/update', currentSelectedTask.value)
+  //   .then((response) => {
+  //     if (response.data === 'success') {
+  //       alert('任务更新成功！')
+  //     } else {
+  //       alert('任务更新失败！')
+  //     }
+  //   })
+  //   .catch((error) => {
+  //     alert('任务更新失败！' + error.message)
+  //   })
 
   // 保存成功的提示框
   alert('任务保存成功！')
@@ -136,12 +150,26 @@ const cancelEditing = () => {
   currentSelectedTask.value = props.selectedTask
 }
 
-const deleteTask = () => {
-  if (confirm('确定要删除此任务吗？')) {
-    console.log('删除任务:', currentSelectedTask.value)
+const giveUpTask = () => {
+  if (confirm('确定要放弃此任务吗？')) {
+    console.log('放弃任务:', currentSelectedTask.value)
     currentSelectedTask.value.isDeleted = true
     // 删除成功的提示框
     alert('任务删除成功！')
+  }
+}
+
+const deleteTask = () => {
+  if (confirm('确定要删除此任务吗？')) {
+    console.log('删除任务:', currentSelectedTask.value)
+    // axios
+    //   .delete('http://localhost:8080/delete?id=${currentSelectedTask.value.id}')
+    //   .then((response) => {
+    //     alert('删除成功:', response.data)
+    //   })
+    //   .catch((error) => {
+    //     alert('删除失败:', error)
+    //   })
   }
 }
 
