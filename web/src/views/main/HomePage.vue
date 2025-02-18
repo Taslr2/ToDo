@@ -8,6 +8,7 @@ import PersonalInformation from '@/components/RightPopUpWindows/PersonalInformat
 import { ref, provide, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { tasks as taskList } from '@/api/tasks.js' // 引入任务数组
+import axios from 'axios'
 
 const isSidebarVisible = ref(true)
 const headNavigationRef = ref(null)
@@ -61,6 +62,12 @@ const makePersonalVisible = (right, personal) => {
 const makeRightInvisible = (invisbility) => {
   isRightVisible.value = invisbility
 }
+
+// const taskList = axios
+//   .get('http://localhost:8080/showTodos')
+//   .then((response) => console.log(response.data))
+//   .catch((error) => console.log(error))
+
 const tasks = ref(taskList)
 provide('tasks', tasks)
 
