@@ -1,5 +1,6 @@
 export const tasks = [
   {
+    id: 1,
     title: '整理文件',
     details: '整理和清理办公桌，保持整洁。',
     isCompleted: true,
@@ -11,6 +12,7 @@ export const tasks = [
     isUrgent: false,
   },
   {
+    id: 2,
     title: '编写代码',
     details: '编写项目代码。',
     isCompleted: true,
@@ -22,6 +24,7 @@ export const tasks = [
     isUrgent: true,
   },
   {
+    id: 3,
     title: '学习新技能',
     details: '学习一项新技能。',
     isCompleted: true,
@@ -33,6 +36,7 @@ export const tasks = [
     isUrgent: false,
   },
   {
+    id: 4,
     title: '购物清单',
     details: '制定购物清单。',
     isCompleted: false,
@@ -44,6 +48,7 @@ export const tasks = [
     isUrgent: true,
   },
   {
+    id: 5,
     title: '整理照片',
     details: '整理个人照片。',
     isCompleted: false,
@@ -55,6 +60,7 @@ export const tasks = [
     isUrgent: false,
   },
   {
+    id: 6,
     title: '编写测试用例',
     details: '编写项目测试用例。',
     isCompleted: false,
@@ -66,6 +72,7 @@ export const tasks = [
     isUrgent: true,
   },
   {
+    id: 7,
     title: '学习JavaScript',
     details: '深入学习JavaScript。',
     isCompleted: false,
@@ -77,6 +84,7 @@ export const tasks = [
     isUrgent: false,
   },
   {
+    id: 8,
     title: '学习CSS',
     details: '学习CSS以提升网站设计技能。',
     isCompleted: false,
@@ -88,6 +96,7 @@ export const tasks = [
     isUrgent: true,
   },
   {
+    id: 9,
     title: '优化网站',
     details: '优化公司网站以提高用户体验。',
     isCompleted: false,
@@ -99,6 +108,7 @@ export const tasks = [
     isUrgent: false,
   },
   {
+    id: 10,
     title: '计划下个月预算',
     details: '制定下个月的个人预算。',
     isCompleted: false,
@@ -110,6 +120,7 @@ export const tasks = [
     isUrgent: false,
   },
   {
+    id: 11,
     title: '回复客户邮件',
     details: '回复客户关于项目进度的询问邮件。',
     isCompleted: true,
@@ -121,6 +132,7 @@ export const tasks = [
     isUrgent: false,
   },
   {
+    id: 12,
     title: '学习React',
     details: '学习React以增强前端开发能力。',
     isCompleted: false,
@@ -132,6 +144,7 @@ export const tasks = [
     isUrgent: false,
   },
   {
+    id: 13,
     title: '健身训练',
     details: '进行一小时的健身锻炼。',
     isCompleted: true,
@@ -143,6 +156,7 @@ export const tasks = [
     isUrgent: false,
   },
   {
+    id: 14,
     title: '学习ES6',
     details: '学习ES6以提高代码质量。',
     isCompleted: false,
