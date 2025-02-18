@@ -38,6 +38,20 @@ onUnmounted(() => {
 
 // 添加任务
 import { tasks as Alltasks } from '@/api/tasks.js'
+
+// // 初始化所有任务
+// const Alltasks = ref([])
+
+// // 使用 axios 请求后端接口
+// axios
+//   .get('http://localhost:8080/showTodos')
+//   .then((response) => {
+//     Alltasks.value = response.data
+//   })
+//   .catch((error) => {
+//     console.error('获取任务列表失败:', error)
+//   })
+
 const ImportantUrgentTasks = Alltasks.filter((task) => !task.isCompleted && !task.isDeleted && task.isImportant && task.isUrgent)
 const UrgentNotImportantTasks = Alltasks.filter((task) => !task.isCompleted && !task.isDeleted && task.isUrgent && !task.isImportant)
 const NotImportantNotUrgentTasks = Alltasks.filter((task) => !task.isCompleted && !task.isDeleted && !task.isUrgent && !task.isImportant)
