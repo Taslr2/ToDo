@@ -21,7 +21,7 @@ const handleMouseDown = (box) => {
   activeBox.value = box
 }
 
-const emit = defineEmits(['showSetting', 'showHelp', 'showNew', 'showPersonal'])
+const emit = defineEmits(['showSetting', 'showHelp', 'showNew', 'showPersonal', 'showCalendar'])
 const props = defineProps({
   isUpperRightVisible: {
     type: Boolean,
@@ -66,6 +66,10 @@ const handleClickOutside = (event) => {
   }
 }
 
+const handleShowCalendar = (test) => {
+  emit('showCalendar',test)
+}
+
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
 })
@@ -86,7 +90,9 @@ defineExpose({
       <img src="@/assets/svg/sign.svg" alt="" @click="refreshPage" />
     </div>
     <div class="title" @click="refreshPage">To Do</div>
-    <div class="search"><SearchBox ref="searchBoxRef" /></div>
+    <div class="search">
+      <SearchBox ref="searchBoxRef" @showCalendar="handleShowCalendar" />
+    </div>
     <div class="right">
       <UpperRightComponent
         @showSetting="makeSettingVisible"
