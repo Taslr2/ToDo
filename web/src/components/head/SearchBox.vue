@@ -8,6 +8,7 @@ const isSearchVisable = ref(false)
 const isCancelVisable = ref(false)
 const inputRef = ref(null)
 const taskList = ref([])
+const test = ref('2025-02-11T12:00:00Z')
 
 const startEditing = () => {
   isEditing.value = true
@@ -62,7 +63,7 @@ const closeEditing = () => {
 const emit = defineEmits(['showCalendar'])
 
 const handleResultClick = () => {
-  emit('showCalendar')
+  emit('showCalendar',test.value)
   isEditing.value = false
 }
 
