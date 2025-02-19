@@ -47,13 +47,13 @@
           type="text"
           class="input-field"
         />
-        <label for="expectedCompletionDate">预计完成日期：</label>
+        <!-- <label for="expectedCompletionDate">预计完成日期：</label>
         <input
           id="expectedCompletionDate"
           v-model="currentSelectedTask.expectedCompletionDate"
           type="date"
           class="input-field"
-        />
+        /> -->
         <div class="checkbox-group">
           <input
             id="isCompleted"
