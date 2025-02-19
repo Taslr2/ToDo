@@ -125,9 +125,19 @@ const startEditing = () => {
 const saveTask = () => {
   console.log('保存任务:', currentSelectedTask.value)
   isEditing.value = false
+  console.log('更新任务:', currentSelectedTask.value)
   // 利用后端接口更新任务
+  if (currentSelectedTask.value.isImportant === true) currentSelectedTask.value.isImportant = 1
+  else currentSelectedTask.value.isImportant = 0
+  if (currentSelectedTask.value.isUrgent === true) currentSelectedTask.value.isUrgent = 1
+  else currentSelectedTask.value.isUrgent = 0
+
+  if (currentSelectedTask.value.isCompleted === true) currentSelectedTask.value.isCompleted = 1
+  else currentSelectedTask.value.isCompleted = 0
+  if (currentSelectedTask.value.isDeleted === true) currentSelectedTask.value.isDeleted = 1
+  else currentSelectedTask.value.isDeleted = 0
   axios
-    .put('http://localhost:8080/todo/update', currentSelectedTask.value)
+    .put(`http://localhost:8080/todo/update?id=${currentSelectedTask.value.id}`, currentSelectedTask.value)
     .then((response) => {
       if (response.data === 'success') {
         alert('任务更新成功！')
@@ -138,9 +148,6 @@ const saveTask = () => {
     .catch((error) => {
       alert('任务更新失败！' + error.message)
     })
-
-  // 保存成功的提示框
-  alert('任务保存成功！')
 }
 
 const cancelEditing = () => {
@@ -153,23 +160,39 @@ const cancelEditing = () => {
 const giveUpTask = () => {
   if (confirm('确定要放弃此任务吗？')) {
     console.log('放弃任务:', currentSelectedTask.value)
-    currentSelectedTask.value.isDeleted = true
-    // 删除成功的提示框
-    alert('任务删除成功！')
+    currentSelectedTask.value.isDeleted = 1
+    if (currentSelectedTask.value.isImportant === true) currentSelectedTask.value.isImportant = 1
+    else currentSelectedTask.value.isImportant = 0
+    if (currentSelectedTask.value.isUrgent === true) currentSelectedTask.value.isUrgent = 1
+    else currentSelectedTask.value.isUrgent = 0
+
+    if (currentSelectedTask.value.isCompleted === true) currentSelectedTask.value.isCompleted = 1
+    else currentSelectedTask.value.isCompleted = 0
+    axios
+    .put(`http://localhost:8080/todo/update`
+    // ?title=${currentSelectedTask.value.title}&details=${currentSelectedTask.value.details}&isCompleted=${currentSelectedTask.value.isCompleted}&completionDate=${currentSelectedTask.value.completionDate || ''}&category=${currentSelectedTask.value.category}&isDeleted=${currentSelectedTask.value.isDeleted}&expectedCompletionDate=${currentSelectedTask.value.expectedCompletionDate}&id=${currentSelectedTask.value.id}&isImportant=${currentSelectedTask.value.isImportant}&isUrgent=${currentSelectedTask.value.isUrgent}`
+    , currentSelectedTask.value)
+      .then((response) => {
+        if (response.data ==='success') {
+          alert('任务放弃成功！')
+        } else {
+          alert('任务放弃失败！')
+        }
+      }) 
   }
 }
 
 const deleteTask = () => {
   if (confirm('确定要删除此任务吗？')) {
     console.log('删除任务:', currentSelectedTask.value)
-    // axios
-    //   .delete('http://localhost:8080/delete?id=${currentSelectedTask.value.id}')
-    //   .then((response) => {
-    //     alert('删除成功:', response.data)
-    //   })
-    //   .catch((error) => {
-    //     alert('删除失败:', error)
-    //   })
+    axios
+      .delete(`http://localhost:8080/todo/delete?id=${currentSelectedTask.value.id}`)
+      .then((response) => {
+        alert('删除成功:', response.data)
+      })
+      .catch((error) => {
+        alert('删除失败:', error)
+      })
   }
 }
 
