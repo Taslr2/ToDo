@@ -68,7 +68,9 @@ const handleClickOutside = (event) => {
 
 const handleShowCalendar = (test) => {
   emit('showCalendar',test)
+  console.log("HeadNavigation成功发送:"+test)
 }
+
 
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
