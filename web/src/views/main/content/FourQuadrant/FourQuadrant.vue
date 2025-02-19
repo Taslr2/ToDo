@@ -45,7 +45,7 @@ const Alltasks = ref([])
 
 // 使用 axios 请求后端接口
 axios
-  .get('http://localhost:8080/showTodos')
+  .get('http://localhost:8080/todo/showTodos')
   .then((response) => {
     Alltasks.value = response.data
   })
