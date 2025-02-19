@@ -55,7 +55,7 @@ const navigateWithDelay = async (path, index) => {
 </script>
 
 <template>
-  <div class="all" v-if="isContentVisible">
+  <div class="all" >
     <div class="toggle">
       <img
         class="menu-icon"

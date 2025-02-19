@@ -116,14 +116,12 @@ onBeforeUnmount(() => {
     </div>
 
     <div class="main-container">
-      <transition name="leftside">
-        <div class="leftcontent" v-if="isSidebarVisible">
+        <div class="leftcontent" :class="isSidebarVisible?'':'hide'">
           <SideNavigation
             @updateVisibility="handleUpdateVisibility"
             :isSidebarVisible="isSidebarVisible"
           />
         </div>
-      </transition>
       <div class="content">
         <RouterView
           :is-sidebar-visible="isSidebarVisible"
@@ -166,9 +164,14 @@ onBeforeUnmount(() => {
 .leftcontent {
   width: 290px;
   height: 100%;
+  overflow: hidden;
+  transition: .3s;
+}
+.hide{
+  width: 0;
 }
 .content {
-  width: 100%;
+  flex: 1;
 }
 .content-padding {
   z-index: 999;

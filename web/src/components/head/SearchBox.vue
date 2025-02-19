@@ -62,10 +62,10 @@ const closeEditing = () => {
 
 const emit = defineEmits(['showCalendar'])
 
-const handleResultClick = () => {
+const handleResultClick = (task) => {
   // emit('showCalendar',test.value)
-  emit('showCalendar',taskList.value.expectedCompletionDate)
-  console.log('SearchBox成功发送'+ taskList.value.expectedCompletionDate)
+  emit('showCalendar',task.expectedCompletionDate)
+  console.log('SearchBox成功发送'+ task.expectedCompletionDate)
   isEditing.value = false
 }
 
@@ -120,7 +120,7 @@ defineExpose({
 
     <!-- 搜索结果展示 -->
     <div class="search-results" v-if="isEditing && taskList.length > 0">
-      <div  v-for="task in taskList" :key="task.id" class="search-result-item" @click="handleResultClick">
+      <div  v-for="task in taskList" :key="task.id" class="search-result-item" @click="handleResultClick(task)">
         <!-- v-for="task in taskList" :key="task.id"  -->
         <!-- {{ task.title }} -->
         {{ task.title }}
