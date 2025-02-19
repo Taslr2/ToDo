@@ -65,6 +65,7 @@ const emit = defineEmits(['showCalendar'])
 const handleResultClick = () => {
   // emit('showCalendar',test.value)
   emit('showCalendar',taskList.value.expectedCompletionDate)
+  console.log('SearchBox成功发送'+ taskList.value.expectedCompletionDate)
   isEditing.value = false
 }
 
