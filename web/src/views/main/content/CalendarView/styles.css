@@ -16,7 +16,7 @@
   border-width: 1px;
   border-color: #000000;
   border-radius: 12px;
-  background: linear-gradient(0deg, #9b96eb, #e1b3ed);
+  background: linear-gradient(180deg, #4463C9, #8297da);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   padding: 22px;
   position: relative;
@@ -160,7 +160,7 @@
   font-size: 0.75rem;
   line-height: 1rem;
   font-weight: 400;
-  color: #7650ac;
+  color: #4463C9;
   font-weight: bold;
   margin: 0 auto;
 }
@@ -209,7 +209,7 @@
 }
 
 .CalendarCellTrigger[data-selected] {
-  background-color: #a99edf;
+  background-color: #778dd4;
   color: #ffffff;
   font-weight: 500;
   box-shadow: 5px 5px 5px #87c6df;
@@ -251,5 +251,5 @@
 
 .CalendarCellTrigger[data-today]::before {
   display: block;
-  background-color: #a89edb;
+  background-color: #778dd4;
 }

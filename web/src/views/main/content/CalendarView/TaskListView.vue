@@ -173,7 +173,7 @@ const emitTask = (task) => {
   margin-left: 0;
   border-bottom-left-radius: 12px;
   margin-right: 0px;
-  background: #bbb5de;
+  background: #b5b8de;
   border: none;
   flex: 2;
   outline: none;
@@ -185,7 +185,7 @@ const emitTask = (task) => {
   width: 20%;
   height: 40px;
   text-align: center;
-  background: #c27dfa;
+  background: #6d88e2;
   border: none;
   /* padding: 1.2em; */
   outline: none;
