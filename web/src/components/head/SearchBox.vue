@@ -118,7 +118,7 @@ defineExpose({
     <div id="tooltip16" v-show="isCancelVisable">退出搜索</div>
 
     <!-- 搜索结果展示 -->
-    <div class="search-results" v-if="isEditing && taskList.length >= 0">
+    <div class="search-results" v-if="isEditing && taskList.length > 0">
       <div  v-for="task in taskList" :key="task.id" class="search-result-item" @click="handleResultClick">
         <!-- v-for="task in taskList" :key="task.id"  -->
         <!-- {{ task.title }} -->
