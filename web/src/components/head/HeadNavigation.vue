@@ -66,8 +66,8 @@ const handleClickOutside = (event) => {
   }
 }
 
-const handleShowCalendar = () => {
-  emit('showCalendar')
+const handleShowCalendar = (test) => {
+  emit('showCalendar',test)
 }
 
 onMounted(() => {
