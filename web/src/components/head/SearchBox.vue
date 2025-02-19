@@ -1,11 +1,13 @@
 <script setup>
 import { ref } from 'vue'
+import axios from 'axios'
 
 const searchQuery = ref('')
 const isEditing = ref(false)
 const isSearchVisable = ref(false)
 const isCancelVisable = ref(false)
 const inputRef = ref(null)
+const taskList = ref([])
 
 const startEditing = () => {
   isEditing.value = true
@@ -26,7 +28,12 @@ const searchContent = () => {
   if (searchQuery.value === '') {
     isEditing.value = true
   } else {
-    console.log('Search query:', searchQuery.value) // 搜索功能
+    axios
+      .get(`http://localhost:8080/todo/search?query=${searchQuery.value}`)
+      .then((response) => {
+        taskList.value = response.data
+      })
+      .catch((error) => console.log(error))
   }
 }
 
@@ -51,6 +58,14 @@ const closeEditing = () => {
   isEditing.value = false
   searchQuery.value = ''
 }
+
+const emit = defineEmits(['showCalendar'])
+
+const handleResultClick = () => {
+  emit('showCalendar')
+  isEditing.value = false
+}
+
 defineExpose({
   closeEditing,
 })
@@ -99,6 +114,15 @@ defineExpose({
     </div>
     <div id="tooltip15" v-show="isSearchVisable">搜索</div>
     <div id="tooltip16" v-show="isCancelVisable">退出搜索</div>
+
+    <!-- 搜索结果展示 -->
+    <div class="search-results" v-if="isEditing && taskList.length >= 0">
+      <div  class="search-result-item" @click="handleResultClick">
+        <!-- v-for="task in taskList" :key="task.id"  -->
+        <!-- {{ task.title }} -->
+          1
+      </div>
+    </div>
   </div>
 </template>
 
@@ -210,5 +234,37 @@ defineExpose({
   border-width: 0 10px 10px 10px;
   border-style: solid;
   border-color: transparent transparent #fff transparent;
+}
+.search-results {
+
+  position: absolute;
+  top: 40px;
+  right: 0;
+  width: calc(100% - 45px);
+  max-height: 200px;
+  overflow-y: none;
+  background-color: #fff;
+  border: 1px solid #dcdfe6;
+  border-radius: 5px;
+  margin-top: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+.search-result-item {
+  display: flex;
+  flex-direction:column ;
+  width: 100%;
+  height: 30px;
+  border: 1px solid #dcdfe6;
+  padding: 0 0 0 15px;
+  border-radius: 5px;
+  justify-content: center;
+  cursor: pointer;
+}
+.search-result-item:hover {
+background-color: rgb(201, 201, 201);
+}
+.search-result-item:last-child {
+  border-bottom: none;
 }
 </style>
