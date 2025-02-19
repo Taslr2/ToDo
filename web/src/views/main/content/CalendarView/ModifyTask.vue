@@ -127,7 +127,7 @@ const saveTask = () => {
   isEditing.value = false
   // 利用后端接口更新任务
   axios
-    .put('http://localhost:8080/update', currentSelectedTask.value)
+    .put('http://localhost:8080/todo/update', currentSelectedTask.value)
     .then((response) => {
       if (response.data === 'success') {
         alert('任务更新成功！')
