@@ -66,9 +66,9 @@ const handleClickOutside = (event) => {
   }
 }
 
-const handleShowCalendar = (test) => {
-  emit('showCalendar',test)
-  console.log("HeadNavigation成功发送:"+test)
+const handleShowCalendar = (expectedCompletionDate,title) => {
+  emit('showCalendar',expectedCompletionDate,title)
+  console.log("HeadNavigation成功发送:"+expectedCompletionDate+title)
 }
 
 

@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { provide, ref, inject, defineProps, defineEmits } from 'vue'
+import { provide, ref, inject, defineProps, defineEmits, computed } from 'vue'
 import StatisticalAnalysisHeader from './StatisticalAnalysis-header/StatisticalAnalysis-header.vue'
 import PieChart from './PieChart.vue'
 import LineChart from './LineChart.vue'
@@ -29,9 +29,11 @@ import LineChart from './LineChart.vue'
 const tasks = inject('tasks')
 
 const allTasks = ref(tasks.value)
-const completedTasks = ref(allTasks.value.filter((task) => task.isCompleted))
-const unfinishedTasks = ref(allTasks.value.filter((task) => !task.isCompleted && !task.isDeleted))
-const deleteTasks = ref(allTasks.value.filter((task) => !task.isCompleted && task.isDeleted))
+const completedTasks = computed(()=> allTasks.value.filter((task) => task.isCompleted))
+const unfinishedTasks = computed(()=> allTasks.value.filter((task) => !task.isCompleted && !task.isDeleted))
+const deleteTasks = computed(()=> allTasks.value.filter((task) => !task.isCompleted && task.isDeleted))
+
+console.log('completedTasks111', completedTasks.value)
 
 const props = defineProps(['isSidebarVisible'])
 const emit = defineEmits(['makeSidebarVisible'])

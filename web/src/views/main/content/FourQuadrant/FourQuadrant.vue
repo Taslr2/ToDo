@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import sun from '@/assets/svg/sun.svg'
 import navigation from '@/assets/svg/menu-icon.svg'
 import axios from 'axios'
@@ -16,7 +16,7 @@ const toggleSidebar = () => {
 }
 
 // 放大quedrantBox
-const isClicked = ref([false, false, false, false])
+const isClicked = ref([0, 0, 0, 0])
 const toggleFullScreen = (index) => {
   console.log('点击了四象限的', index)
   isClicked.value[index] = !isClicked.value[index]
@@ -25,7 +25,7 @@ const toggleFullScreen = (index) => {
 const handleKeyDown = (event) => {
   // 按下Esc键退出全屏
   if (event.key === 'Escape') {
-    isClicked.value = [false, false, false, false]
+    isClicked.value = [0, 0, 0, 0]
   }
 }
 
@@ -53,10 +53,10 @@ axios
     console.error('获取任务列表失败:', error)
   })
 
-const ImportantUrgentTasks = Alltasks.value.filter((task) => !task.isCompleted && !task.isDeleted && task.isImportant && task.isUrgent)
-const UrgentNotImportantTasks = Alltasks.value.filter((task) => !task.isCompleted && !task.isDeleted && task.isUrgent && !task.isImportant)
-const NotImportantNotUrgentTasks = Alltasks.value.filter((task) => !task.isCompleted && !task.isDeleted && !task.isUrgent && !task.isImportant)
-const NotUrgentImportantTasks = Alltasks.value.filter((task) => !task.isCompleted && !task.isDeleted && !task.isUrgent && task.isImportant)
+const ImportantUrgentTasks = computed(()=> Alltasks.value.filter((task) => !task.isCompleted && !task.isDeleted && task.isImportant && task.isUrgent))
+const UrgentNotImportantTasks = computed(()=>Alltasks.value.filter((task) => !task.isCompleted && !task.isDeleted && task.isUrgent && !task.isImportant))
+const NotImportantNotUrgentTasks =computed(()=> Alltasks.value.filter((task) => !task.isCompleted && !task.isDeleted && !task.isUrgent && !task.isImportant))
+const NotUrgentImportantTasks =computed(()=> Alltasks.value.filter((task) => !task.isCompleted && !task.isDeleted && !task.isUrgent && task.isImportant))
 </script>
 
 <template>

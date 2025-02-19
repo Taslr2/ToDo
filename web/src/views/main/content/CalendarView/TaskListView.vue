@@ -41,10 +41,6 @@ const props = defineProps({
 
 console.log('接收：', props.year, props.month, props.day)
 
-// // 初始化所有任务
-// import { tasks } from '@/api/tasks.js'
-// const allTasks = ref(tasks)
-
 // 初始化所有任务
 const allTasks = ref([])
 
@@ -78,42 +74,41 @@ const calendarType = ref('Work')
 // 添加 tasks 的方法
 const addCalendarEvent = () => {
   const newTask = {
-    id: Date.now(), // 为每个任务生成唯一的 id
     title: calendarDescription.value,
     category: calendarType.value,
     expectedCompletionDate: new Date(props.year, props.month - 1, props.day).toISOString(), // 使用传递的 year, month, day
-    isCompleted: false,
+    isCompleted: 0,
     completionDate: null,
-    isDeleted: false,
+    isDeleted: 0,
     details: '',
-    isImportant: false,
-    isUrgent: false,
+    isImportant: 0,
+    isUrgent: 0,
   }
 
-  allTasks.value.push(newTask)
+  console.log('添加任务:', newTask)
 
-  // // 使用 axios 发送 POST 请求
-  // axios
-  //   .post('http://localhost:8080/todo/save', newTask)
-  //   .then((response) => {
-  //     console.log('任务保存成功:', response.data)
-  //   })
-  //   .catch((error) => {
-  //     console.error('任务保存失败:', error)
-  //   })
+  // 使用 axios 发送 POST 请求
+  axios
+    .post('http://localhost:8080/todo/save', newTask)
+    .then((response) => {
+      console.log('任务保存成功:', response.data)
+      allTasks.value.push(newTask)
+      // 清空输入框
+      calendarDescription.value = ''
+      calendarType.value = 'Work'
 
-  // 清空输入框
-  calendarDescription.value = ''
-  calendarType.value = 'Work'
-
-  // 重新过滤任务
-  filteredTasks.value = allTasks.value.filter((task) => {
-    const taskDate = new Date(task.expectedCompletionDate)
-    const taskYear = taskDate.getFullYear()
-    const taskMonth = taskDate.getMonth() + 1
-    const taskDay = taskDate.getDate()
-    return taskYear === props.year && taskMonth === props.month && taskDay === props.day
-  })
+      // 重新过滤任务
+      filteredTasks.value = allTasks.value.filter((task) => {
+        const taskDate = new Date(task.expectedCompletionDate)
+        const taskYear = taskDate.getFullYear()
+        const taskMonth = taskDate.getMonth() + 1
+        const taskDay = taskDate.getDate()
+        return taskYear === props.year && taskMonth === props.month && taskDay === props.day
+      })
+    })
+    .catch((error) => {
+      console.error('任务保存失败:', error)
+    })
 }
 
 // 定义 emitTask 方法

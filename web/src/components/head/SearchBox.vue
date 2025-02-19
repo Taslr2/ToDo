@@ -28,9 +28,10 @@ const stopEditing = () => {
 const searchContent = () => {
   if (searchQuery.value === '') {
     isEditing.value = true
+    taskList.value = []
   } else {
     axios
-      .get(`http://localhost:8080/todo/search`)
+      .get(`http://localhost:8080/todo/search?keyword=${searchQuery.value}`)
       .then((response) => {
         taskList.value = response.data
       })
@@ -64,8 +65,8 @@ const emit = defineEmits(['showCalendar'])
 
 const handleResultClick = (task) => {
   // emit('showCalendar',test.value)
-  emit('showCalendar',task.expectedCompletionDate)
-  console.log('SearchBox成功发送'+ task.expectedCompletionDate)
+  emit('showCalendar',task.expectedCompletionDate,task.title)
+  console.log('SearchBox成功发送'+ task.expectedCompletionDate+ task.title)
   isEditing.value = false
 }
 
@@ -81,7 +82,7 @@ defineExpose({
       class="init"
       type="string"
       v-model="searchQuery"
-      @keyup.enter="searchContent"
+      @keyup="searchContent"
       placeholder="搜索"
       ref="inputRef"
     >

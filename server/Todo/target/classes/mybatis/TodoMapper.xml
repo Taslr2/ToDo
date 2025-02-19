@@ -31,7 +31,7 @@
         SET details = #{details}, isCompleted = #{isCompleted},
             completionDate = #{completionDate}, category = #{category},
             isDeleted = #{isDeleted}, expectedCompletionDate = #{expectedCompletionDate},
-            title = #{title}
+            title = #{title}, isImportant = #{isImportant}, isUrgent = #{isUrgent}
         WHERE id=#{id}
     </update>
 
