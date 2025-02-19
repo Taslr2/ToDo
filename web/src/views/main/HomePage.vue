@@ -7,7 +7,6 @@ import NewFutures from '@/components/RightPopUpWindows/NewFutures.vue'
 import PersonalInformation from '@/components/RightPopUpWindows/PersonalInformation.vue'
 import { ref, provide, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-// import { tasks as taskList } from '@/api/tasks.js' // 引入任务数组
 import axios from 'axios'
 
 const isSidebarVisible = ref(true)
@@ -66,7 +65,6 @@ const makeRightInvisible = (invisbility) => {
 const taskList = ref([])
 
 axios
-  // .get('http://192.168.1.101:8080/todo/showTodos')
   .get('http://localhost:8080/todo/showTodos')
   .then((response) => {
     console.log(response.data)
@@ -86,6 +84,10 @@ const handleClickOutside = (event) => {
   }
 }
 
+const showCalendar = () => {
+  router.push({ name: 'CalendarView' })
+}
+
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
   if (route.path !== '/') {
@@ -103,6 +105,7 @@ onBeforeUnmount(() => {
     <div class="head">
       <HeadNavigation
         ref="headNavigationRef"
+        @showCalendar="showCalendar"
         @showSetting="makeSettingVisible"
         @showHelp="makeHelpVisible"
         @showNew="makeNewVisible"
