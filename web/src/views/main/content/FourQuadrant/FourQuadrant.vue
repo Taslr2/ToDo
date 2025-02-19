@@ -186,28 +186,28 @@ const NotUrgentImportantTasks =computed(()=> Alltasks.value.filter((task) => !ta
 }
 
 .quadrant-container > .quedrantBox:nth-child(1) {
-  background-color: #d09bfb;
+  background-color: #828BE4;
   left: 0px;
   top: 0px;
   z-index: 1;
 }
 
 .quadrant-container > .quedrantBox:nth-child(2) {
-  background-color: #a43ef8;
+  background-color: #4463C9;
   left: 50%;
   top: 0px;
   z-index: 1;
 }
 
 .quadrant-container > .quedrantBox:nth-child(3) {
-  background-color: #e5d1f5;
+  background-color: #c3c3f7;
   left: 0px;
   top: calc(50% - 40px);
   z-index: 1;
 }
 
 .quadrant-container > .quedrantBox:nth-child(4) {
-  background-color: #b87aeb;
+  background-color: #636fcb;
   left: 50%;
   top: calc(50% - 40px);
   z-index: 1;

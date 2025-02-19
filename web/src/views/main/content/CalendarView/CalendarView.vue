@@ -115,7 +115,7 @@ const handleTaskSelected = (task) => {
   height: 532px;
   margin: 10px;
   border-radius: 12px;
-  background: linear-gradient(0deg, #9b96eb, #e1b3ed);
+  background: linear-gradient(180deg, #4463C9, #8297da);
   left: calc(25% + 10px);
   position: absolute;
   top: 50%;
@@ -132,6 +132,6 @@ const handleTaskSelected = (task) => {
   left: calc(55% + 10px);
   top: 50%;
   transform: translateY(-53%);
-  background: linear-gradient(0deg, #9b96eb, #e1b3ed);
+  background: linear-gradient(180deg, #4463C9, #8297da);
 }
 </style>

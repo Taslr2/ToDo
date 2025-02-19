@@ -61,13 +61,13 @@ const formatDateString = (dateString) => {
 }
 
 .task-card h3 {
-  color: #6d5691;
+  color: #383aba;
   font-size: 18px;
   margin-bottom: 5px;
 }
 
 .task-card p {
-  color: #a898d1;
+  color: #4b4db1;
   font-size: 12px;
 }
 </style>
