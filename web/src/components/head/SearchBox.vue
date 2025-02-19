@@ -8,7 +8,7 @@ const isSearchVisable = ref(false)
 const isCancelVisable = ref(false)
 const inputRef = ref(null)
 const taskList = ref([])
-const test = ref('2025-02-11T12:00:00Z')
+// const test = ref('2025-02-11T12:00:00Z')
 
 const startEditing = () => {
   isEditing.value = true
@@ -30,7 +30,7 @@ const searchContent = () => {
     isEditing.value = true
   } else {
     axios
-      .get(`http://localhost:8080/todo/search?query=${searchQuery.value}`)
+      .get(`http://localhost:8080/todo/search`)
       .then((response) => {
         taskList.value = response.data
       })
@@ -63,7 +63,8 @@ const closeEditing = () => {
 const emit = defineEmits(['showCalendar'])
 
 const handleResultClick = () => {
-  emit('showCalendar',test.value)
+  // emit('showCalendar',test.value)
+  emit('showCalendar',taskList.value.expectedCompletionDate)
   isEditing.value = false
 }
 
@@ -118,10 +119,11 @@ defineExpose({
 
     <!-- 搜索结果展示 -->
     <div class="search-results" v-if="isEditing && taskList.length >= 0">
-      <div  class="search-result-item" @click="handleResultClick">
+      <div  v-for="task in taskList" :key="task.id" class="search-result-item" @click="handleResultClick">
         <!-- v-for="task in taskList" :key="task.id"  -->
         <!-- {{ task.title }} -->
-          1
+        {{ task.title }}
+          <!-- 1 -->
       </div>
     </div>
   </div>
