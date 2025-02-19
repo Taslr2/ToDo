@@ -125,19 +125,19 @@ const startEditing = () => {
 const saveTask = () => {
   console.log('保存任务:', currentSelectedTask.value)
   isEditing.value = false
-  // // 利用后端接口更新任务
-  // axios
-  //   .put('http://localhost:8080/update', currentSelectedTask.value)
-  //   .then((response) => {
-  //     if (response.data === 'success') {
-  //       alert('任务更新成功！')
-  //     } else {
-  //       alert('任务更新失败！')
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     alert('任务更新失败！' + error.message)
-  //   })
+  // 利用后端接口更新任务
+  axios
+    .put('http://localhost:8080/update', currentSelectedTask.value)
+    .then((response) => {
+      if (response.data === 'success') {
+        alert('任务更新成功！')
+      } else {
+        alert('任务更新失败！')
+      }
+    })
+    .catch((error) => {
+      alert('任务更新失败！' + error.message)
+    })
 
   // 保存成功的提示框
   alert('任务保存成功！')

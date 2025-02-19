@@ -1,19 +1,20 @@
 <script setup>
 import { ref, onMounted, inject } from 'vue'
-import { tasks } from '@/api/tasks.js'
+import axios from 'axios'
+// import { tasks } from '@/api/tasks.js'
 
-// // 初始化所有任务
-// const tasks = ref([])
+// 初始化所有任务
+const tasks = ref([])
 
-// // 使用 axios 请求后端接口
-// axios
-//   .get('http://localhost:8080/showTodos')
-//   .then((response) => {
-//     tasks.value = response.data
-//   })
-//   .catch((error) => {
-//     console.error('获取任务列表失败:', error)
-//   })
+// 使用 axios 请求后端接口
+axios
+  .get('http://localhost:8080/todo/showTodos')
+  .then((response) => {
+    tasks.value = response.data
+  })
+  .catch((error) => {
+    console.error('获取任务列表失败:', error)
+  })
 
 const props = defineProps({
   index: {

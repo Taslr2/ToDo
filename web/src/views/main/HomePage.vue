@@ -7,7 +7,7 @@ import NewFutures from '@/components/RightPopUpWindows/NewFutures.vue'
 import PersonalInformation from '@/components/RightPopUpWindows/PersonalInformation.vue'
 import { ref, provide, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { tasks as taskList } from '@/api/tasks.js' // 引入任务数组
+// import { tasks as taskList } from '@/api/tasks.js' // 引入任务数组
 import axios from 'axios'
 
 const isSidebarVisible = ref(true)
@@ -63,13 +63,18 @@ const makeRightInvisible = (invisbility) => {
   isRightVisible.value = invisbility
 }
 
-// const taskList = axios
-//   .get('http://localhost:8080/showTodos')
-//   .then((response) => console.log(response.data))
-//   .catch((error) => console.log(error))
+const taskList = ref([])
 
-const tasks = ref(taskList)
-provide('tasks', tasks)
+axios
+  // .get('http://192.168.1.101:8080/todo/showTodos')
+  .get('http://localhost:8080/todo/showTodos')
+  .then((response) => {
+    console.log(response.data)
+    taskList.value = response.data
+  })
+  .catch((error) => console.log(error))
+
+provide('tasks', taskList)
 
 const handleClickOutside = (event) => {
   if (event.target.closest('.head')) {
