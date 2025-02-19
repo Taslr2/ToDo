@@ -26,7 +26,7 @@ const props = defineProps({
 const selectedTask = ref(null)
 
 onMounted(() => {
-  const filtered = tasks.filter(task => !task.isCompleted && !task.isDeleted)
+  const filtered = tasks.value.filter(task => !task.isCompleted && !task.isDeleted)
   if (filtered.length > props.index) {
     selectedTask.value = filtered[props.index]
   }
