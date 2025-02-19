@@ -14,6 +14,7 @@ public class TodoController {
     @Autowired
     private TodoService todoService;
 
+    @CrossOrigin
     @RequestMapping("/showTodos")
     @ResponseBody
     public List<Todo> showTodos() {
