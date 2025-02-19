@@ -98,7 +98,7 @@
 </template>
   
   <script setup>
-import { defineProps, watch, ref, defineEmits } from 'vue'
+import { defineProps, watch, ref, defineEmits, toRef } from 'vue'
 import moment from 'moment'
 import axios from 'axios'
 
@@ -110,8 +110,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['taskDeleted'])
-
-const currentSelectedTask = ref(props.selectedTask || null)
+const currentSelectedTask = toRef(props.selectedTask)
 const isEditing = ref(false)
 
 const formattedDate = (date) => {
@@ -204,10 +203,10 @@ watch(
   }
 )
 
-watch([() => props.year, () => props.month, () => props.day], () => {
-  currentSelectedTask.value = null
-  isEditing.value = false
-})
+// watch([() => props.year, () => props.month, () => props.day], () => {
+//   currentSelectedTask.value = null
+//   isEditing.value = false
+// })
 </script>
   
   <style scoped>

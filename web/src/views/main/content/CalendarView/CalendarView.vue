@@ -58,6 +58,7 @@ const handleDateSelected = (date) => {
 const selectedTask = ref(null)
 
 const handleTaskSelected = (task) => {
+  console.log("task", task)
   selectedTask.value = task
   // console.log("过滤task: ", selectedTask.value)
 }

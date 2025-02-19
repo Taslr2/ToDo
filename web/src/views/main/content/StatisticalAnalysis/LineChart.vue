@@ -15,39 +15,43 @@ const lineChart = ref(null)
 const allTasks = inject('allTasks')
 const completedTasks = inject('completedTasks')
 
+console.log('completedTasks222', completedTasks.value)
+
 // 处理数据，统计每天完成的任务数量及其分类
 const taskCountByTime = computed(() => {
   const completedTasksArray = completedTasks.value
   const dateCountMap = {}
 
   completedTasksArray.forEach((task) => {
-    const date = new Date(task.completionDate).toLocaleDateString() // 提取日期
+    const date = new Date(task.expectedCompletionDate).toString() // 提取日期
+    console.log("date = ", date)
     const category = task.category // 提取任务分类
     if (!dateCountMap[date]) {
-      dateCountMap[date] = { 工作: 0, 学习: 0, 生活: 0, 其他: 0 }
+      dateCountMap[date] = { Work: 0, Study: 0, Social: 0, Other: 0 }
     }
     dateCountMap[date][category] += 1
+    console.log("dateCountMap[date] = ", dateCountMap[date])
   })
 
-  console.log(dateCountMap)
+  console.log("dateCountMap = ", dateCountMap)
 
   const dates = Object.keys(dateCountMap)
     .map((date) => new Date(date))
     .sort((a, b) => a - b);
 
-  const latest20Dates = dates.slice(-20).map((date) => date.toLocaleDateString())
-  console.log(latest20Dates)
+  const latest20Dates = dates.slice(-20).map((date) => date.toString())
+  console.log("dates", dates)
 
-  const workCounts = latest20Dates.map((date) => dateCountMap[date]['工作'] || 0)
-  const studyCounts = latest20Dates.map((date) => dateCountMap[date]['学习'] || 0)
-  const lifeCounts = latest20Dates.map((date) => dateCountMap[date]['生活'] || 0)
-  const otherCounts = latest20Dates.map((date) => dateCountMap[date]['其他'] || 0)
+  const workCounts = latest20Dates.map((date) => dateCountMap[date]['Work'] || 0)
+  const studyCounts = latest20Dates.map((date) => dateCountMap[date]['Study'] || 0)
+  const lifeCounts = latest20Dates.map((date) => dateCountMap[date]['Social'] || 0)
+  const otherCounts = latest20Dates.map((date) => dateCountMap[date]['Other'] || 0)
   const totalCounts = latest20Dates.map(
     (date) =>
-      (dateCountMap[date]['工作'] || 0) +
-      (dateCountMap[date]['学习'] || 0) +
-      (dateCountMap[date]['生活'] || 0) +
-      (dateCountMap[date]['其他'] || 0)
+      (dateCountMap[date]['Work'] || 0) +
+      (dateCountMap[date]['Study'] || 0) +
+      (dateCountMap[date]['Social'] || 0) +
+      (dateCountMap[date]['Other'] || 0)
   )
 
   return {
