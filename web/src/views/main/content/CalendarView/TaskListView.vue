@@ -41,22 +41,22 @@ const props = defineProps({
 
 console.log('接收：', props.year, props.month, props.day)
 
-// 初始化所有任务
-import { tasks } from '@/api/tasks.js'
-const allTasks = ref(tasks)
-
 // // 初始化所有任务
-// const allTasks = ref([])
+// import { tasks } from '@/api/tasks.js'
+// const allTasks = ref(tasks)
 
-// // 使用 axios 请求后端接口
-// axios
-//   .get('http://localhost:8080/showTodos')
-//   .then((response) => {
-//     allTasks.value = response.data
-//   })
-//   .catch((error) => {
-//     console.error('获取任务列表失败:', error)
-//   })
+// 初始化所有任务
+const allTasks = ref([])
+
+// 使用 axios 请求后端接口
+axios
+  .get('http://localhost:8080/showTodos')
+  .then((response) => {
+    allTasks.value = response.data
+  })
+  .catch((error) => {
+    console.error('获取任务列表失败:', error)
+  })
 
 // 监听 props 变化并过滤任务
 const filteredTasks = ref([])
