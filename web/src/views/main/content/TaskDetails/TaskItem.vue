@@ -177,11 +177,11 @@ onUnmounted(() => {
 }
 
 .active {
-  background: #3a36ff;
+  background: #0000b2;
 }
 
 .active:hover {
-  box-shadow: #3a36ff 0px 0px 15px 0px;
+  box-shadow: #0000b2 0px 0px 15px 0px;
 }
 
 .item-title {
