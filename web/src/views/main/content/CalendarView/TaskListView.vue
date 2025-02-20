@@ -29,8 +29,9 @@
 </template>
 
 <script setup>
-import { ref, defineProps, watch, defineEmits } from 'vue'
+import { ref, defineProps, watch, defineEmits, onMounted, onUnmounted, inject } from 'vue'
 import axios from 'axios'
+import { routerKey } from 'vue-router'
 
 // 定义接收的 props
 const props = defineProps({
@@ -74,6 +75,7 @@ const calendarType = ref('Work')
 // 添加 tasks 的方法
 const addCalendarEvent = () => {
   const newTask = {
+    id: 0,
     title: calendarDescription.value,
     category: calendarType.value,
     expectedCompletionDate: new Date(props.year, props.month - 1, props.day).toISOString(), // 使用传递的 year, month, day
@@ -92,22 +94,32 @@ const addCalendarEvent = () => {
     .post('http://localhost:8080/todo/save', newTask)
     .then((response) => {
       console.log('任务保存成功:', response.data)
-      allTasks.value.push(newTask)
+      // 重新获取allTasks
+      axios
+        .get('http://localhost:8080/todo/showTodos')
+        .then((response) => {
+          allTasks.value = response.data
+          console.log('重新获取所有任务:', allTasks.value)
+        })
+        .catch((error) => {
+          console.error('重新获取任务列表失败:', error)
+        })
       // 清空输入框
       calendarDescription.value = ''
       calendarType.value = 'Work'
 
       // 重新过滤任务
-      filteredTasks.value = allTasks.value.filter((task) => {
-        const taskDate = new Date(task.expectedCompletionDate)
-        const taskYear = taskDate.getFullYear()
-        const taskMonth = taskDate.getMonth() + 1
-        const taskDay = taskDate.getDate()
-        return taskYear === props.year && taskMonth === props.month && taskDay === props.day
-      })
+      // filteredTasks.value = allTasks.value.filter((task) => {
+      //   const taskDate = new Date(task.expectedCompletionDate)
+      //   const taskYear = taskDate.getFullYear()
+      //   const taskMonth = taskDate.getMonth() + 1
+      //   const taskDay = taskDate.getDate()
+      //   return taskYear === props.year && taskMonth === props.month && taskDay === props.day
+      // })
     })
     .catch((error) => {
       console.error('任务保存失败:', error)
+      hideLoading() // 确保在发生错误时也隐藏加载指示器
     })
 }
 

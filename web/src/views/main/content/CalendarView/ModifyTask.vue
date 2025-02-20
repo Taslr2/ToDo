@@ -110,8 +110,26 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['taskDeleted'])
-const currentSelectedTask = toRef(props.selectedTask)
+const currentSelectedTask = ref(null)
+watch(
+  () => props.selectedTask,
+  (newTask) => {
+    currentSelectedTask.value = newTask || null
+    if (currentSelectedTask.value) {
+      currentSelectedTask.value.isCompleted = 1 ? true : false
+      currentSelectedTask.value.isDeleted = 1 ? true : false
+      currentSelectedTask.value.isUrgent = 1 ? true : false
+      currentSelectedTask.value.isImportant = 1 ? true : false
+    }
+    console.log('currentSelectedTask', currentSelectedTask.value)
+  },
+  { immediate: true }
+)
 const isEditing = ref(false)
+
+watch(currentSelectedTask, () => {
+  console.log('currentSelectedTask value changed:', currentSelectedTask.value)
+})
 
 const formattedDate = (date) => {
   return date ? moment(date).format('YYYY-MM-DD') : ''
@@ -136,7 +154,10 @@ const saveTask = () => {
   if (currentSelectedTask.value.isDeleted === true) currentSelectedTask.value.isDeleted = 1
   else currentSelectedTask.value.isDeleted = 0
   axios
-    .put(`http://localhost:8080/todo/update?id=${currentSelectedTask.value.id}`, currentSelectedTask.value)
+    .put(
+      `http://localhost:8080/todo/update?id=${currentSelectedTask.value.id}`,
+      currentSelectedTask.value
+    )
     .then((response) => {
       if (response.data === 'success') {
         alert('任务更新成功！')
@@ -168,16 +189,18 @@ const giveUpTask = () => {
     if (currentSelectedTask.value.isCompleted === true) currentSelectedTask.value.isCompleted = 1
     else currentSelectedTask.value.isCompleted = 0
     axios
-    .put(`http://localhost:8080/todo/update`
-    // ?title=${currentSelectedTask.value.title}&details=${currentSelectedTask.value.details}&isCompleted=${currentSelectedTask.value.isCompleted}&completionDate=${currentSelectedTask.value.completionDate || ''}&category=${currentSelectedTask.value.category}&isDeleted=${currentSelectedTask.value.isDeleted}&expectedCompletionDate=${currentSelectedTask.value.expectedCompletionDate}&id=${currentSelectedTask.value.id}&isImportant=${currentSelectedTask.value.isImportant}&isUrgent=${currentSelectedTask.value.isUrgent}`
-    , currentSelectedTask.value)
+      .put(
+        `http://localhost:8080/todo/update`,
+        // ?title=${currentSelectedTask.value.title}&details=${currentSelectedTask.value.details}&isCompleted=${currentSelectedTask.value.isCompleted}&completionDate=${currentSelectedTask.value.completionDate || ''}&category=${currentSelectedTask.value.category}&isDeleted=${currentSelectedTask.value.isDeleted}&expectedCompletionDate=${currentSelectedTask.value.expectedCompletionDate}&id=${currentSelectedTask.value.id}&isImportant=${currentSelectedTask.value.isImportant}&isUrgent=${currentSelectedTask.value.isUrgent}`
+        currentSelectedTask.value
+      )
       .then((response) => {
-        if (response.data ==='success') {
+        if (response.data === 'success') {
           alert('任务放弃成功！')
         } else {
           alert('任务放弃失败！')
         }
-      }) 
+      })
   }
 }
 
@@ -203,10 +226,10 @@ watch(
   }
 )
 
-// watch([() => props.year, () => props.month, () => props.day], () => {
-//   currentSelectedTask.value = null
-//   isEditing.value = false
-// })
+watch([() => props.year, () => props.month, () => props.day], () => {
+  currentSelectedTask.value = null
+  isEditing.value = false
+})
 </script>
   
   <style scoped>
