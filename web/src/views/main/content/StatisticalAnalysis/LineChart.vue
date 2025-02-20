@@ -24,23 +24,23 @@ const taskCountByTime = computed(() => {
 
   completedTasksArray.forEach((task) => {
     const date = new Date(task.expectedCompletionDate).toString() // 提取日期
-    console.log("date = ", date)
+    console.log('date = ', date)
     const category = task.category // 提取任务分类
     if (!dateCountMap[date]) {
       dateCountMap[date] = { Work: 0, Study: 0, Social: 0, Other: 0 }
     }
     dateCountMap[date][category] += 1
-    console.log("dateCountMap[date] = ", dateCountMap[date])
+    console.log('dateCountMap[date] = ', dateCountMap[date])
   })
 
-  console.log("dateCountMap = ", dateCountMap)
+  console.log('dateCountMap = ', dateCountMap)
 
   const dates = Object.keys(dateCountMap)
     .map((date) => new Date(date))
-    .sort((a, b) => a - b);
+    .sort((a, b) => a - b)
 
   const latest20Dates = dates.slice(-20).map((date) => date.toString())
-  console.log("dates", dates)
+  console.log('dates', dates)
 
   const workCounts = latest20Dates.map((date) => dateCountMap[date]['Work'] || 0)
   const studyCounts = latest20Dates.map((date) => dateCountMap[date]['Study'] || 0)
@@ -80,6 +80,15 @@ onMounted(() => {
     xAxis: {
       type: 'category',
       data: taskCountByTime.value.times, // 使用处理后的日期数据
+      axisLabel: {
+        formatter: function (value) {
+          const date = new Date(value)
+          const year = date.getFullYear()
+          const month = String(date.getMonth() + 1).padStart(2, '0') // 月份从0开始，需加1
+          const day = String(date.getDate()).padStart(2, '0')
+          return `${year}-${month}-${day}` // 格式化为 yyyy-mm-dd
+        },
+      },
     },
     yAxis: {
       type: 'value',
