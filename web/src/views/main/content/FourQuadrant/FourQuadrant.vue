@@ -78,7 +78,7 @@ const NotUrgentImportantTasks =computed(()=> Alltasks.value.filter((task) => !ta
       >
         <div class="quedrantBox-title">重要但不紧急</div>
         <div class="quedrantBox-content">
-          <div v-for="(task, index) in UrgentNotImportantTasks" :key="index" class="task-info">
+          <div v-for="(task, index) in NotUrgentImportantTasks" :key="index" class="task-info">
             <div class="task-title">{{ task.title }}</div>
             <div class="task-info-detail" v-if="isClicked[0]">具体内容: {{ task.details }}</div>
             <div class="task-info-detail" v-if="isClicked[0]">类别：{{ task.category }}</div>
@@ -123,7 +123,7 @@ const NotUrgentImportantTasks =computed(()=> Alltasks.value.filter((task) => !ta
       >
         <div class="quedrantBox-title">紧急但不重要</div>
         <div class="quedrantBox-content">
-          <div v-for="(task, index) in NotUrgentImportantTasks" :key="index" class="task-info">
+          <div v-for="(task, index) in UrgentNotImportantTasks" :key="index" class="task-info">
             <div class="task-title">{{ task.title }}</div>
             <div class="task-info-detail" v-if="isClicked[3]">具体内容: {{ task.details }}</div>
             <div class="task-info-detail" v-if="isClicked[3]">类别：{{ task.category }}</div>

@@ -31,7 +31,10 @@
 <script setup>
 import { ref, defineProps, watch, defineEmits, onMounted, onUnmounted, inject } from 'vue'
 import axios from 'axios'
-import { routerKey } from 'vue-router'
+import { routerKey, useRouter, useRoute } from 'vue-router'
+
+const router = useRouter()
+const route = useRoute()
 
 // 定义接收的 props
 const props = defineProps({
@@ -71,6 +74,9 @@ watch([() => props.year, () => props.month, () => props.day], ([newYear, newMont
 // 添加 tasks 的相关数据
 const calendarDescription = ref('')
 const calendarType = ref('Work')
+
+const showLoading = inject('showLoading')
+const hideLoading = inject('hideLoading')
 
 // 添加 tasks 的方法
 const addCalendarEvent = () => {
@@ -121,6 +127,15 @@ const addCalendarEvent = () => {
       console.error('任务保存失败:', error)
       hideLoading() // 确保在发生错误时也隐藏加载指示器
     })
+
+  showLoading()
+  setTimeout(() => {
+    const currentPath = route.path
+    window.location.reload()
+    router.push(currentPath) // 刷新页面
+    hideLoading()
+    alert('任务添加成功！')
+  }, 500)
 }
 
 // 定义 emitTask 方法
