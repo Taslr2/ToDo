@@ -8,7 +8,6 @@ const isSearchVisable = ref(false)
 const isCancelVisable = ref(false)
 const inputRef = ref(null)
 const taskList = ref([])
-// const test = ref('2025-02-11T12:00:00Z')
 
 const startEditing = () => {
   isEditing.value = true
@@ -64,7 +63,6 @@ const closeEditing = () => {
 const emit = defineEmits(['showCalendar'])
 
 const handleResultClick = (task) => {
-  // emit('showCalendar',test.value)
   emit('showCalendar',task.expectedCompletionDate,task.title)
   console.log('SearchBox成功发送'+ task.expectedCompletionDate+ task.title)
   isEditing.value = false
@@ -119,13 +117,10 @@ defineExpose({
     <div id="tooltip15" v-show="isSearchVisable">搜索</div>
     <div id="tooltip16" v-show="isCancelVisable">退出搜索</div>
 
-    <!-- 搜索结果展示 -->
+
     <div class="search-results" v-if="isEditing && taskList.length > 0">
       <div  v-for="task in taskList" :key="task.id" class="search-result-item" @click="handleResultClick(task)">
-        <!-- v-for="task in taskList" :key="task.id"  -->
-        <!-- {{ task.title }} -->
         {{ task.title }}
-          <!-- 1 -->
       </div>
     </div>
   </div>
@@ -265,6 +260,8 @@ defineExpose({
   border-radius: 5px;
   justify-content: center;
   cursor: pointer;
+  font-size: 14px;
+  font-family: Microsoft YaHei;
 }
 .search-result-item:hover {
 background-color: rgb(201, 201, 201);
