@@ -84,9 +84,8 @@ const handleClickOutside = (event) => {
   }
 }
 
-const showCalendar = (expectedCompletionDate,title) => {
-  router.push({ name: 'CalendarView' })
-  console.log("HomePage成功接收:"+expectedCompletionDate+title)
+const showCalendar = (expectedCompletionDate, title) => {
+  console.log('HomePage成功接收:' + expectedCompletionDate + title)
 }
 
 onMounted(() => {
@@ -116,12 +115,12 @@ onBeforeUnmount(() => {
     </div>
 
     <div class="main-container">
-        <div class="leftcontent" :class="isSidebarVisible?'':'hide'">
-          <SideNavigation
-            @updateVisibility="handleUpdateVisibility"
-            :isSidebarVisible="isSidebarVisible"
-          />
-        </div>
+      <div class="leftcontent" :class="isSidebarVisible ? '' : 'hide'">
+        <SideNavigation
+          @updateVisibility="handleUpdateVisibility"
+          :isSidebarVisible="isSidebarVisible"
+        />
+      </div>
       <div class="content">
         <RouterView
           :is-sidebar-visible="isSidebarVisible"
@@ -165,9 +164,9 @@ onBeforeUnmount(() => {
   width: 290px;
   height: 100%;
   overflow: hidden;
-  transition: .3s;
+  transition: 0.3s;
 }
-.hide{
+.hide {
   width: 0;
 }
 .content {
