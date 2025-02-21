@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineProps, defineEmits, inject } from 'vue'
+import { ref, defineProps, defineEmits } from 'vue'
 import house from '@/assets/svg/house.svg'
 import navigation from '@/assets/svg/menu-icon.svg'
 import TaskItem from '@/views/main/content/TaskDetails/TaskItem.vue'
