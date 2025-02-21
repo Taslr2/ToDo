@@ -2,43 +2,41 @@
   <div class="todo-app">
     <div class="task-information">
       <div class="filter-options">
-        <label>
-          <input type="radio" v-model="filter" value="all" /> 全部
-        </label>
-        <label>
-          <input type="radio" v-model="filter" value="completed" /> 已完成
-        </label>
-        <label>
-          <input type="radio" v-model="filter" value="active" /> 未完成
-        </label>
-        <label>
-          <input type="radio" v-model="filter" value="deleted" /> 已删除
-        </label>
+        <label> <input type="radio" v-model="filter" value="all" /> 全部 </label>
+        <label> <input type="radio" v-model="filter" value="completed" /> 已完成 </label>
+        <label> <input type="radio" v-model="filter" value="active" /> 未完成 </label>
+        <label> <input type="radio" v-model="filter" value="deleted" /> 已删除 </label>
       </div>
       <div
         class="task-items"
         v-for="(task, index) in filteredTasks"
         :key="index"
-        :class="{ completed: task.isCompleted && !task.isDeleted, deleted: task.isDeleted, active: !task.isCompleted && !task.isDeleted }"
+        :class="{
+          completed: task.isCompleted && !task.isDeleted,
+          deleted: task.isDeleted,
+          active: !task.isCompleted && !task.isDeleted,
+        }"
         @click="showDetailsModal(index)"
       >
         <div class="item-title">{{ task.title }}</div>
         <div class="item-expectedCompletionDate">{{ task.expectedCompletionDate }}</div>
-        <div class="item-status">{{ task.isDeleted ? '已删除' : task.isCompleted ? '已完成' : '未完成' }}</div>
+        <div class="item-status">
+          {{ task.isDeleted ? '已删除' : task.isCompleted ? '已完成' : '未完成' }}
+        </div>
       </div>
     </div>
 
-    <!-- 弹出框背景 -->
-    <div class="modal-overlay" v-if="showModal" @click="closeModal"></div>
-
     <!-- 弹出框 -->
-    <div class="modal" v-if="showModal" @click.stop>
+    <div class="modal" v-if="showModal || modalStore.whetherShowModal" @click.stop>
       <div class="modal-content">
         <span class="close-button" @click="closeModal">&times;</span>
         <h2>{{ currentTask.title }}</h2>
         <p>{{ currentTask.details }}</p>
         <p>类别: {{ currentTask.category }}</p>
-        <p>状态: {{ currentTask.isCompleted ? '已完成' : currentTask.isDeleted ? '已删除' : '待完成' }}</p>
+        <p>
+          状态:
+          {{ currentTask.isCompleted ? '已完成' : currentTask.isDeleted ? '已删除' : '待完成' }}
+        </p>
         <p>预计完成时间: {{ currentTask.expectedCompletionDate }}</p>
         <p>实际完成时间: {{ currentTask.completionDate }}</p>
       </div>
@@ -48,65 +46,94 @@
 </template>
 
 <script setup>
-import { ref, inject, computed, onMounted, onUnmounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { ref, inject, computed, onMounted, onUnmounted, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { useModalStore } from '@/stores/modal'
+
+const modalStore = useModalStore()
 
 // 导入 defineEmits
-const emit = defineEmits(['isBlur']);
+const emit = defineEmits(['isBlur'])
 
-const tasks = inject('tasks');
-const filter = ref('all');
-const showModal = ref(false);
-const currentTask = ref(null);
+const tasks = inject('tasks')
+const filter = ref('all')
+const showModal = ref(false)
+const currentTask = ref(null)
 
+watch(
+  () => modalStore.whetherShowModal,
+  (newVal) => {
+    if (newVal == true) {
+      filteredTasks.value.forEach((task, index) => {
+        // console.log(`Task ${index}:`)
+        // console.log(`Title: ${task.title}`)
+        if (task.title === modalStore.modalTitle) {
+          currentTask.value = filteredTasks.value[index]
+          return
+        }
+      })
+    }
+  },
+)
 const sortedTasks = computed(() => {
-  return tasks.value.slice().sort((a, b) => new Date(a.expectedCompletionDate) - new Date(b.expectedCompletionDate));
-});
+  return tasks.value
+    .slice()
+    .sort((a, b) => new Date(a.expectedCompletionDate) - new Date(b.expectedCompletionDate))
+})
 
 const filteredTasks = computed(() => {
-  return sortedTasks.value.filter(task => {
-    if (filter.value === 'all') return true;
-    if (filter.value === 'active') return !task.isCompleted && !task.isDeleted;
-    if (filter.value === 'completed') return task.isCompleted && !task.isDeleted;
-    if (filter.value === 'deleted') return task.isDeleted;
-    return true;
-  });
-});
+  return sortedTasks.value.filter((task) => {
+    if (filter.value === 'all') return true
+    if (filter.value === 'active') return !task.isCompleted && !task.isDeleted
+    if (filter.value === 'completed') return task.isCompleted && !task.isDeleted
+    if (filter.value === 'deleted') return task.isDeleted
+    return true
+  })
+})
 
 // 监听路由参数
-const route = useRoute();
-filter.value = route.query.filter || 'all';
+const route = useRoute()
+filter.value = route.query.filter || 'all'
 
 const showDetailsModal = (index) => {
-  currentTask.value = filteredTasks.value[index];
-  showModal.value = true;
-  emit('isBlur', true); // 触发事件
-};
+  currentTask.value = filteredTasks.value[index]
+  showModal.value = true
+  emit('isBlur', true) // 触发事件
+  // console.log(
+  //   'filteredTasks.value[index] ' +
+  //     filteredTasks.value[index].title +
+  //     ' id:' +
+  //     filteredTasks.value[index].id +
+  //     ' index:' +
+  //     index,
+  // )
+}
 
 const closeModal = () => {
-  showModal.value = false;
-  emit('isBlur', false); // 关闭时触发事件
-};
+  showModal.value = false
+  modalStore.whetherShowModal = false
+  emit('isBlur', false) // 关闭时触发事件
+}
 
 // 监听键盘事件
 const handleKeyDown = (event) => {
   if (event.key === 'Escape') {
-    closeModal();
+    closeModal()
   }
-};
+}
 
 onMounted(() => {
-  window.addEventListener('keydown', handleKeyDown);
-});
+  window.addEventListener('keydown', handleKeyDown)
+})
 
 onUnmounted(() => {
-  window.removeEventListener('keydown', handleKeyDown);
-});
+  window.removeEventListener('keydown', handleKeyDown)
+})
 </script>
 
-
 <style scoped>
-.todo-app, .task-information {
+.todo-app,
+.task-information {
   line-height: 1.1;
   padding: 20px;
 }
@@ -134,13 +161,13 @@ onUnmounted(() => {
   justify-content: center;
 }
 
-.filter-options input[type="radio"] {
+.filter-options input[type='radio'] {
   margin-right: 5px;
   position: relative;
   top: 1px;
 }
 
-.filter-options input[type="radio"]:checked + label {
+.filter-options input[type='radio']:checked + label {
   background-color: #007bff;
   color: white;
   border-color: #007bff;
