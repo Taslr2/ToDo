@@ -5,12 +5,15 @@ import SettingWindow from '@/components/RightPopUpWindows/SettingWindow.vue'
 import HelpWindow from '@/components/RightPopUpWindows/HelpWindow.vue'
 import NewFutures from '@/components/RightPopUpWindows/NewFutures.vue'
 import PersonalInformation from '@/components/RightPopUpWindows/PersonalInformation.vue'
+import TaskItemModal from '@/components/TaskItemModal.vue' // Import
 import { ref, provide, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import axios from 'axios'
 
 const isSidebarVisible = ref(true)
 const headNavigationRef = ref(null)
+const showTaskItemModal = ref(false) // Add
+const currentTask = ref({}) // Add
 const [isRightVisible, isSettingVisible, isHelpVisible, isNewVisible, isPersonalVisible] = [
   ref(false),
   ref(false),
@@ -64,6 +67,14 @@ const makeRightInvisible = (invisbility) => {
 
 const taskList = ref([])
 
+const showTaskDetails = (task) => {
+  console.log("showTaskDetails called with task:", task);
+  currentTask.value = task;
+  console.log("currentTask.value:", currentTask.value);
+  showTaskItemModal.value = true;
+  console.log("showTaskItemModal.value:", showTaskItemModal.value);
+};
+
 axios
   .get('http://localhost:8080/todo/showTodos')
   .then((response) => {
@@ -111,6 +122,7 @@ onBeforeUnmount(() => {
         @showNew="makeNewVisible"
         @showPersonal="makePersonalVisible"
         :isUpperRightVisible="isRightVisible"
+        @show-task-details="showTaskDetails"
       />
     </div>
 
@@ -148,6 +160,12 @@ onBeforeUnmount(() => {
           </transition-group>
         </div>
       </transition>
+      <TaskItemModal
+        v-if="showTaskItemModal"
+        :task="currentTask"
+        :showModalProp="showTaskItemModal"
+        @update:showModalProp="showTaskItemModal = $event"
+      />
     </div>
   </div>
 </template>

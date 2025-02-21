@@ -21,7 +21,14 @@ const handleMouseDown = (box) => {
   activeBox.value = box
 }
 
-const emit = defineEmits(['showSetting', 'showHelp', 'showNew', 'showPersonal', 'showCalendar'])
+const emit = defineEmits([
+  'showSetting',
+  'showHelp',
+  'showNew',
+  'showPersonal',
+  'showCalendar',
+  'show-task-details',
+]) // Add 'show-task-details'
 const props = defineProps({
   isUpperRightVisible: {
     type: Boolean,
@@ -66,11 +73,14 @@ const handleClickOutside = (event) => {
   }
 }
 
-const handleShowCalendar = (expectedCompletionDate,title) => {
-  emit('showCalendar',expectedCompletionDate,title)
-  console.log("HeadNavigation成功发送:"+expectedCompletionDate+title)
+const handleShowCalendar = (expectedCompletionDate, title) => {
+  emit('showCalendar', expectedCompletionDate, title)
+  console.log('HeadNavigation成功发送:' + expectedCompletionDate + title)
 }
 
+const handleShowTaskDetails = (task) => {
+  emit('show-task-details', task)
+}
 
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
@@ -93,7 +103,11 @@ defineExpose({
     </div>
     <div class="title" @click="refreshPage">To Do</div>
     <div class="search">
-      <SearchBox ref="searchBoxRef" @showCalendar="handleShowCalendar" />
+      <SearchBox
+        ref="searchBoxRef"
+        @showCalendar="handleShowCalendar"
+        @show-task-details="handleShowTaskDetails"
+      />
     </div>
     <div class="right">
       <UpperRightComponent

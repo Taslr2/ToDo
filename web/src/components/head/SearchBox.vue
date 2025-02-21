@@ -1,15 +1,17 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import axios from 'axios'
 import { useModalStore } from '@/stores/modal'
 
 const searchQuery = ref('')
 const modalStore = useModalStore()
 const [isEditing, isSearchVisable, isCancelVisable] = [ref(false), ref(false), ref(false)]
-// const showModal = ref(false)
 const inputRef = ref(null)
 const taskList = ref([])
-
+watch(
+  () => modalStore.whetherShowModal,
+  () => console.log('modalStore.whetherShowModal:' + modalStore.whetherShowModal),
+)
 const startEditing = () => {
   isEditing.value = true
   isSearchVisable.value = false
@@ -60,14 +62,12 @@ const closeEditing = () => {
   searchQuery.value = ''
 }
 
-const emit = defineEmits(['showCalendar'])
+const emit = defineEmits(['showCalendar', 'show-task-details'])
 
 const handleResultClick = (task) => {
   emit('showCalendar', task.expectedCompletionDate, task.title)
-  console.log('SearchBox成功发送' + task.expectedCompletionDate + task.title)
+  emit('show-task-details', task)
   isEditing.value = false
-  modalStore.whetherShowModal = true
-  modalStore.modalTitle = task.title
   taskList.value = []
 }
 
@@ -131,7 +131,6 @@ defineExpose({
       </div>
     </div>
   </div>
-
 </template>
 
 <style scoped>
