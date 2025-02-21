@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, defineEmits, watch } from 'vue'
+import { ref, defineProps, defineEmits } from 'vue'
 import calendar from '@/assets/svg/calendar.svg'
 import navigation from '@/assets/svg/menu-icon.svg'
 import Calendar from './Calendar.vue'
