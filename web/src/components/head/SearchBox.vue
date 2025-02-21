@@ -1,11 +1,12 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
+import { useModalStore } from '@/stores/modal'
 
 const searchQuery = ref('')
-const isEditing = ref(false)
-const isSearchVisable = ref(false)
-const isCancelVisable = ref(false)
+const modalStore = useModalStore()
+const [isEditing, isSearchVisable, isCancelVisable] = [ref(false), ref(false), ref(false)]
+// const showModal = ref(false)
 const inputRef = ref(null)
 const taskList = ref([])
 
@@ -27,7 +28,6 @@ const stopEditing = () => {
 const searchContent = () => {
   if (searchQuery.value === '') {
     isEditing.value = true
-    taskList.value = []
   } else {
     axios
       .get(`http://localhost:8080/todo/search?keyword=${searchQuery.value}`)
@@ -63,9 +63,12 @@ const closeEditing = () => {
 const emit = defineEmits(['showCalendar'])
 
 const handleResultClick = (task) => {
-  emit('showCalendar',task.expectedCompletionDate,task.title)
-  console.log('SearchBox成功发送'+ task.expectedCompletionDate+ task.title)
+  emit('showCalendar', task.expectedCompletionDate, task.title)
+  console.log('SearchBox成功发送' + task.expectedCompletionDate + task.title)
   isEditing.value = false
+  modalStore.whetherShowModal = true
+  modalStore.modalTitle = task.title
+  taskList.value = []
 }
 
 defineExpose({
@@ -117,13 +120,18 @@ defineExpose({
     <div id="tooltip15" v-show="isSearchVisable">搜索</div>
     <div id="tooltip16" v-show="isCancelVisable">退出搜索</div>
 
-
     <div class="search-results" v-if="isEditing && taskList.length > 0">
-      <div  v-for="task in taskList" :key="task.id" class="search-result-item" @click="handleResultClick(task)">
+      <div
+        v-for="task in taskList"
+        :key="task.id"
+        class="search-result-item"
+        @click="handleResultClick(task)"
+      >
         {{ task.title }}
       </div>
     </div>
   </div>
+
 </template>
 
 <style scoped>
@@ -236,7 +244,6 @@ defineExpose({
   border-color: transparent transparent #fff transparent;
 }
 .search-results {
-
   position: absolute;
   top: 40px;
   right: 0;
@@ -252,7 +259,7 @@ defineExpose({
 }
 .search-result-item {
   display: flex;
-  flex-direction:column ;
+  flex-direction: column;
   width: 100%;
   height: 40px;
   padding: 0 0 0 15px;
@@ -263,7 +270,7 @@ defineExpose({
   font-family: Microsoft YaHei;
 }
 .search-result-item:hover {
-background-color: rgb(223, 223, 223);
+  background-color: rgb(223, 223, 223);
 }
 .search-result-item:last-child {
   border-bottom: none;
