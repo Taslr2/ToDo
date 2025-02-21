@@ -42,33 +42,57 @@ const handleMouseUp = () => {
 }
 
 const makeSettingVisible = () => {
+  if( isRightVisible.value === true &&
+    isSettingVisible.value === true){
+    isRightVisible.value = false
+    isSettingVisible.value = false
+  }else{
   isRightVisible.value = true
   isSettingVisible.value = true
+}
   isHelpVisible.value = isPersonalVisible.value = isNewVisible.value = false
   helpBgColor.value = newBgColor.value = personalBgColor.value = ''
   emit('showSetting', isRightVisible.value, isSettingVisible.value)
 }
 const makeHelpVisible = () => {
-  isRightVisible.value = true
-  isHelpVisible.value = true
+  if (isRightVisible.value === true && isHelpVisible.value === true) {
+    isRightVisible.value = false
+    isHelpVisible.value = false
+  } else {
+    isRightVisible.value = true
+    isHelpVisible.value = true
+  }
   isSettingVisible.value = isPersonalVisible.value = isNewVisible.value = false
   settingBgColor.value = newBgColor.value = personalBgColor.value = ''
   emit('showHelp', isRightVisible.value, isHelpVisible.value)
 }
+
 const makeNewVisible = () => {
-  isRightVisible.value = true
-  isNewVisible.value = true
+  if (isRightVisible.value === true && isNewVisible.value === true) {
+    isRightVisible.value = false
+    isNewVisible.value = false
+  } else {
+    isRightVisible.value = true
+    isNewVisible.value = true
+  }
   isSettingVisible.value = isHelpVisible.value = isPersonalVisible.value = false
   settingBgColor.value = helpBgColor.value = personalBgColor.value = ''
   emit('showNew', isRightVisible.value, isNewVisible.value)
 }
+
 const makePersonalVisible = () => {
-  isRightVisible.value = true
-  isPersonalVisible.value = true
+  if (isRightVisible.value === true && isPersonalVisible.value === true) {
+    isRightVisible.value = false
+    isPersonalVisible.value = false
+  } else {
+    isRightVisible.value = true
+    isPersonalVisible.value = true
+  }
   isSettingVisible.value = isHelpVisible.value = isNewVisible.value = false
   settingBgColor.value = helpBgColor.value = newBgColor.value = ''
   emit('showPersonal', isRightVisible.value, isPersonalVisible.value)
 }
+
 
 const handleMouseLeave = (type) => {
   switch (type) {
