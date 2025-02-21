@@ -98,9 +98,13 @@
 </template>
   
   <script setup>
-import { defineProps, watch, ref, defineEmits, toRef } from 'vue'
+import { defineProps, watch, ref, defineEmits, inject } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import moment from 'moment'
 import axios from 'axios'
+
+const router = useRouter()
+const route = useRoute()
 
 const props = defineProps({
   selectedTask: Object,
@@ -116,15 +120,17 @@ watch(
   (newTask) => {
     currentSelectedTask.value = newTask || null
     if (currentSelectedTask.value) {
-      currentSelectedTask.value.isCompleted = 1 ? true : false
-      currentSelectedTask.value.isDeleted = 1 ? true : false
-      currentSelectedTask.value.isUrgent = 1 ? true : false
-      currentSelectedTask.value.isImportant = 1 ? true : false
+      // 将 1 或 0 转换为布尔值
+      currentSelectedTask.value.isCompleted = currentSelectedTask.value.isCompleted === 1
+      currentSelectedTask.value.isDeleted = currentSelectedTask.value.isDeleted === 1
+      currentSelectedTask.value.isUrgent = currentSelectedTask.value.isUrgent === 1
+      currentSelectedTask.value.isImportant = currentSelectedTask.value.isImportant === 1
     }
     console.log('currentSelectedTask', currentSelectedTask.value)
   },
   { immediate: true }
 )
+
 const isEditing = ref(false)
 
 watch(currentSelectedTask, () => {
@@ -138,6 +144,9 @@ const formattedDate = (date) => {
 const startEditing = () => {
   isEditing.value = true
 }
+
+const showLoading = inject('showLoading')
+const hideLoading = inject('hideLoading')
 
 const saveTask = () => {
   console.log('保存任务:', currentSelectedTask.value)
@@ -168,6 +177,13 @@ const saveTask = () => {
     .catch((error) => {
       alert('任务更新失败！' + error.message)
     })
+  showLoading()
+  setTimeout(() => {
+    const currentPath = route.path
+    window.location.reload()
+    router.push(currentPath) // 刷新页面
+    hideLoading()
+  }, 500)
 }
 
 const cancelEditing = () => {
@@ -188,20 +204,21 @@ const giveUpTask = () => {
 
     if (currentSelectedTask.value.isCompleted === true) currentSelectedTask.value.isCompleted = 1
     else currentSelectedTask.value.isCompleted = 0
-    axios
-      .put(
-        `http://localhost:8080/todo/update`,
-        // ?title=${currentSelectedTask.value.title}&details=${currentSelectedTask.value.details}&isCompleted=${currentSelectedTask.value.isCompleted}&completionDate=${currentSelectedTask.value.completionDate || ''}&category=${currentSelectedTask.value.category}&isDeleted=${currentSelectedTask.value.isDeleted}&expectedCompletionDate=${currentSelectedTask.value.expectedCompletionDate}&id=${currentSelectedTask.value.id}&isImportant=${currentSelectedTask.value.isImportant}&isUrgent=${currentSelectedTask.value.isUrgent}`
-        currentSelectedTask.value
-      )
-      .then((response) => {
-        if (response.data === 'success') {
-          alert('任务放弃成功！')
-        } else {
-          alert('任务放弃失败！')
-        }
-      })
+    axios.put(`http://localhost:8080/todo/update`, currentSelectedTask.value).then((response) => {
+      if (response.data === 'success') {
+        alert('任务放弃成功！')
+      } else {
+        alert('任务放弃失败！')
+      }
+    })
   }
+  showLoading()
+  setTimeout(() => {
+    const currentPath = route.path
+    window.location.reload()
+    router.push(currentPath) // 刷新页面
+    hideLoading()
+  }, 500)
 }
 
 const deleteTask = () => {
@@ -216,6 +233,13 @@ const deleteTask = () => {
         alert('删除失败:', error)
       })
   }
+  showLoading()
+  setTimeout(() => {
+    const currentPath = route.path
+    window.location.reload()
+    router.push(currentPath) // 刷新页面
+    hideLoading()
+  }, 500)
 }
 
 watch(
