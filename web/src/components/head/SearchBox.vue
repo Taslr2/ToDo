@@ -254,8 +254,7 @@ defineExpose({
   display: flex;
   flex-direction:column ;
   width: 100%;
-  height: 30px;
-  border: 1px solid #dcdfe6;
+  height: 40px;
   padding: 0 0 0 15px;
   border-radius: 5px;
   justify-content: center;
@@ -264,7 +263,7 @@ defineExpose({
   font-family: Microsoft YaHei;
 }
 .search-result-item:hover {
-background-color: rgb(201, 201, 201);
+background-color: rgb(223, 223, 223);
 }
 .search-result-item:last-child {
   border-bottom: none;
