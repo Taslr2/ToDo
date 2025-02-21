@@ -161,27 +161,27 @@ onUnmounted(() => {
 }
 
 .completed {
-  background: #d58dff;
+  background: #5d55f7;
 }
 
 .completed:hover {
-  box-shadow: #d58dff 0px 0px 15px 0px;
+  box-shadow: #5d55f7 0px 0px 15px 0px;
 }
 
 .deleted {
-  background: #9896f1;
+  background: #938dff;
 }
 
 .deleted:hover {
-  box-shadow: #9896f1 0px 0px 15px 0px;
+  box-shadow: #938dff 0px 0px 15px 0px;
 }
 
 .active {
-  background: #edb1f1;
+  background: #0000b2;
 }
 
 .active:hover {
-  box-shadow: #edb1f1 0px 0px 15px 0px;
+  box-shadow: #0000b2 0px 0px 15px 0px;
 }
 
 .item-title {

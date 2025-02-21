@@ -18,9 +18,9 @@ const completedCount = ref(completedTasks.value.length)
 const unfinishedCount = ref(unfinishedTasks.value.length)
 const deleteCount = ref(deleteTasks.value.length)
 
-const WorkCount = ref(allTasks.value.filter((task) => task.category === '工作').length)
-const StudyCount = ref(allTasks.value.filter((task) => task.category === '学习').length)
-const LifeCount = ref(allTasks.value.filter((task) => task.category === '生活').length)
+const WorkCount = ref(allTasks.value.filter((task) => task.category === 'Work').length)
+const StudyCount = ref(allTasks.value.filter((task) => task.category === 'Study').length)
+const LifeCount = ref(allTasks.value.filter((task) => task.category === 'Social').length)
 const OtherCount = ref(allTasks.value.length - WorkCount.value - StudyCount.value - LifeCount.value)
 
 onMounted(() => {

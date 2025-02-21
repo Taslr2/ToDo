@@ -30,10 +30,11 @@ public class TodoController {
 
     @PostMapping("/save")
     @ResponseBody
-    public String save(Todo todo) {
-        int i=  todoService.addTodo(todo);
-        if (i>0) return "success";
-        else return "fail";
+    public String save(@RequestBody Todo todo) {
+            int i=  todoService.addTodo(todo);
+            System.out.println(todo.toString());
+            if (i>0) return "success";
+            else return "fail";
     }
 
     @GetMapping("/search")
@@ -52,7 +53,7 @@ public class TodoController {
 
     @PutMapping("/update")
     @ResponseBody
-    public String update(Todo todo) {
+    public String update(@RequestBody Todo todo) {
         int result = todoService.updateTodo(todo);
         if (result > 0) {
             return "success";

@@ -84,9 +84,9 @@ const handleClickOutside = (event) => {
   }
 }
 
-const showCalendar = (test) => {
+const showCalendar = (expectedCompletionDate,title) => {
   router.push({ name: 'CalendarView' })
-  console.log("HomePage成功接收:"+test)
+  console.log("HomePage成功接收:"+expectedCompletionDate+title)
 }
 
 onMounted(() => {

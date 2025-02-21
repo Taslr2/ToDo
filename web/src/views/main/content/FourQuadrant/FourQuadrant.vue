@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import sun from '@/assets/svg/sun.svg'
 import navigation from '@/assets/svg/menu-icon.svg'
 import axios from 'axios'
@@ -16,7 +16,7 @@ const toggleSidebar = () => {
 }
 
 // 放大quedrantBox
-const isClicked = ref([false, false, false, false])
+const isClicked = ref([0, 0, 0, 0])
 const toggleFullScreen = (index) => {
   console.log('点击了四象限的', index)
   isClicked.value[index] = !isClicked.value[index]
@@ -25,7 +25,7 @@ const toggleFullScreen = (index) => {
 const handleKeyDown = (event) => {
   // 按下Esc键退出全屏
   if (event.key === 'Escape') {
-    isClicked.value = [false, false, false, false]
+    isClicked.value = [0, 0, 0, 0]
   }
 }
 
@@ -53,10 +53,10 @@ axios
     console.error('获取任务列表失败:', error)
   })
 
-const ImportantUrgentTasks = Alltasks.value.filter((task) => !task.isCompleted && !task.isDeleted && task.isImportant && task.isUrgent)
-const UrgentNotImportantTasks = Alltasks.value.filter((task) => !task.isCompleted && !task.isDeleted && task.isUrgent && !task.isImportant)
-const NotImportantNotUrgentTasks = Alltasks.value.filter((task) => !task.isCompleted && !task.isDeleted && !task.isUrgent && !task.isImportant)
-const NotUrgentImportantTasks = Alltasks.value.filter((task) => !task.isCompleted && !task.isDeleted && !task.isUrgent && task.isImportant)
+const ImportantUrgentTasks = computed(()=> Alltasks.value.filter((task) => !task.isCompleted && !task.isDeleted && task.isImportant && task.isUrgent))
+const UrgentNotImportantTasks = computed(()=>Alltasks.value.filter((task) => !task.isCompleted && !task.isDeleted && task.isUrgent && !task.isImportant))
+const NotImportantNotUrgentTasks =computed(()=> Alltasks.value.filter((task) => !task.isCompleted && !task.isDeleted && !task.isUrgent && !task.isImportant))
+const NotUrgentImportantTasks =computed(()=> Alltasks.value.filter((task) => !task.isCompleted && !task.isDeleted && !task.isUrgent && task.isImportant))
 </script>
 
 <template>
@@ -186,28 +186,28 @@ const NotUrgentImportantTasks = Alltasks.value.filter((task) => !task.isComplete
 }
 
 .quadrant-container > .quedrantBox:nth-child(1) {
-  background-color: #d09bfb;
+  background-color: #828BE4;
   left: 0px;
   top: 0px;
   z-index: 1;
 }
 
 .quadrant-container > .quedrantBox:nth-child(2) {
-  background-color: #a43ef8;
+  background-color: #4463C9;
   left: 50%;
   top: 0px;
   z-index: 1;
 }
 
 .quadrant-container > .quedrantBox:nth-child(3) {
-  background-color: #e5d1f5;
+  background-color: #c3c3f7;
   left: 0px;
   top: calc(50% - 40px);
   z-index: 1;
 }
 
 .quadrant-container > .quedrantBox:nth-child(4) {
-  background-color: #b87aeb;
+  background-color: #636fcb;
   left: 50%;
   top: calc(50% - 40px);
   z-index: 1;

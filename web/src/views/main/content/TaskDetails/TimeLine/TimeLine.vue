@@ -14,7 +14,7 @@
         <li>
           <div class="card">
             <a href="#">
-              <img src="./03.gif" alt="" />
+              <img src="./11.jpg" alt="" />
             </a>
           </div>
         </li>
@@ -30,7 +30,7 @@
         <li>
           <div class="card">
             <a href="#">
-              <img src="./03.gif" alt="" />
+              <img src="./12.jpg" alt="" />
             </a>
           </div>
         </li>
@@ -46,7 +46,7 @@
         <li>
           <div class="card">
             <a href="#">
-              <img src="./03.gif" alt="" />
+              <img src="./13.jpg" alt="" />
             </a>
           </div>
         </li>
@@ -130,7 +130,7 @@ li {
 }
 
 .task-card {
-  color: #8977af;
+  color: #3c3f94;
 }
 
 .task-card::before {
@@ -140,7 +140,7 @@ li {
   left: 0;
   bottom: 0; /* 修改为bottom: 0; 使伪元素与卡片高度一致 */
   width: 5px; /* 边框宽度 */
-  background: linear-gradient(to bottom, #9885c5, #7f639d); /* 渐变颜色 */
+  background: linear-gradient(to bottom, #655cb3, #5550c1); /* 渐变颜色 */
   border-top-left-radius: 12px; /* 添加圆角样式以匹配卡片的圆角 */
   border-bottom-left-radius: 12px; /* 添加圆角样式以匹配卡片的圆角 */
 }
@@ -312,7 +312,7 @@ li:nth-child(6) .card {
     180deg,
     rgba(60, 26, 229, 0) 0%,
     #3c1ae5 50%,
-    rgba(60, 26, 229, 0) 100%
+    rgba(8, 0, 255, 0) 100%
   );
 }
 

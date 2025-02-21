@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, inject } from 'vue'
+import { ref, onMounted, inject, watch } from 'vue'
 import axios from 'axios'
 // import { tasks } from '@/api/tasks.js'
 
@@ -11,10 +11,16 @@ axios
   .get('http://localhost:8080/todo/showTodos')
   .then((response) => {
     tasks.value = response.data
+    console.log("tasks-1:", tasks.value)
   })
   .catch((error) => {
     console.error('获取任务列表失败:', error)
   })
+
+// 监听 tasks 的变化
+watch(tasks, (newTasks) => {
+  console.log("tasks-2:", newTasks)
+}, { immediate: true })
 
 const props = defineProps({
   index: {
@@ -25,8 +31,10 @@ const props = defineProps({
 
 const selectedTask = ref(null)
 
-onMounted(() => {
-  const filtered = tasks.filter(task => !task.isCompleted && !task.isDeleted)
+watch(() => {
+  const filtered = tasks.value.filter(task => !task.isCompleted && !task.isDeleted)
+  console.log("tasks-3:", tasks.value)
+  console.log("filtered:", filtered)
   if (filtered.length > props.index) {
     selectedTask.value = filtered[props.index]
   }
@@ -61,13 +69,13 @@ const formatDateString = (dateString) => {
 }
 
 .task-card h3 {
-  color: #6d5691;
+  color: #383aba;
   font-size: 18px;
   margin-bottom: 5px;
 }
 
 .task-card p {
-  color: #a898d1;
+  color: #4b4db1;
   font-size: 12px;
 }
 </style>

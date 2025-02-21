@@ -1,4 +1,4 @@
-package Todo_Test;
+package Todo_Test.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
