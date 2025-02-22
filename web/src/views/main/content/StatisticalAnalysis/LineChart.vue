@@ -23,24 +23,23 @@ const taskCountByTime = computed(() => {
   const dateCountMap = {}
 
   completedTasksArray.forEach((task) => {
-    const date = new Date(task.expectedCompletionDate).toString() // 提取日期
-    console.log('date = ', date)
-    const category = task.category // 提取任务分类
-    if (!dateCountMap[date]) {
-      dateCountMap[date] = { Work: 0, Study: 0, Social: 0, Other: 0 }
+    const date = new Date(task.expectedCompletionDate)
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0') // 月份从0开始，需加1
+    const day = String(date.getDate()).padStart(2, '0')
+    const formattedDate = `${year}-${month}-${day}` // 格式化为 yyyy-mm-dd
+
+    if (!dateCountMap[formattedDate]) {
+      dateCountMap[formattedDate] = { Work: 0, Study: 0, Social: 0, Other: 0 }
     }
-    dateCountMap[date][category] += 1
-    console.log('dateCountMap[date] = ', dateCountMap[date])
+    dateCountMap[formattedDate][task.category] += 1
   })
 
-  console.log('dateCountMap = ', dateCountMap)
-
   const dates = Object.keys(dateCountMap)
-    .map((date) => new Date(date))
-    .sort((a, b) => a - b)
+    .map((date) => date) // 直接使用格式化后的日期
+    .sort((a, b) => new Date(a) - new Date(b)) // 按日期排序
 
-  const latest20Dates = dates.slice(-20).map((date) => date.toString())
-  console.log('dates', dates)
+  const latest20Dates = dates.slice(-20)
 
   const workCounts = latest20Dates.map((date) => dateCountMap[date]['Work'] || 0)
   const studyCounts = latest20Dates.map((date) => dateCountMap[date]['Study'] || 0)
@@ -63,6 +62,7 @@ const taskCountByTime = computed(() => {
     totalCounts: totalCounts,
   }
 })
+
 
 onMounted(() => {
   // 初始化 ECharts 实例
