@@ -20,6 +20,7 @@ declare module 'vue' {
     SearchBox: typeof import('./src/components/head/SearchBox.vue')['default']
     SettingWindow: typeof import('./src/components/RightPopUpWindows/SettingWindow.vue')['default']
     SideNavigation: typeof import('./src/components/sidebar/SideNavigation.vue')['default']
+    TaskItemModal: typeof import('./src/components/TaskItemModal.vue')['default']
     UpperRightComponent: typeof import('./src/components/head/UpperRightComponent.vue')['default']
   }
 }
