@@ -149,6 +149,10 @@ defineExpose({
   height: 33.33px;
   padding: 0;
 }
+
+::v-deep .dark-mode .el-input__wrapper {
+  background-color: #242424 !important;
+}
 ::v-deep .el-input__inner {
   height: 100%;
 }

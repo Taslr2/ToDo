@@ -98,7 +98,10 @@ defineExpose({
 
 <template>
   <div class="total">
-    <div :class="['icon', { active: activeBox === 'icon' }]" @mousedown="handleMouseDown('icon')">
+    <div
+      :class="['headicon', { active: activeBox === 'headicon' }]"
+      @mousedown="handleMouseDown('icon')"
+    >
       <img src="@/assets/svg/sign.svg" alt="" @click="refreshPage" />
     </div>
     <div class="title" @click="refreshPage">To Do</div>
@@ -130,7 +133,7 @@ defineExpose({
   background-color: rgb(37, 100, 207);
   position: relative;
 }
-.icon {
+.headicon {
   width: 48px;
   height: 48px;
   display: flex;
@@ -138,7 +141,7 @@ defineExpose({
   justify-content: center;
   color: white;
 }
-.icon:hover {
+.headicon:hover {
   background-color: #005a9e;
   cursor: pointer;
 }
@@ -167,7 +170,7 @@ defineExpose({
   width: 192px;
   height: 48px;
 }
-.icon.active {
+.headicon.active {
   background-color: #173f85;
   border: 0.5px solid white;
   box-sizing: border-box;

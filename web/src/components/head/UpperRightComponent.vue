@@ -178,7 +178,7 @@ const handleMouseLeave = (type) => {
 .questionMark:hover,
 .paperPlane:hover,
 .personalCenter:hover {
-  background-color: #005a9e !important;
+  background-color: #005a9e ;
   cursor: pointer;
 }
 
