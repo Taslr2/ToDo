@@ -55,7 +55,7 @@ const navigateWithDelay = async (path, index) => {
 </script>
 
 <template>
-  <div class="all" >
+  <div class="all">
     <div class="toggle">
       <img
         class="menu-icon"
@@ -166,6 +166,11 @@ const navigateWithDelay = async (path, index) => {
   background-color: #f5f5f5;
 }
 
+.dark-mode .selected {
+  background-color: #19222c !important;
+  color: #409eff !important;
+}
+
 .selected {
   font-size: 14px;
   background-color: #eff6fc;
@@ -182,5 +187,9 @@ const navigateWithDelay = async (path, index) => {
   height: 100%;
   background-color: #2564cf;
   animation: zoomIn 0.5s;
+}
+
+.dark-mode .selected::before{
+    background-color: #409eff !important;
 }
 </style>

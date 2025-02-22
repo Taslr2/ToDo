@@ -2,21 +2,33 @@
 import { ref, defineProps, defineEmits } from 'vue'
 import rightCancel from '@/assets/svg/rightcancel.svg'
 import { useSideStore } from '@/stores/sidebar'
+import { watch } from 'vue'
 
 const sideStore = useSideStore()
 
-const [value1, value2, value3, value4, value5, value6, value7, value11, value12] = [
+const [value1, value2, value3, value4, value5, value6, value11, value12] = [
   ref(true),
   ref(true),
   ref(false),
   ref(true),
   ref(true),
   ref(true),
-  ref(false),
-
   ref(false),
   ref(false),
 ]
+
+// 添加 isDarkMode 响应式变量
+const isDarkMode = ref(false)
+
+// 监听 isDarkMode 变化，切换 dark-mode 类
+watch(isDarkMode, (newVal) => {
+  if (newVal) {
+    document.documentElement.classList.add('dark-mode')
+  } else {
+    document.documentElement.classList.remove('dark-mode')
+  }
+})
+
 const props = defineProps(['isSettingVisible'])
 const emit = defineEmits(['closeIsSetting'])
 const isSettingVisible = props.isSettingVisible
@@ -100,10 +112,10 @@ const closeIsSetting = () => {
           打开夜间模式
           <div class="button">
             <el-switch
-              v-model="value7"
+              v-model="isDarkMode"
               style="--el-switch-on-color: #2564cf; --el-switch-off-color: #ccc"
             />
-            <div class="buttontext">{{ value7 ? '开启' : '关闭' }}</div>
+            <div class="buttontext">{{ isDarkMode ? '开启' : '关闭' }}</div>
           </div>
         </div>
         <div class="subtitle">智能列表</div>
@@ -170,6 +182,10 @@ const closeIsSetting = () => {
   overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: #8f8f8f transparent;
+}
+
+.dark-mode .total {
+  background-color: #141414 !important;
 }
 .title {
   width: 100%;
