@@ -12,30 +12,28 @@ body {
 }
 
 .dark-mode {
-  background-color: #141414 !important;
-  color: #ffffff !important;
+  background-color: #121212 !important;
+  color: RGB(204, 204, 204) !important;
 }
 
 .dark-mode .el-input__inner {
   background-color: #333333 !important;
-  color: #ffffff !important;
+  color: RGB(204, 204, 204) !important;
   border-color: #666666 !important;
 }
-
+/* 右侧弹窗关闭按钮 */
 .dark-mode .el-button {
-  background-color: #333333 !important;
-  color: #61afef !important;
-  border-color: #666666 !important;
+  background-color: #121212 !important;
+  border-color: #121212 !important;
 }
 
 .dark-mode .el-button:hover {
-  background-color: #5b9bd5 !important;
-  color: #ffffff !important;
+  background-color: RGB(45, 39, 54) !important;
 }
 
 .dark-mode .el-textarea__inner {
   background-color: #333333 !important;
-  color: #ffffff !important;
+  color: RGB(204, 204, 204) !important;
   border-color: #666666 !important;
 }
 
@@ -45,89 +43,90 @@ body {
 
 .dark-mode .el-menu-item {
   background-color: #333333 !important;
-  color: #ffffff !important;
+  color: RGB(204, 204, 204) !important;
 }
 
 .dark-mode .el-menu-item:hover {
   background-color: #666666 !important;
 }
 
+.dark-mode .el-switch.is-checked .el-switch__core {
+  background-color: #2564cf !important;
+  border-color: #2564cf !important;
+}
 .dark-mode .el-switch__core {
-  background-color: #666666 !important;
+  background-color: #242424 !important;
+  border-color: #242424 !important;
 }
 
 .dark-mode .total {
-  background-color: #141414 !important;
+  background-color: #121212 !important;
   border-bottom: 1px solid #4c4d4f !important;
 }
 
 .dark-mode .buttontext {
-  color: #ffffff !important;
+  color: RGB(204, 204, 204) !important;
 }
 
 .dark-mode .el-popover {
   background-color: #333333 !important;
-  color: #ffffff !important;
+  color: RGB(204, 204, 204) !important;
 }
 
 .dark-mode .el-popover__title {
-  color: #ffffff !important;
+  color: RGB(204, 204, 204) !important;
 }
 
 .dark-mode .el-dialog {
   background-color: #333333 !important;
-  color: #ffffff !important;
+  color: RGB(204, 204, 204) !important;
 }
 
 .dark-mode .el-dialog__title {
-  color: #ffffff !important;
+  color: RGB(204, 204, 204) !important;
 }
 
 .dark-mode .el-dialog__headerbtn .el-dialog__close {
-  color: #ffffff !important;
+  color: RGB(204, 204, 204) !important;
 }
 
 .dark-mode .el-input-number__decrease:hover,
 .dark-mode .el-input-number__increase:hover {
-  color: #ffffff !important;
+  color: RGB(204, 204, 204) !important;
 }
 
-/* .dark-mode .el-icon {
-  color: #ffffff !important;
-} */
-
 .dark-mode .main-container {
-  background-color: #141414 !important;
+  background-color: #121212 !important;
 }
 
 .dark-mode .leftcontent {
-  background-color: #141414 !important;
+  background-color: #121212 !important;
 }
 
 .dark-mode .content {
-  background-color: #141414 !important;
+  background-color: #121212 !important;
 }
 
 .dark-mode .sidebar {
-  background-color: #141414 !important;
+  background-color: #121212 !important;
 }
 
 .dark-mode .all {
-  background-color: #141414 !important;
+  background-color: #121212 !important;
 }
 
 .dark-mode .all::after {
-  background-color: #141414 !important;
+  background-color: #121212 !important;
   width: 0 !important;
 }
 
 .dark-mode .toggle {
-  background-color: #141414 !important;
+  background-color: #121212 !important;
 }
 
 .dark-mode .nav li {
-  color: #ffffff !important;
-  background-color: #141414 !important;
+  color: #000000 !important;
+  background-color: #121212 !important;
 }
 
 .dark-mode .unselected:hover {
@@ -144,11 +143,11 @@ body {
 }
 
 .dark-mode .text {
-  color: #ffffff !important;
+  color: RGB(204, 204, 204) !important;
 }
 
 .dark-mode .ul-last {
-  background-color: #141414 !important;
+  background-color: #121212 !important;
   display: none !important;
 }
 
@@ -178,6 +177,13 @@ body {
   color: #409eff;
 }
 /* 搜索框 */
+
+/* 新增 */
+/* 夜间模式 */
+.dark-mode .whole div.active img {
+  filter: invert(1) !important;
+}
+
 .dark-mode .init-button {
   background-color: #242424 !important;
   border: none !important;
@@ -202,4 +208,74 @@ body {
 .dark-mode .paperPlane:hover,
 .dark-mode .personalCenter:hover {
   background-color: #333333 !important;
+}
+.dark-mode .rightwindow {
+  background-color: #121212 !important;
+}
+/* 右侧弹窗标题、副标题 */
+.dark-mode .total .title h3,
+.dark-mode .total .content .subtitle {
+  color: RGB(204, 204, 204);
+}
+
+.dark-mode .total .choice {
+  color: RGB(170, 170, 170);
+}
+/* 设置界面按钮 */
+.dark-mode .total .button .el-switch {
+  --el-switch-on-color: #000 !important;
+  --el-switch-off-color: #ccc !important;
+}
+/* 搜索框左右提示框 */
+.dark-mode #tooltip15,
+.dark-mode #tooltip16 {
+  background-color: #242424 !important;
+  color: RGB(204, 204, 204) !important;
+}
+.dark-mode #tooltip15::after {
+  border-color: transparent transparent transparent #242424 !important;
+}
+.dark-mode #tooltip16::before {
+  border-color: transparent transparent #242424 transparent !important;
+}
+
+.dark-mode .custom-button {
+  background-color: #242424 !important;
+}
+
+/* .dark-mode :deep(.custom-button span) {
+  color: #ccc !important;
+} */
+
+/* 非夜间模式 */
+.whole div.active:hover {
+  /* 点击后hover */
+  background-color: #005a9e;
+}
+
+.whole div.active img {
+  filter: none !important;
+}
+
+.inactive-icon {
+  background-color: #fff;
+}
+.dark-mode .inactive-icon {
+  background-color: #121212;
+}
+
+body.dark-mode .settingSection .el-button[type='primary'][color='#626aef'] {
+  border: 1px solid #cccccc !important;
+}
+/* 帮助界面 */
+
+.dark-mode .total .innerContent {
+  background-color: #383838 !important;
+  color: RGB(204, 204, 204) !important;
+}
+.dark-mode :deep(.el-collapse-item__content) {
+  background-color: #383838 !important;
+}
+.dark-mode .personal-name {
+  color: #ccc !important;
 }

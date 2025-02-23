@@ -76,6 +76,9 @@ onMounted(() => {
     },
     legend: {
       data: ['工作', '学习', '生活', '其他', '总数'],
+      textStyle: {
+        color: '#000', // 默认颜色
+      },
     },
     xAxis: {
       type: 'category',
@@ -165,7 +168,25 @@ onMounted(() => {
   }
 
   // 设置图表选项
-  myChartLine.setOption(optionLine)
+  myChartLine.setOption(optionLine);
+  console.log(allTasks);
+
+  // 监听夜间模式切换
+  const updateChartDarkMode = () => {
+    const isDarkMode = document.documentElement.classList.contains('dark-mode');
+    myChartLine.setOption({
+      legend: {
+        textStyle: {
+          color: isDarkMode ? '#ccc' : '#000',
+        },
+      },
+    });
+  };
+
+  const observer = new MutationObserver(updateChartDarkMode);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+  updateChartDarkMode(); // 初始化时调用一次
 })
 </script>
 
