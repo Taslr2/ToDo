@@ -9,6 +9,18 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 // https://vite.dev/config/
 
 export default defineConfig({
+  build:{
+    rollupOptions:{
+      output:{
+        manualChunks(id){
+          if(id.includes('node_modules/echarts')){
+            return 'echarts'
+          }
+        }
+      },
+      external:['element-plus']
+    }
+  },
   plugins: [
     vue(),
     vueDevTools(),
