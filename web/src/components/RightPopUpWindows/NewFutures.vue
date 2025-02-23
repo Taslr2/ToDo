@@ -1,6 +1,6 @@
 z
 <script setup>
-import { defineProps, defineEmits, computed } from 'vue'
+import { defineProps, defineEmits, computed, onMounted } from 'vue'
 import rightCancel from '@/assets/svg/rightcancel.svg'
 const props = defineProps(['isNewVisible'])
 const emit = defineEmits(['closeIsNew'])
@@ -8,9 +8,31 @@ const isNewVisible = props.isPersonalVisible
 const closeIsNew = () => {
   emit('closeIsNew', false)
 }
+
 const listButton = () => {
   console.log('hello')
 }
+
+const updateButtonStyle = () => {
+    const customButtons = document.querySelectorAll('.custom-button');
+    customButtons.forEach(button => {
+        const isDarkMode = document.documentElement.classList.contains('dark-mode');
+        button.style.backgroundColor = isDarkMode ? '#383838' : '#fff';
+        button.style.borderColor = isDarkMode? '#ccc' : '';
+        const span = button.querySelector('span');
+        if(span){
+            span.style.color = isDarkMode ? '#ccc' : '#000';
+        }
+    });
+}
+
+onMounted(() => {
+  updateButtonStyle();
+
+  const observer = new MutationObserver(updateButtonStyle);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+})
+
 const menuItems = [
   {
     imgSrc: '',
@@ -168,10 +190,13 @@ const iconColor = computed(() => {
 .taller-box {
   height: 165.33px !important;
 }
+</style>
 
+<style>
 :deep(.custom-button) {
-  width: 67.33px !important;
-  height: 33.33px !important;
+  width: 53px !important;
+  height: 33px !important;
+  background-color: #fff !important;
   position: absolute;
   left: 28px;
   bottom: 20px;
@@ -182,16 +207,6 @@ const iconColor = computed(() => {
   transition: background-color 0.3s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  :deep(.custom-button) {
-    background-color: #383838 !important;
-    border-color: #ccc !important;
-  }
-  :deep(.custom-button span) {
-    color: #ccc !important;
-  }
-}
-
 :deep(.custom-button:hover) {
   background-color: #f5f5f5 !important;
 }
@@ -200,7 +215,16 @@ const iconColor = computed(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
-  color: #292827;
+  color: #000000 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  :deep(.custom-button) {
+    background-color: #383838 !important;
+    border-color: #ccc !important;
+  }
+  :deep(.custom-button span) {
+    color: #ccc !important;
+  }
 }
 </style>
