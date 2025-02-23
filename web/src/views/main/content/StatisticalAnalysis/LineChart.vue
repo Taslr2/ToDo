@@ -8,11 +8,11 @@
 
 <script setup>
 import { ref, onMounted, computed, inject } from 'vue'
-import * as echarts from 'echarts'
+import {init} from 'echarts/core'
+import { graphic } from 'echarts'
 
 const lineChart = ref(null)
 
-const allTasks = inject('allTasks')
 const completedTasks = inject('completedTasks')
 
 console.log('completedTasks222', completedTasks.value)
@@ -67,7 +67,7 @@ const taskCountByTime = computed(() => {
 onMounted(() => {
   // 初始化 ECharts 实例
   const chartDomLine = document.getElementById('lineChart')
-  const myChartLine = echarts.init(chartDomLine)
+  const myChartLine = init(chartDomLine)
 
   // 配置折线图选项
   const optionLine = {
@@ -107,7 +107,7 @@ onMounted(() => {
         data: taskCountByTime.value.workCounts, // 使用处理后的任务数量数据
         smooth: true,
         areaStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          color: new graphic.LinearGradient(0, 0, 0, 1, [
             { offset: 0, color: 'rgba(0, 0, 128, 0.5)' }, // 起始颜色，半透明的蓝色
             { offset: 1, color: 'rgba(0, 0, 128, 0)' }, // 结束颜色，完全透明的蓝色
           ]),
@@ -119,7 +119,7 @@ onMounted(() => {
         data: taskCountByTime.value.studyCounts, // 使用处理后的任务数量数据
         smooth: true,
         areaStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          color: new graphic.LinearGradient(0, 0, 0, 1, [
             { offset: 0, color: 'rgba(0, 128, 0, 0.5)' }, // 起始颜色，半透明的绿色
             { offset: 1, color: 'rgba(0, 128, 0, 0)' }, // 结束颜色，完全透明的绿色
           ]),
@@ -131,7 +131,7 @@ onMounted(() => {
         data: taskCountByTime.value.lifeCounts, // 使用处理后的任务数量数据
         smooth: true,
         areaStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          color: new graphic.LinearGradient(0, 0, 0, 1, [
             { offset: 0, color: 'rgba(255, 165, 0, 0.5)' }, // 起始颜色，半透明的橙色
             { offset: 1, color: 'rgba(255, 165, 0, 0)' }, // 结束颜色，完全透明的橙色
           ]),
@@ -143,7 +143,7 @@ onMounted(() => {
         data: taskCountByTime.value.otherCounts, // 使用处理后的任务数量数据
         smooth: true,
         areaStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          color: new graphic.LinearGradient(0, 0, 0, 1, [
             { offset: 0, color: 'rgba(128, 0, 128, 0.5)' }, // 起始颜色，半透明的紫色
             { offset: 1, color: 'rgba(128, 0, 128, 0)' }, // 结束颜色，完全透明的紫色
           ]),
@@ -155,7 +155,7 @@ onMounted(() => {
         data: taskCountByTime.value.totalCounts, // 使用处理后的任务数量数据
         smooth: true,
         areaStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          color: new graphic.LinearGradient(0, 0, 0, 1, [
             { offset: 0, color: 'rgba(159, 191, 219, 0.5)' }, // 起始颜色，半透明的黄色
             { offset: 1, color: 'rgba(159, 191, 219, 0)' }, // 结束颜色，完全透明的黄色
           ]),

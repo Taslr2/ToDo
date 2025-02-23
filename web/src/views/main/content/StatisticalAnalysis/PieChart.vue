@@ -4,7 +4,7 @@
   
 <script setup>
 import { ref, onMounted, inject } from 'vue'
-import * as echarts from 'echarts'
+import {init} from 'echarts/core'
 
 const pieChart = ref(null)
 
@@ -13,7 +13,6 @@ const completedTasks = inject('completedTasks')
 const unfinishedTasks = inject('unfinishedTasks')
 const deleteTasks = inject('deleteTasks')
 
-const allCount = ref(allTasks.value.length)
 const completedCount = ref(completedTasks.value.length)
 const unfinishedCount = ref(unfinishedTasks.value.length)
 const deleteCount = ref(deleteTasks.value.length)
@@ -26,7 +25,7 @@ const OtherCount = ref(allTasks.value.length - WorkCount.value - StudyCount.valu
 onMounted(() => {
   // 初始化 ECharts 实例
   const chartDom = document.getElementById('pieChart')
-  const myChart = echarts.init(chartDom)
+  const myChart = init(chartDom)
 
   // 配置饼图选项
   const option = {
