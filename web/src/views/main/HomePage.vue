@@ -140,7 +140,7 @@ onBeforeUnmount(() => {
         />
       </div>
       <transition name="slide">
-        <div class="right" v-show="isRightVisible">
+        <div class="rightwindow" v-show="isRightVisible">
           <transition-group name="characterslide">
             <SettingWindow
               v-show="isSettingVisible"
@@ -194,7 +194,7 @@ onBeforeUnmount(() => {
   z-index: 999;
 }
 
-.right {
+.rightwindow {
   position: absolute;
   top: 0;
   right: 0;

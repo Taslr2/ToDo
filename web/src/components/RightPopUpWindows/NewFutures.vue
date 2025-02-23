@@ -1,5 +1,6 @@
+z
 <script setup>
-import { defineProps, defineEmits } from 'vue'
+import { defineProps, defineEmits, computed } from 'vue'
 import rightCancel from '@/assets/svg/rightcancel.svg'
 const props = defineProps(['isNewVisible'])
 const emit = defineEmits(['closeIsNew'])
@@ -11,7 +12,11 @@ const listButton = () => {
   console.log('hello')
 }
 const menuItems = [
-  { imgSrc: '', mainText: '现在，你可以在设置中更改为深色模式主题!', buttonText: '试用' },
+  {
+    imgSrc: '',
+    mainText: '现在，你可以在设置中更改为深色模式主题!',
+    buttonText: '试用',
+  },
   {
     imgSrc: '',
     mainText: '现在，可以通过拖动窗格边缘来调整详细信息窗格的大小!',
@@ -23,6 +28,13 @@ const menuItems = [
     buttonText: '明白了',
   },
 ]
+
+const iconColor = computed(() => {
+  return document.documentElement.classList.contains('dark-mode') ||
+    document.body.classList.contains('dark-mode')
+    ? 'filter:brightness(0) saturate(100%) invert(82%) sepia(22%) saturate(0%) hue-rotate(138deg) brightness(95%) contrast(92%)'
+    : ''
+})
 </script>
 
 <template>
@@ -31,7 +43,7 @@ const menuItems = [
       <div class="title">
         <h3>新增功能</h3>
         <el-button @click="closeIsNew" class="cancel" color="#faf9f8">
-          <img :src="rightCancel" />
+          <img :src="rightCancel" :style="iconColor" />
         </el-button>
       </div>
       <div class="content">
@@ -122,6 +134,10 @@ const menuItems = [
   margin-bottom: 30px;
 }
 
+.innerImg {
+  object-fit: contain;
+}
+
 .Img {
   width: 320px;
   height: 180px;
@@ -164,6 +180,16 @@ const menuItems = [
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  :deep(.custom-button) {
+    background-color: #383838 !important;
+    border-color: #ccc !important;
+  }
+  :deep(.custom-button span) {
+    color: #ccc !important;
+  }
 }
 
 :deep(.custom-button:hover) {
