@@ -1,7 +1,7 @@
 <template>
   <div id="pieChart" ref="pieChart" style="width: 100%; height: 100%"></div>
 </template>
-  
+
 <script setup>
 import { ref, onMounted, inject } from 'vue'
 import * as echarts from 'echarts'
@@ -42,6 +42,9 @@ onMounted(() => {
       itemWidth: 25, // 每个图例项的宽度
       itemHeight: 14, // 每个图例项的高度
       itemGap: 20, // 图例项之间的间隔
+      textStyle: {
+        color: '#000', // 默认颜色
+      },
     },
     series: [
       {
@@ -130,14 +133,31 @@ onMounted(() => {
   }
 
   // 设置图表选项
-  myChart.setOption(option)
+  myChart.setOption(option);
+  console.log(allCount);
+
+  // 监听夜间模式切换
+  const updateChartDarkMode = () => {
+    const isDarkMode = document.documentElement.classList.contains('dark-mode');
+    myChart.setOption({
+      legend: {
+        textStyle: {
+          color: isDarkMode ? '#ccc' : '#000',
+        },
+      },
+    });
+  };
+
+  const observer = new MutationObserver(updateChartDarkMode);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+  updateChartDarkMode(); // 初始化时调用一次
 })
 </script>
-  
+
 <style scoped>
 #pieChart {
   width: 100%;
   height: 100%;
 }
 </style>
-  
