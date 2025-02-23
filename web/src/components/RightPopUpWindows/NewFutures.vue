@@ -168,10 +168,13 @@ const iconColor = computed(() => {
 .taller-box {
   height: 165.33px !important;
 }
+</style>
 
+<style>
 :deep(.custom-button) {
   width: 67.33px !important;
   height: 33.33px !important;
+  background-color: #fff !important;
   position: absolute;
   left: 28px;
   bottom: 20px;
@@ -182,16 +185,6 @@ const iconColor = computed(() => {
   transition: background-color 0.3s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  :deep(.custom-button) {
-    background-color: #383838 !important;
-    border-color: #ccc !important;
-  }
-  :deep(.custom-button span) {
-    color: #ccc !important;
-  }
-}
-
 :deep(.custom-button:hover) {
   background-color: #f5f5f5 !important;
 }
@@ -200,7 +193,16 @@ const iconColor = computed(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
-  color: #292827;
+  color: #000000 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  :deep(.custom-button) {
+    background-color: #383838 !important;
+    border-color: #ccc !important;
+  }
+  :deep(.custom-button span) {
+    color: #ccc !important;
+  }
 }
 </style>

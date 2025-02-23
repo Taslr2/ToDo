@@ -243,9 +243,9 @@ body {
   background-color: #242424 !important;
 }
 
-.dark-mode :deep(.custom-button span) {
+/* .dark-mode :deep(.custom-button span) {
   color: #ccc !important;
-}
+} */
 
 /* 非夜间模式 */
 .whole div.active:hover {
