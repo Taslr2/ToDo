@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, defineEmits } from 'vue'
+import { defineProps, defineEmits, computed } from 'vue'
 import rightCancel from '@/assets/svg/rightcancel.svg'
 const props = defineProps(['isHelpVisible'])
 const emit = defineEmits(['closeIsHelp'])
@@ -8,6 +8,14 @@ const isHelpVisible = props.isHelpVisible
 const closeIsHelp = () => {
   emit('closeIsHelp', false)
 }
+
+const iconColor = computed(() => {
+  return document.documentElement.classList.contains('dark-mode') ||
+    document.body.classList.contains('dark-mode')
+    ? 'filter:brightness(0) saturate(100%) invert(82%) sepia(22%) saturate(0%) hue-rotate(138deg) brightness(95%) contrast(92%)'
+    : ''
+})
+
 </script>
 
 <template>
@@ -15,9 +23,9 @@ const closeIsHelp = () => {
     <div class="total" v-show="isHelpVisible">
       <div class="title">
         <h3>帮助</h3>
-        <el-button @click="closeIsHelp" class="cancel" color="#faf9f8"
-          ><img :src="rightCancel"
-        /></el-button>
+        <el-button @click="closeIsHelp" class="cancel" color="#faf9f8">
+          <img :src="rightCancel" :style="iconColor"/>
+        </el-button>
       </div>
       <div class="settingSection">
         <p><a href="#">了解详细信息</a></p>

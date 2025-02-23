@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineProps, defineEmits } from 'vue'
+import { ref, defineProps, defineEmits, computed } from 'vue'
 import rightCancel from '@/assets/svg/rightcancel.svg'
 import { useSideStore } from '@/stores/sidebar'
 import { watch } from 'vue'
@@ -8,10 +8,10 @@ const sideStore = useSideStore()
 
 const [value1, value2, value3, value4, value5, value6, value11, value12] = [
   ref(true),
-  ref(true),
+  ref(false),
   ref(false),
   ref(true),
-  ref(true),
+  ref(false),
   ref(true),
   ref(false),
   ref(false),
@@ -36,14 +36,21 @@ const isSettingVisible = props.isSettingVisible
 const closeIsSetting = () => {
   emit('closeIsSetting', false)
 }
+
+const iconColor = computed(() => {
+  return document.documentElement.classList.contains('dark-mode') ||
+    document.body.classList.contains('dark-mode')
+    ? 'filter:brightness(0) saturate(100%) invert(82%) sepia(22%) saturate(0%) hue-rotate(138deg) brightness(95%) contrast(92%)'
+    : ''
+})
 </script>
 <template>
   <transition>
     <div class="total" v-show="isSettingVisible">
       <div class="title">
         <h3>设置</h3>
-        <el-button @click="closeIsSetting" class="cancel" color="#faf9f8"
-          ><img :src="rightCancel" />
+        <el-button @click="closeIsSetting" class="cancel" color="#faf9f8">
+          <img :src="rightCancel" :style="iconColor" />
         </el-button>
       </div>
       <div class="content">

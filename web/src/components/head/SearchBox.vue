@@ -202,6 +202,7 @@ defineExpose({
   color: #333;
   opacity: 0;
   animation-fill-mode: forwards;
+  z-index: 1000;
 }
 #tooltip15::after {
   content: '';
@@ -212,7 +213,7 @@ defineExpose({
   border-width: 15px;
   border-style: solid;
   border-color: transparent transparent transparent #fff;
-  z-index: 1;
+  z-index: 1000;
 }
 #tooltip16 {
   position: absolute;
@@ -235,6 +236,7 @@ defineExpose({
   opacity: 0;
   animation-fill-mode: forwards;
   box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
 }
 #tooltip16::before {
   content: '';
@@ -245,6 +247,7 @@ defineExpose({
   border-width: 0 10px 10px 10px;
   border-style: solid;
   border-color: transparent transparent #fff transparent;
+  z-index: 1000;
 }
 .search-results {
   position: absolute;
@@ -252,7 +255,9 @@ defineExpose({
   right: 0;
   width: calc(100% - 45px);
   max-height: 200px;
-  overflow-y: none;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #8f8f8f transparent;
   background-color: #fff;
   border: 1px solid #dcdfe6;
   border-radius: 5px;
